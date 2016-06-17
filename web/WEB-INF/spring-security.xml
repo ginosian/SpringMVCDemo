@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="http://www.springframework.org/schema/security
+      http://www.springframework.org/schema/security/spring-security-4.0.xsd
+      http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+
+
+       <!--<http>-->
+              <!--<intercept-url pattern="/" access="isAnonymous()" /> &lt;!&ndash;Returns true if the current principal is an anonymous userDTO&ndash;&gt;-->
+              <!--<intercept-url pattern="/login" access="isAnonymous()" />-->
+              <!--<intercept-url pattern="/logout" access="isAnonymous()" />-->
+
+
+              <!--<intercept-url pattern="/admin" access="hasAnyRole('ROLE_ADMIN')" /> &lt;!&ndash;Returns true if the current principal has the specified roleDTO.&ndash;&gt;-->
+              <!--<intercept-url pattern="/common_user" access="hasRole('ROLE_USER')" />-->
+              <!--<intercept-url pattern="/other/**" access="isAuthenticated()" /> &lt;!&ndash;Returns true if the userDTO is not anonymous&ndash;&gt;-->
+
+              <!--<access-denied-handler error-page="/403" />-->
+
+              <!--<form-login login-page='/login'-->
+                          <!--login-processing-url="/j_spring_security_check"-->
+                          <!--default-target-url="/userInfo"-->
+                          <!--always-use-default-target="false"-->
+                          <!--authentication-failure-url="/login?error=true"-->
+                          <!--username-parameter="username"-->
+                          <!--password-parameter="password" />-->
+
+              <!--<logout logout-url="/logout"-->
+                      <!--logout-success-url="/logoutSuccessful"-->
+                      <!--delete-cookies="JSESSIONID"-->
+                      <!--invalidate-session="true" />-->
+           <!--<csrf> disabled="true"</csrf> \&lt;!&ndash;Cross Site Request Forgery&ndash;&gt;-->
+
+       <!--</http>-->
+
+       <!--<authentication-manager> &lt;!&ndash; authentication from database &ndash;&gt;-->
+              <!--<authentication-provider>-->
+                     <!--<jdbc-userDTO-service data-source-ref="spring_mvc_demo_db"-->
+                                        <!--users-by-username-query="select username,password, enabled from users where username=?"-->
+                                        <!--authorities-by-username-query="Select username, concat('ROLE_',user_role) user_role from user_roles where username=?" />-->
+              <!--</authentication-provider>-->
+       <!--</authentication-manager>-->
+
+    <!--<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">-->
+        <!--<beans:property name="driverClassName" value="om.mysql.jdbc.Driver"/>-->
+        <!--<beans:property name="url" value="jdbc:mysql://localhost:3306/spring_mvc_demo_db/>-->
+        <!--<beans:property name="username" value="root"/>-->
+        <!--<beans:property name="password" value="root"/>-->
+    <!--</beans:bean>-->
+
+</beans:beans>
