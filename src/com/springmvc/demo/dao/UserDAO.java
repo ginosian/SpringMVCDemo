@@ -11,7 +11,7 @@ import java.util.Collection;
 public interface UserDAO {
     UserDTO getUserById(Long id);
     void addUser(UserDTO userDTO);
-    UserDTO getUserByLogin(String login);
-    Collection<UserDTO> allUsersByRole(RoleDTO roleDTO);
+    UserDTO getUserByUsername(String login);
+    Collection<UserDTO> getAllUsersByRole(RoleDTO roleDTO);
 
 }

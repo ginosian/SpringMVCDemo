@@ -112,7 +112,7 @@
       <td style="text-align: center; vertical-align: middle;">
         <input name="create_task" style="width:60%; position:relative; white-space:normal; background-color: #C5E1A5; font-size:24px" type="button" value="Create taskDTO" /></td>
       <td style="text-align: center; vertical-align: middle;">
-        <input name="create_user" style="width:60%; position:relative; white-space:normal; background-color: #BCAAA4; font-size:24px" type="button" value="Create userDTO" /></td>
+        <input name="create_user" onclick="location.href='/read'" style="width:60%; position:relative; white-space:normal; background-color: #BCAAA4; font-size:24px" type="button" value="Create userDTO" /></td>
     </tr>
     </tbody>
   </table>

@@ -59,14 +59,14 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public UserDTO getUserByLogin(String login) {
+    public UserDTO getUserByUsername(String login) {
         Session session = openSession();
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
-            Query query = openSession().createQuery("from UserDTO user where user.login = :login");
-            query.setParameter("login", login);
-            List<UserDTO> userDTOList = query.list(); // TODO check if return type match , ask Lyov if why not to close session
+            Query query = openSession().createQuery("from UserDTO user where user.username = :username");
+            query.setParameter("username", login); // TODO check if this works fine
+            List<UserDTO> userDTOList = query.list(); // TODO check if return type match
             transaction.commit();
             if (userDTOList.size() == 0)return null;
             return userDTOList.get(0);
@@ -80,7 +80,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Collection<UserDTO> allUsersByRole(RoleDTO roleDTO) {
+    public Collection<UserDTO> getAllUsersByRole(RoleDTO roleDTO) {
         Session session = openSession();
         Transaction transaction = null;
         try{

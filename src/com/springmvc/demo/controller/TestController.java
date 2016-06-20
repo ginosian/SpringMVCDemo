@@ -17,12 +17,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Martha on 6/14/2016.
  */
 @Controller
-public class AuthenticationController {
+public class TestController {
 
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
     public ModelAndView login(
@@ -99,7 +101,7 @@ public class AuthenticationController {
 //    }
 //
     @RequestMapping("/tuft")
-    public ModelAndView test(@RequestParam("role") String role){
+    public ModelAndView test(){
 //        ProjectDTO project = new ProjectDTO();
 //        project.set("bla", "mla");
 //        projectManager.addProject(project);
@@ -107,15 +109,40 @@ public class AuthenticationController {
 
         UserDTO userDTO = new UserDTO();
         RoleDTO roleDTO = new RoleDTO();
-        roleDTO.set(role);
-        userDTO.set("root", "aa", "Vle", roleDTO);
+        roleDTO.set("USER");
+        Set<RoleDTO> roles = new HashSet<>();
+        roles.add(roleDTO);
         userManager.addRole(roleDTO);
+        userDTO.set("a@a.com", "aa", "Vle", true, roles);
         userManager.addUser(userDTO);
 
+
+//        UserDTO userDTO2 = new UserDTO();
+//        RoleDTO roleDTO2 = new RoleDTO();
+//        roleDTO.set("USER");
+//        Set<RoleDTO> roles = new HashSet<>();
+//        roles.add(roleDTO);
+//        userManager.addRole(roleDTO);
+//        userDTO.set("e@e.com", "ee", "Ahot", true, roles);
+//        userManager.addUser(userDTO);
 
         ModelAndView modelAndView = new ModelAndView("project_admin_page");
         return modelAndView;
     }
+
+    @RequestMapping("/read")
+    public ModelAndView readUser(@RequestParam("id") long userId) {
+        UserDTO userDTO = userManager.getUserById(userId);
+        ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("id", userDTO.getId());
+        modelAndView.addObject("name", userDTO.getName());
+        modelAndView.addObject("username", userDTO.getUsername());
+        modelAndView.addObject("password", userDTO.getPassword());
+        modelAndView.addObject("roles", userDTO.getUserRoles());
+
+        return modelAndView;
+    }
+
 //
 //    @RequestMapping("/muft")
 //    public ModelAndView testmuft(@RequestParam("id") long id){

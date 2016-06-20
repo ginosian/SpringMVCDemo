@@ -15,4 +15,14 @@
 <%--<cc:redirect url="login_page.jsp"/>--%>
 
 <h1>Welcome page is opened!</h1>
+<h2>${id}</h2>
+<h2>${name}</h2>
+<h2>${username}</h2>
+<h2>${password}</h2>
+<h2>
+  <c:forEach items="${roles}" var="currentRole">
+    <p>${currentRole.getRole()}</p>
+  </c:forEach>
+
+</h2>
 

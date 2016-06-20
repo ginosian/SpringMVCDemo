@@ -19,6 +19,10 @@
       <root url="jar://$USER_HOME$/Desktop/spring secure/spring-security-web-3.2.5.RELEASE.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ideaLibSources/spring-security-core-3.2.5.RELEASE-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.ideaLibSources/spring-security-config-3.2.5.RELEASE-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.ideaLibSources/spring-security-web-3.2.5.RELEASE-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

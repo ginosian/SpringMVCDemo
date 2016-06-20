@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Martha
-  Date: 6/8/2016
-  Time: 10:24 PM
+  Date: 6/20/2016
+  Time: 4:40 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -52,24 +52,26 @@
 <p>
   &nbsp;</p>
 <div style="background-color: rgb(235, 248, 252); color:black;">
-  <h2>
-    <span style="font-size:48px;">Project name</span></h2>
+  <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 100%; height: 100%">
+    <tbody>
+    <tr>
+      <td colspan="3" style="text-align: center;">
+        <form action="">
+          <p>
+            User First Name:<br />
+            <input id="dfsds" name="username" style="height:12%;width:25%" type="text" /><br />
+            User Login:<br />
+            <input id="czzce" name="username" style="height:12%;width:25%" type="text" /><br />
+            Password:<br />
+            <input id="password" name="password" style="height:12%;width:25%" type="password" /></p>
+          <input style="width:25%; position:relative; white-space:normal" type="submit" value="Create" />&nbsp;</form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
   <p>
-    London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
-  <p>
-    Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+    v</p>
 </div>
-<p>
-  &nbsp; <span style="font-size:48px;">Tasks</span></p>
-<p>
-  &nbsp; ${task.getName} ${task.getUsername} <a class="btn btn-success custom-width" href="&lt;c:url value='/edit-task-${task}' /&gt;">edit</a> &nbsp; &nbsp;</p>
-<p>
-  <sec:authorize access="hasRole('USER')"> <a href="&lt;c:url value='/newTask' /&gt;">Add New Task</a> </sec:authorize></p>
-<table cellpadding="1" cellspacing="1" style="width: 100%; height: 100%; ">
-</table>
-<p>
-  &nbsp;</p>
-<div>
-  &nbsp;</div>
 </body>
 </html>
+

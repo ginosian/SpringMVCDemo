@@ -8,19 +8,23 @@ import javax.persistence.*;
 @Entity
 @Table(name = "role")
 public class RoleDTO {
-    @Id
-    @GeneratedValue
-    private Long id;
 
+    private Long id;
     private String role;
 
     public RoleDTO() {
     }
 
-    public void set(String role){
+    public RoleDTO(String role) {
         this.role = role;
     }
 
+    public void set(String role) {
+        this.role = role;
+    }
+
+    @Id
+    @GeneratedValue
     public Long getId() {
         return id;
     }
@@ -29,6 +33,7 @@ public class RoleDTO {
         this.id = id;
     }
 
+    @Column(name = "role", nullable = false, length = 10)
     public String getRole() {
         return role;
     }
@@ -36,6 +41,4 @@ public class RoleDTO {
     public void setRole(String role) {
         this.role = role;
     }
-
-
 }
