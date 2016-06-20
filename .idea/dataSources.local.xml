@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="spring_mvc_demo_db" uuid="edf8fb66-f910-42ed-8d35-d80da72d42dd" />
+    <data-source name="MySQL - @localhost" uuid="cd33650e-1263-4043-add9-8beeaf918a27" />
+  </component>
+</project>

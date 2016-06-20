@@ -6,6 +6,17 @@
       <root url="jar://$PROJECT_DIR$/lib/spring-webmvc-4.2.6.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/spring-websocket-4.2.6.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/spring-web-4.2.6.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/spring secure/spring-security-acl-3.2.5.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/spring secure/spring-security-aspects-3.2.5.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/spring secure/spring-security-cas-3.2.5.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/spring secure/spring-security-config-3.2.5.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/spring secure/spring-security-core-3.2.5.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/spring secure/spring-security-crypto-3.2.5.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/spring secure/spring-security-ldap-3.2.5.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/spring secure/spring-security-openid-3.2.5.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/spring secure/spring-security-remoting-3.2.5.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/spring secure/spring-security-taglibs-3.2.5.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/spring secure/spring-security-web-3.2.5.RELEASE.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
