@@ -9,7 +9,7 @@ import java.util.Collection;
  */
 public interface ProjectDAO {
     ProjectDTO getProjectById(int id);
-    ProjectDTO getProjectByName(String name);
+    ProjectDTO getProjectByStory(String story);
     void addProject(ProjectDTO projectDTO);
     void modifyProjectStory(String story);
     void modifyProjectDescription(String projectDTO);

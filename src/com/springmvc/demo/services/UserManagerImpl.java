@@ -56,4 +56,9 @@ public class UserManagerImpl implements UserManager {
     public void addRole(RoleDTO roleDTO) {
         roleDAO.addRole(roleDTO);
     }
+
+    @Override
+    public UserDTO getUserByName(String name) {
+        return userDAO.getUserByName(name);
+    }
 }

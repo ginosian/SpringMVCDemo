@@ -24,23 +24,27 @@ public class ProjectManagerImpl implements ProjectManager {
     }
 
     @Override
+    public ProjectDTO getProjectByStory(String story) {
+        return projectDAO.getProjectByStory(story);
+    }
+
+    @Override
     public void addProject(ProjectDTO projectDTO) {
         projectDAO.addProject(projectDTO);
     }
 
     @Override
-    public void modifyProjectStory(ProjectDTO projectDTO) {
-        projectDAO.modifyProjectStory(projectDTO.getStory());
-        projectDAO.modifyProjectDescription(projectDTO.getDescription());
+    public void modifyProjectStory(String story) {
+        projectDAO.modifyProjectStory(story);
     }
 
     @Override
-    public void modifyProjectDescription(ProjectDTO projectDTO) {
-
+    public void modifyProjectDescription(String projectDescription) {
+        projectDAO.modifyProjectDescription(projectDescription);
     }
 
     @Override
     public Collection<ProjectDTO> allProjects() {
-        return null;
+        return projectDAO.allProjects();
     }
 }

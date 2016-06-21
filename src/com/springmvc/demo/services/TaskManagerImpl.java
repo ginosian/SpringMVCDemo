@@ -1,8 +1,10 @@
 package com.springmvc.demo.services;
 
+import com.springmvc.demo.dao.TaskDAO;
 import com.springmvc.demo.dto.ProjectDTO;
 import com.springmvc.demo.dto.TaskDTO;
 import com.springmvc.demo.dto.UserDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,14 +17,22 @@ import java.util.Collection;
 @Transactional
 public class TaskManagerImpl implements TaskManager {
 
+    @Autowired
+    TaskDAO taskDAO;
+
     @Override
     public TaskDTO getTaskById(int id) {
-        return null;
+        return taskDAO.getTaskById(id);
     }
 
     @Override
-    public TaskDTO addTask(TaskDTO taskDTO) {
-        return null;
+    public TaskDTO getTaskByStory(String story) {
+        return taskDAO.getTaskByStory(story);
+    }
+
+    @Override
+    public void addTask(TaskDTO taskDTO) {
+        taskDAO.addTask(taskDTO);
     }
 
     @Override
@@ -37,16 +47,16 @@ public class TaskManagerImpl implements TaskManager {
 
     @Override
     public Collection<TaskDTO> allTasks(boolean complete) {
-        return null;
+        return taskDAO.allTasks(complete);
     }
 
     @Override
-    public Collection<TaskDTO> getTaskByProject(ProjectDTO projectDTO) {
-        return null;
+    public Collection<TaskDTO> getTasksWithinProject(ProjectDTO projectDTO) {
+        return taskDAO.getTasksWithinProjects(projectDTO);
     }
 
     @Override
     public Collection<TaskDTO> getTaskByUser(UserDTO userDTO) {
-        return null;
+        return taskDAO.getTaskByUser(userDTO);
     }
 }

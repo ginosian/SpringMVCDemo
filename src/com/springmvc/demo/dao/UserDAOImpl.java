@@ -108,4 +108,24 @@ public class UserDAOImpl implements UserDAO {
         return null;
     }
 
+    @Override
+    public UserDTO getUserByName(String name) {
+        Session session = openSession();
+        Transaction transaction = null;
+        try{
+            transaction = session.beginTransaction();
+            Query query = openSession().createQuery("from UserDTO user where user.name = :name");
+            query.setParameter("name", name); // TODO check if this works fine
+            List<UserDTO> userDTOList = query.list(); // TODO check if return type match
+            transaction.commit();
+            if (userDTOList.size() == 0)return null;
+            return userDTOList.get(0);
+        }catch (HibernateException e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return null;
+    }
 }

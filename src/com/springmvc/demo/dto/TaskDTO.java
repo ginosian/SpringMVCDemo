@@ -1,7 +1,5 @@
 package com.springmvc.demo.dto;
 
-import org.hibernate.annotations.ForeignKey;
-
 import javax.persistence.*;
 
 /**
@@ -13,19 +11,19 @@ public class TaskDTO {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Column(length = 10000)
     private String story;
+
+    @Column(length = 10000)
     private String description;
     private boolean complete;
 
     @OneToOne
-    @JoinColumn(name = "" )
-    @ForeignKey(name = "task_project")
     private ProjectDTO projectDTO;
 
 
     @OneToOne
-    @JoinColumn(name = "" )
-    @ForeignKey(name = "task_user")
     private UserDTO userDTO;
 
     public TaskDTO() {

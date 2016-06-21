@@ -11,11 +11,12 @@ import java.util.Collection;
  */
 public interface TaskManager {
     TaskDTO getTaskById(int id);
-    TaskDTO addTask(TaskDTO taskDTO);
+    TaskDTO getTaskByStory(String story);
+    void addTask(TaskDTO taskDTO);
     TaskDTO reassignTask(TaskDTO taskDTO, UserDTO newAssignee);
     TaskDTO markTaskAsComplete();
     Collection<TaskDTO> allTasks(boolean complete);
-    Collection<TaskDTO> getTaskByProject(ProjectDTO projectDTO);
+    Collection<TaskDTO> getTasksWithinProject(ProjectDTO projectDTO);
     Collection<TaskDTO> getTaskByUser(UserDTO userDTO);
 }
 

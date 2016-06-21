@@ -72,16 +72,84 @@ public class TaskDAOImpl implements TaskDAO {
 
     @Override
     public Collection<TaskDTO> allTasks(boolean complete) {
+        Session session = openSession();
+        Transaction transaction = null;
+        try{
+            transaction = session.beginTransaction();
+            List<TaskDTO> projects = session.createQuery("from TaskDTO").list();
+            transaction.commit();
+            if(projects.size() == 0)return null;
+            return projects;
+        }catch (HibernateException e){
+            if(transaction != null)transaction.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
         return null;
     }
 
     @Override
-    public Collection<TaskDTO> getTaskByProject(ProjectDTO projectDTO) {
+    public Collection<TaskDTO> getTasksWithinProjects(ProjectDTO projectDTO) {
+        String project = projectDTO.getStory();
+        Session session = openSession();
+        Transaction transaction = null;
+        try{
+            transaction = session.beginTransaction();
+            Query query = openSession().createQuery("select task from TaskDTO task join task.projectDTO project where project.story = :story");
+            query.setParameter("story", project);
+            Collection<TaskDTO> taskDTOList = query.list();
+            transaction.commit();
+            if (taskDTOList.size() == 0)return null;
+            return taskDTOList;
+        }catch (HibernateException e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
         return null;
     }
 
     @Override
     public Collection<TaskDTO> getTaskByUser(UserDTO userDTO) {
+        String user = userDTO.getName();
+        Session session = openSession();
+        Transaction transaction = null;
+        try{
+            transaction = session.beginTransaction();
+            Query query = openSession().createQuery("select task from TaskDTO task join task.userDTO assignee where assignee.name = :name");
+            query.setParameter("name", user);
+            Collection<TaskDTO> taskDTOList = query.list();
+            transaction.commit();
+            if (taskDTOList.size() == 0)return null;
+            return taskDTOList;
+        }catch (HibernateException e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return null;
+    }
+
+    @Override
+    public TaskDTO getTaskByStory(String story) {
+        Session session = openSession();
+        Transaction transaction = null;
+        try{
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("from TaskDTO task where task.story = :story");
+            query.setParameter("story", story);
+            List<TaskDTO> task = query.list();
+            if(task.size() == 0) return null;
+            return task.get(0);
+        }catch (HibernateException e){
+            if(transaction != null)transaction.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
         return null;
     }
 }

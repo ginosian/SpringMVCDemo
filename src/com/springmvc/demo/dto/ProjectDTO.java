@@ -34,6 +34,7 @@ public class ProjectDTO {
     }
 
 
+    @Column(length = 100000)
     public String getStory() {
         return story;
     }
@@ -42,6 +43,7 @@ public class ProjectDTO {
         this.story = story;
     }
 
+    @Column(length = 100000)
     public String getDescription() {
         return description;
     }
