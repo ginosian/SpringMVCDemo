@@ -34,18 +34,22 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
-    public UserDTO getUserByLogin(String login) {
+    public UserDTO getUserByUsername(String login) {
         return null;
     }
 
     @Override
-    public Collection<RoleDTO> getRoles() {
-        return null;
+    public Collection<RoleDTO> allRoles() {
+        return roleDAO.allRoles();
+    }
+    @Override
+    public RoleDTO getRoleByName(String roleName) {
+        return roleDAO.getRoleByName(roleName);
     }
 
     @Override
-    public Collection<UserDTO> allUsersByRole(Integer role) {
-        return null;
+    public Collection<UserDTO> allUsersByRole(RoleDTO roleDTO) {
+        return userDAO.getAllUsersByRole(roleDTO);
     }
 
     @Override

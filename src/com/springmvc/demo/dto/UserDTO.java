@@ -35,7 +35,8 @@ public class UserDTO {
         this.password = password;
     }
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     public Long getId() {
         return id;
     }
@@ -54,7 +55,7 @@ public class UserDTO {
     }
 
 
-    @Column(name = "username", unique = true, nullable = false, length = 25)
+    @Column(name = "username", nullable = false, length = 25)
     public String getUsername() {
         return username;
     }
@@ -90,10 +91,21 @@ public class UserDTO {
         this.enabled = enabled;
     }
 
-    @OneToMany // Both JPA and Hibernate default fetch type for OneToMany is Lazy
+    @ManyToMany // Both JPA and Hibernate default fetch type for OneToMany is Lazy
+//    @Column(insertable = false, updatable = false)
     public Set<RoleDTO> getUserRoles() {
         return userRoles;
     }
+
+//    @ManyToMany (fetch = FetchType.LAZY)
+//    @JoinTable(name = "user_role",
+//            joinColumns = { @JoinColumn(name = "user_id") },
+//            inverseJoinColumns = { @JoinColumn(name = "role_id")})// Both JPA and Hibernate default fetch type for OneToMany is Lazy
+//    @ManyToOne(targetEntity = RoleDTO.class)
+//    @JoinColumn(name = "id", updatable = false, insertable = false)
+//    public Set<RoleDTO> getUserRoles() {
+//        return userRoles;
+//    }
 
     public void setUserRoles(Set<RoleDTO> userRoles) {
         this.userRoles = userRoles;

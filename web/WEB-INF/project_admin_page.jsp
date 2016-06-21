@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Martha
@@ -53,7 +54,7 @@
   &nbsp;</p>
 <div style="background-color: rgb(235, 248, 252); color:black;">
   <h2>
-    <span style="font-size:48px;">Project name</span></h2>
+    <span style="font-size:48px;" >Project name</span></h2>
   <p>
     London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
   <p>

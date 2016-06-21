@@ -27,7 +27,7 @@ public class UserDAOImpl implements UserDAO {
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
-            Query query = openSession().createQuery("from UserDTO user where user.id = :id");
+            Query query = session.createQuery("from UserDTO user where user.id = :id");
             query.setParameter("id", id);
             List<UserDTO> userDTOList = query.list(); // TODO check if return type match , ask Lyov if why not to close session
             transaction.commit();
@@ -44,11 +44,17 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void addUser(UserDTO userDTO) {
+        UserDTO candidate = getUserByUsername(userDTO.getUsername());
         Session session = openSession();
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
-            session.save(userDTO);
+            if (candidate != null) {
+                userDTO.setId(candidate.getId());
+                session.merge(userDTO);
+            } else {
+                session.save(userDTO);
+            }
             transaction.commit();
         }catch (HibernateException e) {
             if (transaction != null) transaction.rollback();
@@ -81,13 +87,15 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public Collection<UserDTO> getAllUsersByRole(RoleDTO roleDTO) {
+        String role = roleDTO.getRole();
         Session session = openSession();
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
-            Query query = openSession().createQuery("from UserDTO user where user.role = :role");
-            query.setParameter("role", roleDTO);
-            List<UserDTO> userDTOList = query.list(); // TODO check if return type match , ask Lyov if why not to close session
+            Query query = openSession().createQuery("select user from UserDTO user join user.userRoles user_role where user_role.role = :role");
+                    // from UserDTO user join user.userRoles userrole where userrole.role = :role
+            query.setParameter("role", role);
+            List<UserDTO> userDTOList = query.list();
             transaction.commit();
             if (userDTOList.size() == 0)return null;
             return userDTOList;
@@ -99,4 +107,5 @@ public class UserDAOImpl implements UserDAO {
         }
         return null;
     }
+
 }

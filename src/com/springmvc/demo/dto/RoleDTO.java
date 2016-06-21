@@ -33,7 +33,7 @@ public class RoleDTO {
         this.id = id;
     }
 
-    @Column(name = "role", nullable = false, length = 10)
+    @Column(name = "role")
     public String getRole() {
         return role;
     }

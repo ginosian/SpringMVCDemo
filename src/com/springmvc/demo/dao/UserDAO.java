@@ -13,5 +13,4 @@ public interface UserDAO {
     void addUser(UserDTO userDTO);
     UserDTO getUserByUsername(String login);
     Collection<UserDTO> getAllUsersByRole(RoleDTO roleDTO);
-
 }

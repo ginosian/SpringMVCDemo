@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: Martha
@@ -36,7 +37,7 @@
 
     .active {
       background-color:#4CAF50;
-    }		</style>
+    }  </style>
 </head>
 <body>
 <p>
@@ -52,28 +53,31 @@
 <p>
   &nbsp;</p>
 <div style="background-color: rgb(235, 248, 252); color:black;">
-  <table border="1" cellpadding="1" cellspacing="1" style="width: 100%; height: 100%">
+<form:form action="${root}/admin/add_project" method="post">
+  <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+  <table border="0" cellpadding="1" cellspacing="1" style="width: 100%; height: 100%">
     <tbody>
     <tr>
       <td colspan="2" style="text-align: center;">
-        Projectname:<br />
-        <input name="taskname" style="height:12%;width:25%" type="text" /></td>
+        Project Name:<br />
+        <textarea name="project_story" rows="2" cols="50" style="width: 70%" required></textarea>
+      </td>
     </tr>
     <tr>
       <td colspan="2" style="text-align: center;">
-        Projectdescription:<br />
-        <input name="taskdescription" style="height:12%;width:25%" type="text" /></td>
+        Project Description:<br />
+        <textarea name="project_description" rows="5" cols="50" style="width: 70%"></textarea></td>
     </tr>
     <tr>
       <td colspan="2" style="text-align: center;">
-        <input style="width:25%; position:relative; white-space:normal" type="submit" value="LOGIN" /></td>
+        <p>
+          &nbsp;</p>
+        <input style="width:25%; position:relative; white-space:normal" type="submit" value="SUBMIT" /></td>
     </tr>
     </tbody>
   </table>
-  <p>
-    &nbsp;</p>
+</form:form>
+
 </div>
-<p>
-  &nbsp;</p>
 </body>
 </html>

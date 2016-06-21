@@ -10,4 +10,5 @@ import java.util.Collection;
 public interface RoleDAO {
     Collection<RoleDTO> allRoles();
     void addRole(RoleDTO roleDTO);
+    RoleDTO getRoleByName(String name);
 }

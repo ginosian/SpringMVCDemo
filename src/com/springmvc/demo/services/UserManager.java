@@ -11,8 +11,10 @@ import java.util.Collection;
 public interface UserManager {
     UserDTO getUserById(Long id);
     void addUser(UserDTO userDTO);
-    UserDTO getUserByLogin(String login);
-    Collection<RoleDTO> getRoles();
-    Collection<UserDTO> allUsersByRole(Integer role);
+    UserDTO getUserByUsername(String login);
+    Collection<RoleDTO> allRoles();
+    RoleDTO getRoleByName(String roleName);
+    Collection<UserDTO> allUsersByRole(RoleDTO roleDTO);
     void addRole(RoleDTO roleDTO);
+
 }

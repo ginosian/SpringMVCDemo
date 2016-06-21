@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: Martha
@@ -39,8 +41,7 @@
     }		</style>
 </head>
 <body>
-<p>
-  &nbsp;</p>
+
 <ul>
   <li>
     <a href="#home_tab">Home</a></li>
@@ -49,29 +50,35 @@
   <li>
     <a class="active" href="#project_tab">Project Name</a></li>
 </ul>
-<p>
-  &nbsp;</p>
-<div style="background-color: rgb(235, 248, 252); color:black;">
+
+<div style="background-color: rgb(235, 248, 252); color:black;"/>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
+<form:form action="${root}/admin/register" method="post">
+    <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
   <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 100%; height: 100%">
     <tbody>
     <tr>
       <td colspan="3" style="text-align: center;">
-        <form action="">
+            <br>User First Name:<br />
+    <br><input name="name" style="height:12%;width:25%" type="text" required/><br />
+    <br>User Login:<br />
+    <br><input name="username" style="height:12%;width:25%" type="email" required/><br />
+    <br>Password:<br />
+    <p><input id="password" name="password" style="height:12%;width:25%" type="password" required/></p>
+    <br>Approve with authorization:<br />
+          <select name="role" style="height:12%;width:25%" required>
+            <c:forEach items="${roles}" var="roles">
+              <option>${roles.getRole()}</option>
+            </c:forEach>
+          </select>
           <p>
-            User First Name:<br />
-            <input id="dfsds" name="username" style="height:12%;width:25%" type="text" /><br />
-            User Login:<br />
-            <input id="czzce" name="username" style="height:12%;width:25%" type="text" /><br />
-            Password:<br />
-            <input id="password" name="password" style="height:12%;width:25%" type="password" /></p>
-          <input style="width:25%; position:relative; white-space:normal" type="submit" value="Create" />&nbsp;</form>
+              &nbsp;</p>
+          <p><input style="width:25%; position:relative; white-space:normal" type="submit" value="Create" /></p>
       </td>
     </tr>
     </tbody>
   </table>
-  <p>
-    v</p>
+</form:form>
 </div>
 </body>
 </html>
-

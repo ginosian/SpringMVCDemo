@@ -1,10 +1,8 @@
 package com.springmvc.demo.dao;
 
 import com.springmvc.demo.dto.RoleDTO;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import com.springmvc.demo.dto.UserDTO;
+import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -31,10 +29,6 @@ public class RoleDAOImpl implements RoleDAO {
         try{
             transaction = session.beginTransaction();
             List<RoleDTO> roleDTOs = session.createQuery("from RoleDTO").list();
-            Iterator iterator = roleDTOs.iterator();
-            while(iterator.hasNext()){
-                roleDTOs.add((RoleDTO)iterator.next());
-            }
             transaction.commit();
             return roleDTOs;
         }catch (HibernateException e) {
@@ -48,11 +42,17 @@ public class RoleDAOImpl implements RoleDAO {
 
     @Override
     public void addRole(RoleDTO roleDTO) {
+        RoleDTO candidate = getRoleByName(roleDTO.getRole());
         Session session = openSession();
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.save(roleDTO);
+            if (candidate != null) {
+                roleDTO.setId(candidate.getId());
+                session.merge(roleDTO);
+            } else {
+                session.save(roleDTO);
+            }
             transaction.commit();
         } catch (HibernateException e){
             if (transaction != null) transaction.rollback();
@@ -60,5 +60,25 @@ public class RoleDAOImpl implements RoleDAO {
         } finally {
             session.close();
         }
+    }
+    @Override
+    public RoleDTO getRoleByName(String name) {
+        Session session = openSession();
+        Transaction transaction = null;
+        try{
+            transaction = session.beginTransaction();
+            Query query = openSession().createQuery("from RoleDTO role where role.role = :role");
+            query.setParameter("role", name); // TODO check if this works fine
+            List<RoleDTO> roleDTOs = query.list();
+            transaction.commit();
+            if(roleDTOs.size() > 0) return roleDTOs.get(0);
+            return null;
+        }catch (HibernateException e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return null;
     }
 }

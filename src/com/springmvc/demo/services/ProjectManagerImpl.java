@@ -20,7 +20,7 @@ public class ProjectManagerImpl implements ProjectManager {
 
     @Override
     public ProjectDTO getProjectById(int id) {
-        return null;
+        return projectDAO.getProjectById(id);
     }
 
     @Override
@@ -30,7 +30,8 @@ public class ProjectManagerImpl implements ProjectManager {
 
     @Override
     public void modifyProjectStory(ProjectDTO projectDTO) {
-
+        projectDAO.modifyProjectStory(projectDTO.getStory());
+        projectDAO.modifyProjectDescription(projectDTO.getDescription());
     }
 
     @Override

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Martha
@@ -11,7 +12,8 @@
   <title></title>
 </head>
 <body>
-<form action="----" method="post">
+<c:set var="root" value="${pageContext.request.contextPath}"/>
+<form action="${root}/admin" method="get">
   <table align="center" cellpadding="1" cellspacing="1" id="admin_home" style="width: 100%; height: 100%">
     <tbody>
     <tr>
@@ -55,64 +57,21 @@
       </td>
       <td style="text-align: left; vertical-align: top; background-color: #D7CCC8; width: 100%; height: 100%">
         <ul id="user_list_admin" >
-          <li id="user1" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Lee Benson</span></span></li>
-          <li id="user2" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Donna Goodman</span></span></li>
-          <li id="user3" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Pablo Dunn</span></span></li>
-          <li id="user4" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Jacquelyn Waters</span></span></li>
-          <li id="user5" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Marcella Manning</span></span></li>
-          <li id="user6" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Donnie Cook</span></span></li>
-          <li id="user7" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Ginger George</span></span></li>
-          <li id="user8" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Beulah Byrd</span></span></li>
-          <li id="user9" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Lee Benson</span></span></li>
-          <li id="user10" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Donna Goodman</span></span></li>
-          <li id="user11" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Pablo Dunn</span></span></li>
-          <li id="user12" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Jacquelyn Waters</span></span></li>
-          <li id="user13" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Marcella Manning</span></span></li>
-          <li id="user14" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Donnie Cook</span></span></li>
-          <li id="user15" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Ginger George</span></span></li>
-          <li id="user16" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Beulah Byrd</span></span></li>
-          <li id="user24" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Lee Benson</span></span></li>
-          <li id="user17" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Donna Goodman</span></span></li>
-          <li id="user18" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Pablo Dunn</span></span></li>
-          <li id="user19" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Jacquelyn Waters</span></span></li>
-          <li id="user20" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Marcella Manning</span></span></li>
-          <li id="user21" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Donnie Cook</span></span></li>
-          <li id="user22" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Ginger George</span></span></li>
-          <li id="user23" style="text-align: left;">
-            <span style="font-size:24px;"><span style="font-size:24px;">Beulah Byrd</span></span></li>
+            <c:forEach items="${users}" var="users">
+              <li style="text-align: left" id="${users.getUsername()}">
+                <span style="font-size:24px;">${users.getName()}</span>
+              </li>
+            </c:forEach>
         </ul>
       </td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle; height: 50px">
-        <input name="create_project" style="width:60%; position:relative; white-space:normal; background-color: #B0BEC5; font-size:24px" type="button" value="Create projectDTO" /></td>
+        <input name="create_project" onclick="location.href='${root}/admin/create_project'" style="width:60%; position:relative; white-space:normal; background-color: #B0BEC5; font-size:24px" type="button" value="Create projectDTO" /></td>
       <td style="text-align: center; vertical-align: middle;">
         <input name="create_task" style="width:60%; position:relative; white-space:normal; background-color: #C5E1A5; font-size:24px" type="button" value="Create taskDTO" /></td>
       <td style="text-align: center; vertical-align: middle;">
-        <input name="create_user" onclick="location.href='/read'" style="width:60%; position:relative; white-space:normal; background-color: #BCAAA4; font-size:24px" type="button" value="Create userDTO" /></td>
+        <input name="create_user" onclick="location.href='${root}/admin/create_user'" style="width:60%; position:relative; white-space:normal; background-color: #BCAAA4; font-size:24px" type="button" value="Create userDTO" /></td>
     </tr>
     </tbody>
   </table>

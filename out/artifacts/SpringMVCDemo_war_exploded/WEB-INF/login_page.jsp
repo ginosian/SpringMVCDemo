@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   UserDTO: Martha
@@ -28,9 +29,9 @@
             <form action="">
                 <p>
                     Username:<br />
-                    <input type="text" id="username" name="username" style="height:12%;width:25%"  /><br />
+                    <input type="email" id="username" name="username" style="height:12%;width:25%"  required/><br />
                     Password:<br />
-                    <input type="password" id="password" name="password" style="height:12%;width:25%"  /></p>
+                    <input type="password" id="password" name="password" style="height:12%;width:25%"  required/></p>
                     <input type="hidden" name="${_csrf.parameterName}"   value="${_csrf.token}" />
             </form>
         </td>

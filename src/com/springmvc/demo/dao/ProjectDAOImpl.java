@@ -1,6 +1,7 @@
 package com.springmvc.demo.dao;
 
 import com.springmvc.demo.dto.ProjectDTO;
+import com.springmvc.demo.dto.UserDTO;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -44,11 +45,17 @@ public class ProjectDAOImpl implements ProjectDAO {
 
     @Override
     public void addProject(ProjectDTO projectDTO) {
+        ProjectDTO candidate = getProjectByName(projectDTO.getStory());
         Session session = openSession();
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
-            session.save(projectDTO);
+            if (candidate != null) {
+                projectDTO.setId(candidate.getId());
+                session.merge(projectDTO);
+            } else {
+                session.save(projectDTO);
+            }
             transaction.commit();
         }catch (HibernateException e) {
             if (transaction!=null) transaction.rollback();
@@ -77,7 +84,7 @@ public class ProjectDAOImpl implements ProjectDAO {
     }
 
     @Override
-    public void modifyProjectDescription(ProjectDTO projectDTO) {
+    public void modifyProjectDescription(String projectDTO) {
         Session session = openSession();
         Transaction transaction = null;
         try{
@@ -101,6 +108,26 @@ public class ProjectDAOImpl implements ProjectDAO {
 
     @Override
     public Collection<ProjectDTO> allProjects() {
+        return null;
+    }
+
+    @Override
+    public ProjectDTO getProjectByName(String name) {
+        Session session = openSession();
+        Transaction transaction = null;
+        try{
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("from ProjectDTO project where project.name = :name");
+            query.setParameter("name", name);
+            List<ProjectDTO> project = query.list();
+            if(project.size() == 0) return null;
+            return project.get(0);
+        }catch (HibernateException e){
+            if(transaction != null)transaction.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
         return null;
     }
 }

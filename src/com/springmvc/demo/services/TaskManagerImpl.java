@@ -3,12 +3,16 @@ package com.springmvc.demo.services;
 import com.springmvc.demo.dto.ProjectDTO;
 import com.springmvc.demo.dto.TaskDTO;
 import com.springmvc.demo.dto.UserDTO;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
 /**
  * Created by Martha on 6/14/2016.
  */
+@Service
+@Transactional
 public class TaskManagerImpl implements TaskManager {
 
     @Override
