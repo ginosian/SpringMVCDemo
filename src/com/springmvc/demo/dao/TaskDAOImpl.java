@@ -6,6 +6,7 @@ import com.springmvc.demo.dto.UserDTO;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  * Created by Martha on 6/14/2016.
  */
 @Repository
+@Transactional
 public class TaskDAOImpl implements TaskDAO {
 
     @Autowired
@@ -24,7 +26,7 @@ public class TaskDAOImpl implements TaskDAO {
     }
 
     @Override
-    public TaskDTO getTaskById(int id) {
+    public TaskDTO getTaskById(long id) {
         Session session = openSession();
         Transaction transaction = null;
         try{
@@ -32,6 +34,7 @@ public class TaskDAOImpl implements TaskDAO {
             Query query = openSession().createQuery("from TaskDTO task where task.id = :id");
             query.setParameter("id", id);
             List<TaskDTO> taskDTOLIST = query.list(); // TODO check if return type match , ask Lyov if why not to close session
+            Hibernate.initialize(taskDTOLIST);
             transaction.commit();
             if (taskDTOLIST.size() == 0)return null;
             return taskDTOLIST.get(0);
@@ -76,10 +79,11 @@ public class TaskDAOImpl implements TaskDAO {
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
-            List<TaskDTO> projects = session.createQuery("from TaskDTO").list();
+            List<TaskDTO> tasks = session.createQuery("from TaskDTO").list();
+            Hibernate.initialize(tasks);
             transaction.commit();
-            if(projects.size() == 0)return null;
-            return projects;
+            if(tasks.size() == 0)return null;
+            return tasks;
         }catch (HibernateException e){
             if(transaction != null)transaction.rollback();
             e.printStackTrace();
@@ -98,7 +102,8 @@ public class TaskDAOImpl implements TaskDAO {
             transaction = session.beginTransaction();
             Query query = openSession().createQuery("select task from TaskDTO task join task.projectDTO project where project.story = :story");
             query.setParameter("story", project);
-            Collection<TaskDTO> taskDTOList = query.list();
+            List<TaskDTO> taskDTOList = query.list();
+            Hibernate.initialize(taskDTOList);
             transaction.commit();
             if (taskDTOList.size() == 0)return null;
             return taskDTOList;
@@ -120,7 +125,8 @@ public class TaskDAOImpl implements TaskDAO {
             transaction = session.beginTransaction();
             Query query = openSession().createQuery("select task from TaskDTO task join task.userDTO assignee where assignee.name = :name");
             query.setParameter("name", user);
-            Collection<TaskDTO> taskDTOList = query.list();
+            List<TaskDTO> taskDTOList = query.list();
+            Hibernate.initialize(taskDTOList);
             transaction.commit();
             if (taskDTOList.size() == 0)return null;
             return taskDTOList;
@@ -142,6 +148,7 @@ public class TaskDAOImpl implements TaskDAO {
             Query query = session.createQuery("from TaskDTO task where task.story = :story");
             query.setParameter("story", story);
             List<TaskDTO> task = query.list();
+            Hibernate.initialize(task);
             if(task.size() == 0) return null;
             return task.get(0);
         }catch (HibernateException e){
@@ -151,5 +158,27 @@ public class TaskDAOImpl implements TaskDAO {
             session.close();
         }
         return null;
+    }
+
+    @Override
+    public void modifyTask(TaskDTO taskDTO) {
+        TaskDTO candidate = getTaskById(taskDTO.getId());
+        Hibernate.initialize(candidate);
+        Session session = openSession();
+        Transaction transaction = null;
+        try{
+            transaction = session.beginTransaction();
+            if (candidate != null) {
+                session.update(taskDTO);
+            } else {
+                session.save(taskDTO);
+            }
+            transaction.commit();
+        }catch (HibernateException e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
     }
 }

@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Martha on 6/20/2016.
@@ -46,29 +44,29 @@ public class AdminController {
         userManager.addRole(user);
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("admin_page");
 
-        Set<UserDTO> users = new HashSet<>();
-        Collection<UserDTO> dbUsersList = userManager.allUsersByRole(user);
+        List<UserDTO> users = new ArrayList<>();
+        List<UserDTO> dbUsersList = (List<UserDTO>)userManager.allUsersByRole(user);
         if(dbUsersList != null){
             users.addAll(dbUsersList);
             modelAndView.addObject("users", users);
         }
 
-        Set<ProjectDTO> projects = new HashSet<>();
-        Collection<ProjectDTO> dbProjectsList = projectManager.allProjects();
+        List<ProjectDTO> projects = new ArrayList<>();
+        List<ProjectDTO> dbProjectsList = (List<ProjectDTO>)projectManager.allProjects();
         if(dbProjectsList != null){
             projects.addAll(dbProjectsList);
             modelAndView.addObject("projects", projects);
         }
 
-        Set<TaskDTO> tasks = new HashSet<>();
-        Collection<TaskDTO> dbTasksList = taskManager.allTasks(true);
+        List<TaskDTO> tasks = new ArrayList<>();
+        List<TaskDTO> dbTasksList = (List<TaskDTO>)taskManager.allTasks(true);
         if(dbTasksList != null){
             tasks.addAll(dbTasksList);
             modelAndView.addObject("tasks", tasks);
         }
 
+        modelAndView.setViewName("admin_page");
         return modelAndView;
     }
     // endregion
@@ -78,6 +76,7 @@ public class AdminController {
     public ModelAndView createUser(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("roles", userManager.allRoles());
+
         modelAndView.setViewName("create_user");
         return modelAndView;
     }
@@ -94,6 +93,7 @@ public class AdminController {
                 true, roles);
         userManager.addUser(userDTO);
         ModelAndView modelAndView = new ModelAndView();
+
         modelAndView.setViewName("redirect:/admin?success=true");
         return modelAndView;
     }
@@ -105,13 +105,14 @@ public class AdminController {
         return "create_project";
     }
 
-    @RequestMapping(value = "/add_project")
+    @RequestMapping(value = "/add_project", method = RequestMethod.POST)
     public ModelAndView addProject(@ModelAttribute("project_story") String projectStory,
                                 @ModelAttribute("project_description") String projectDescription){
         ProjectDTO projectDTO = new ProjectDTO();
         projectDTO.set(projectStory, projectDescription);
         projectManager.addProject(projectDTO);
         ModelAndView modelAndView = new ModelAndView();
+
         modelAndView.setViewName("redirect:/admin?success=true");
         return modelAndView;
     }
@@ -126,11 +127,12 @@ public class AdminController {
         user.set("USER");
         modelAndView.addObject("projects", projectManager.allProjects());
         modelAndView.addObject("users", userManager.allUsersByRole(user));
+
         modelAndView.setViewName("create_task");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add_task")
+    @RequestMapping(value = "/add_task", method = RequestMethod.POST)
     public ModelAndView addTask(@ModelAttribute("task_story") String taskStory,
                                 @ModelAttribute("task_description") String taskDescription,
                                 @ModelAttribute("users") String assignee,
@@ -141,9 +143,54 @@ public class AdminController {
         taskDTO.set(taskStory, taskDescription, projectDTO, userDTO);
         taskManager.addTask(taskDTO);
         ModelAndView modelAndView = new ModelAndView();
+
         modelAndView.setViewName("redirect:/admin?success=true");
         return modelAndView;
     }
+
+    @RequestMapping(value = "/task_detail", method = RequestMethod.GET)
+    private ModelAndView taskDetail(@ModelAttribute("story") String taskStory){
+        ModelAndView modelAndView = new ModelAndView();
+
+        RoleDTO user = new RoleDTO();
+        user.set("USER");
+
+        TaskDTO task = taskManager.getTaskByStory(taskStory);
+        String project = task.getProjectDTO().getStory();
+        String taskDescription = task.getDescription();
+        String assignee = task.getUserDTO().getName();
+        String taskId = task.getId().toString();
+        Collection<UserDTO> users = userManager.allUsersByRole(user);
+        modelAndView.addObject("project", project);
+        modelAndView.addObject("assignee", assignee);
+        modelAndView.addObject("task_story", taskStory);
+        modelAndView.addObject("task_description", taskDescription);
+        modelAndView.addObject("users", users);
+        modelAndView.addObject("task_id", taskId);
+        modelAndView.setViewName("admin_task_detail");
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/modify_task", method = RequestMethod.POST)
+    public ModelAndView modifyTask(@ModelAttribute("task_story") String taskStory,
+                                   @ModelAttribute("user") String newAssignee,
+                                   @ModelAttribute("task_description") String task_description,
+                                   @ModelAttribute("assignee") String previousAssignee,
+                                   @ModelAttribute("task_id") String id){
+        TaskDTO taskDTO = taskManager.getTaskById(Long.parseLong(id));
+        UserDTO assignee = null;
+        if(newAssignee == null || newAssignee.isEmpty()){
+            assignee = userManager.getUserByName(previousAssignee);
+        } else {assignee = userManager.getUserByName(newAssignee);}
+        taskDTO.set(taskStory, task_description, assignee);
+        taskManager.modifyTask(taskDTO);
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("redirect:/admin?success=true");
+        return modelAndView;
+    }
+
 
     // endregion
 
@@ -151,4 +198,6 @@ public class AdminController {
     public ModelAndView userDetail(){
         return null;
     }
+
+
 }

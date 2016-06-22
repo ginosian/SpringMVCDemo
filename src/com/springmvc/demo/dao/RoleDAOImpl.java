@@ -1,19 +1,19 @@
 package com.springmvc.demo.dao;
 
 import com.springmvc.demo.dto.RoleDTO;
-import com.springmvc.demo.dto.UserDTO;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 /**
  * Created by Martha on 6/14/2016.
  */
 @Repository
+@Transactional
 public class RoleDAOImpl implements RoleDAO {
     @Autowired
     SessionFactory sessionFactory;

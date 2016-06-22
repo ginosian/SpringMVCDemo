@@ -17,13 +17,13 @@ public class TaskDTO {
 
     @Column(length = 10000)
     private String description;
-    private boolean complete;
+    private boolean complete = true;
 
-    @OneToOne
+    @OneToOne (fetch = FetchType.EAGER)
     private ProjectDTO projectDTO;
 
 
-    @OneToOne
+    @OneToOne (fetch = FetchType.EAGER)
     private UserDTO userDTO;
 
     public TaskDTO() {
@@ -34,6 +34,14 @@ public class TaskDTO {
         this.description = description;
         this.projectDTO = projectDTO;
         this.userDTO = userDTO;
+        this.complete = true;
+    }
+
+    public void set(String story, String description, UserDTO userDTO) {
+        this.story = story;
+        this.description = description;
+        this.userDTO = userDTO;
+        this.complete = true;
     }
 
     public Long getId() {

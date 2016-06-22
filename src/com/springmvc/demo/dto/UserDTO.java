@@ -91,7 +91,7 @@ public class UserDTO {
         this.enabled = enabled;
     }
 
-    @ManyToMany // Both JPA and Hibernate default fetch type for OneToMany is Lazy
+    @ManyToMany (fetch = FetchType.EAGER)// Both JPA and Hibernate default fetch type for OneToMany is Lazy
 //    @Column(insertable = false, updatable = false)
     public Set<RoleDTO> getUserRoles() {
         return userRoles;

@@ -10,7 +10,7 @@ import java.util.Collection;
  * Created by Martha on 6/14/2016.
  */
 public interface TaskDAO {
-    TaskDTO getTaskById(int id);
+    TaskDTO getTaskById(long id);
     TaskDTO getTaskByStory(String story);
     void addTask(TaskDTO taskDTO);
     TaskDTO reassignTask(TaskDTO taskDTO, UserDTO newAssignee);
@@ -18,4 +18,5 @@ public interface TaskDAO {
     Collection<TaskDTO> allTasks(boolean complete);
     Collection<TaskDTO> getTasksWithinProjects(ProjectDTO projectDTO);
     Collection<TaskDTO> getTaskByUser(UserDTO userDTO);
+    void modifyTask(TaskDTO taskDTO);
 }

@@ -4,6 +4,7 @@ import com.springmvc.demo.dto.ProjectDTO;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
  * Created by Martha on 6/14/2016.
  */
 @Repository
+@Transactional
 public class ProjectDAOImpl implements ProjectDAO {
     @Autowired
     SessionFactory sessionFactory;

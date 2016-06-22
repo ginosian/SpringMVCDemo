@@ -21,7 +21,7 @@ public class TaskManagerImpl implements TaskManager {
     TaskDAO taskDAO;
 
     @Override
-    public TaskDTO getTaskById(int id) {
+    public TaskDTO getTaskById(long id) {
         return taskDAO.getTaskById(id);
     }
 
@@ -58,5 +58,10 @@ public class TaskManagerImpl implements TaskManager {
     @Override
     public Collection<TaskDTO> getTaskByUser(UserDTO userDTO) {
         return taskDAO.getTaskByUser(userDTO);
+    }
+
+    @Override
+    public void modifyTask(TaskDTO taskDTO) {
+        taskDAO.modifyTask(taskDTO);
     }
 }
