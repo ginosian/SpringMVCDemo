@@ -60,20 +60,20 @@
     <tr>
       <td colspan="3" style="text-align: center;">
             <br>User First Name:<br />
-    <br><input name="name" style="height:12%;width:25%" type="text" required/><br />
+    <br><input name="name" style="height:40px;width:25%" type="text" required/><br />
     <br>User Login:<br />
-    <br><input name="username" style="height:12%;width:25%" type="email" required/><br />
+    <br><input name="username" style="height:40px;width:25%" type="email" required/><br />
     <br>Password:<br />
-    <p><input id="password" name="password" style="height:12%;width:25%" type="password" required/></p>
+    <p><input id="password" name="password" style="height:40px;width:25%" type="password" required/></p>
     <br>Approve with authorization:<br />
-          <select name="role" style="height:12%;width:25%" required>
+          <select name="role" style="height:40px;width:25%" required>
             <c:forEach items="${roles}" var="roles">
               <option>${roles.getRole()}</option>
             </c:forEach>
           </select>
           <p>
               &nbsp;</p>
-          <p><input style="width:25%; position:relative; white-space:normal" type="submit" value="Create" /></p>
+          <p><input style="width:25%; height:40px; position:relative; white-space:normal" type="submit" value="Create" /></p>
       </td>
     </tr>
     </tbody>

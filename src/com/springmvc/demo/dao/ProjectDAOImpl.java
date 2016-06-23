@@ -1,6 +1,7 @@
 package com.springmvc.demo.dao;
 
 import com.springmvc.demo.dto.ProjectDTO;
+import com.springmvc.demo.dto.TaskDTO;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,9 +23,8 @@ public class ProjectDAOImpl implements ProjectDAO {
         return sessionFactory.openSession();
     }
 
-
     @Override
-    public ProjectDTO getProjectById(int id) {
+    public ProjectDTO getProjectById(Long id) {
         Session session = openSession();
         Transaction transaction = null;
         try{
@@ -45,6 +45,26 @@ public class ProjectDAOImpl implements ProjectDAO {
     }
 
     @Override
+    public ProjectDTO getProjectByStory(String story) {
+        Session session = openSession();
+        Transaction transaction = null;
+        try{
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("from ProjectDTO project where project.story = :story");
+            query.setParameter("story", story);
+            List<ProjectDTO> project = query.list();
+            if(project.size() == 0) return null;
+            return project.get(0);
+        }catch (HibernateException e){
+            if(transaction != null)transaction.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return null;
+    }
+
+    @Override
     public void addProject(ProjectDTO projectDTO) {
         ProjectDTO candidate = getProjectByStory(projectDTO.getStory());
         Session session = openSession();
@@ -53,7 +73,7 @@ public class ProjectDAOImpl implements ProjectDAO {
             transaction = session.beginTransaction();
             if (candidate != null) {
                 projectDTO.setId(candidate.getId());
-                session.merge(projectDTO);
+                session.update(projectDTO);
             } else {
                 session.save(projectDTO);
             }
@@ -67,40 +87,18 @@ public class ProjectDAOImpl implements ProjectDAO {
     }
 
     @Override
-    public void modifyProjectStory(String story) {
+    public void modifyProject(Long id, String story, String description) {
         Session session = openSession();
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
-            ProjectDTO project = (ProjectDTO)session.get(ProjectDTO.class, story);
+            ProjectDTO project = (ProjectDTO)session.get(ProjectDTO.class, id);
             project.setStory(story);
+            project.setDescription(description);
             session.update(project);
             transaction.commit();
         }catch (HibernateException e) {
             if (transaction!=null) transaction.rollback();
-            e.printStackTrace();
-        }finally {
-            session.close();
-        }
-    }
-
-    @Override
-    public void modifyProjectDescription(String projectDTO) {
-        Session session = openSession();
-        Transaction transaction = null;
-        try{
-//            transaction = session.beginTransaction();
-//            String description = projectDTO.getDescription();
-//            Long id = projectDTO.getId();
-//            String hql = "UPDATE ProjectDTO set description = :description "  +
-//            "WHERE id = :id";
-//            Query query = session.createQuery(hql);
-//            query.setParameter("description", description);
-//            int result = query.executeUpdate();
-//
-//            ProjectDTO projectDTO = (ProjectDTO)session.get(ProjectDTO.class, description);
-        }catch (HibernateException e){
-            if(transaction != null) transaction.rollback();
             e.printStackTrace();
         }finally {
             session.close();
@@ -117,26 +115,6 @@ public class ProjectDAOImpl implements ProjectDAO {
             transaction.commit();
             if(projects.size() == 0)return null;
             return projects;
-        }catch (HibernateException e){
-            if(transaction != null)transaction.rollback();
-            e.printStackTrace();
-        }finally {
-            session.close();
-        }
-        return null;
-    }
-
-    @Override
-    public ProjectDTO getProjectByStory(String story) {
-        Session session = openSession();
-        Transaction transaction = null;
-        try{
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("from ProjectDTO project where project.story = :story");
-            query.setParameter("story", story);
-            List<ProjectDTO> project = query.list();
-            if(project.size() == 0) return null;
-            return project.get(0);
         }catch (HibernateException e){
             if(transaction != null)transaction.rollback();
             e.printStackTrace();

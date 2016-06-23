@@ -19,7 +19,7 @@ public class ProjectManagerImpl implements ProjectManager {
     ProjectDAO projectDAO;
 
     @Override
-    public ProjectDTO getProjectById(int id) {
+    public ProjectDTO getProjectById(Long id) {
         return projectDAO.getProjectById(id);
     }
 
@@ -34,13 +34,8 @@ public class ProjectManagerImpl implements ProjectManager {
     }
 
     @Override
-    public void modifyProjectStory(String story) {
-        projectDAO.modifyProjectStory(story);
-    }
-
-    @Override
-    public void modifyProjectDescription(String projectDescription) {
-        projectDAO.modifyProjectDescription(projectDescription);
+    public void modifyProject(Long id, String story, String description) {
+        projectDAO.modifyProject(id, story, description);
     }
 
     @Override

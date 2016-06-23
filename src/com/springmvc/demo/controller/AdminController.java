@@ -56,7 +56,7 @@ public class AdminController {
         List<ProjectDTO> dbProjectsList = (List<ProjectDTO>)projectManager.allProjects();
         if(dbProjectsList != null){
             projects.addAll(dbProjectsList);
-            modelAndView.addObject("projects", projects);
+            modelAndView.addObject("project", projects);
         }
 
         List<TaskDTO> tasks = new ArrayList<>();
@@ -116,6 +116,118 @@ public class AdminController {
         modelAndView.setViewName("redirect:/admin?success=true");
         return modelAndView;
     }
+
+    @RequestMapping(value = "/project_detail", method = RequestMethod.GET)
+    public ModelAndView projectDetail(@ModelAttribute("project") String projectStory){
+        ModelAndView modelAndView = new ModelAndView();
+
+        RoleDTO user = new RoleDTO();
+        user.set("USER");
+
+        ProjectDTO project = projectManager.getProjectByStory(projectStory);
+        String projectId = project.getId().toString();
+        String projectDescription = project.getDescription();
+        Collection<TaskDTO> tasks = taskManager.getTasksWithinProject(project);
+
+        modelAndView.addObject("project_id", projectId);
+        modelAndView.addObject("project_story", projectStory);
+        modelAndView.addObject("project_description", projectDescription);
+        modelAndView.addObject("tasks", tasks);
+
+        modelAndView.setViewName("admin_project_detail");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/modify_project", method = RequestMethod.POST)
+    public ModelAndView modifyProject(@ModelAttribute("project_story") String projectStory,
+                                      @ModelAttribute("project_description") String project_description,
+                                      @ModelAttribute("project_id") String id){
+        Long projectId = Long.parseLong(id);
+        projectManager.modifyProject(projectId, projectStory, project_description);
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("redirect:/admin?success=true");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/create_project_task", method = RequestMethod.GET)
+    public ModelAndView createProjectTask(@ModelAttribute("project_id") String id){
+        ModelAndView modelAndView = new ModelAndView();
+        RoleDTO user = new RoleDTO();
+        user.set("USER");
+        ProjectDTO project = projectManager.getProjectById(Long.parseLong(id));
+        modelAndView.addObject("project", project.getStory());
+        modelAndView.addObject("users", userManager.allUsersByRole(user));
+
+        modelAndView.setViewName("new_task_from_project");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/add_project_task", method = RequestMethod.POST)
+    public ModelAndView addProjectTask(@ModelAttribute("task_story") String taskStory,
+                                          @ModelAttribute("user") String assignee,
+                                          @ModelAttribute("task_description") String taskDescription,
+                                          @ModelAttribute("project") String projectStory){
+        TaskDTO taskDTO = new TaskDTO();
+        UserDTO userDTO = userManager.getUserByName(assignee);
+        ProjectDTO projectDTO = projectManager.getProjectByStory(projectStory);
+        taskDTO.set(taskStory, taskDescription, projectDTO, userDTO);
+        taskManager.addTask(taskDTO);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("project", projectStory);
+
+        modelAndView.setViewName("redirect:/admin/project_detail?success=true");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/project_task_detail", method = RequestMethod.GET)
+    public ModelAndView reviewProjectTask(@ModelAttribute("story") String taskStory){
+        ModelAndView modelAndView = new ModelAndView();
+
+        RoleDTO user = new RoleDTO();
+        user.set("USER");
+
+        TaskDTO task = taskManager.getTaskByStory(taskStory);
+        String project = task.getProjectDTO().getStory();
+        String taskDescription = task.getDescription();
+        String assignee = task.getUserDTO().getName();
+        String taskId = task.getId().toString();
+        Collection<UserDTO> users = userManager.allUsersByRole(user);
+        modelAndView.addObject("project", project);
+        modelAndView.addObject("assignee", assignee);
+        modelAndView.addObject("task_story", taskStory);
+        modelAndView.addObject("task_description", taskDescription);
+        modelAndView.addObject("users", users);
+        modelAndView.addObject("task_id", taskId);
+
+        modelAndView.setViewName("project_task_detail");
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/modify_project_task", method = RequestMethod.POST)
+    public ModelAndView modifyProjectTask(@ModelAttribute("task_story") String taskStory,
+                                          @ModelAttribute("user") String newAssignee,
+                                          @ModelAttribute("task_description") String task_description,
+                                          @ModelAttribute("assignee") String previousAssignee,
+                                          @ModelAttribute("task_id") String id,
+                                          @ModelAttribute("project") String projectStory){
+        TaskDTO taskDTO = taskManager.getTaskById(Long.parseLong(id));
+        UserDTO assignee = null;
+        if(newAssignee == null || newAssignee.isEmpty()){
+            assignee = userManager.getUserByName(previousAssignee);
+        } else {assignee = userManager.getUserByName(newAssignee);}
+        taskDTO.set(taskStory, task_description, assignee);
+        taskManager.modifyTask(taskDTO);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("project", projectStory);
+
+        modelAndView.setViewName("redirect:/admin/project_detail?success=true");
+        return modelAndView;
+    }
+
+
+
     // endregion
 
     // region Task
@@ -149,7 +261,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/task_detail", method = RequestMethod.GET)
-    private ModelAndView taskDetail(@ModelAttribute("story") String taskStory){
+    public ModelAndView taskDetail(@ModelAttribute("story") String taskStory){
         ModelAndView modelAndView = new ModelAndView();
 
         RoleDTO user = new RoleDTO();
@@ -190,8 +302,6 @@ public class AdminController {
         modelAndView.setViewName("redirect:/admin?success=true");
         return modelAndView;
     }
-
-
     // endregion
 
     @RequestMapping("/user_detail")

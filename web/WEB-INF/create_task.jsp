@@ -66,11 +66,11 @@
             <tr>
                 <td style="text-align: center;">
                     <p style="font-size:20px" type="text">
-                        Choose Assignee</p>
+                        Choose Project</p>
                 </td>
                 <td style="text-align: center;">
                     <p style="font-size:20px" type="text">
-                        Choose Project</p>
+                        Choose Assignee</p>
                 </td>
             </tr>
             <tr>

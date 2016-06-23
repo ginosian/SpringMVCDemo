@@ -25,11 +25,11 @@
       <strong><span style="font-size:36px;">Users</span></strong></td>
   </tr>
   <tr>
-    <td style="text-align: left; vertical-align: top; background-color: #ECEFF1" style="width: 100%; height: 100%">
+    <td style="text-align: left; vertical-align: top; background-color: #ECEFF1" style="width: 33%; height: 100%">
       <ul id="project_list_admin" >
-        <c:forEach items="${projects}" var="projects">
-          <li style="text-align: left" id="${projects.getStory()}">
-            <span style="font-size:24px;" >${projects.getStory()}</span>
+        <c:forEach items="${project}" var="project">
+          <li style="text-align: left" id="${project.getStory()}">
+            <span style="font-size:24px;" onclick="location.href='${root}/admin/project_detail?project=${project.getStory()}'">${project.getStory()}</span>
           </li>
         </c:forEach>
       </ul>
@@ -42,15 +42,12 @@
       <%--<span style="font-size:24px;">Web development</span></li>--%>
       <%--</ul>--%>
     </td>
-    <td style="text-align: left; vertical-align: top; background-color: #DCEDC8" style="width: 100%; height: 100%">
+    <td style="text-align: left; vertical-align: top; background-color: #DCEDC8" style="width: 33%; height: 100%">
       <ul id="task_list_admin" >
-
-
         <c:forEach items="${tasks}" var="tasks">
           <li style="text-align: left" id="${tasks.getStory()}">
             <span style="font-size:24px;" onclick="location.href='${root}/admin/task_detail?story=${tasks.getStory()}'">${tasks.getStory()}</span>
           </li>
-
         </c:forEach>
       </ul>
       <%--<ul id="task_list_admin">--%>
@@ -72,7 +69,7 @@
       <%--<span style="font-size:24px;"><span style="font-size:24px;">Maintenance and Updating</span></span></li>--%>
       <%--</ul>--%>
     </td>
-    <td style="text-align: left; vertical-align: top; background-color: #D7CCC8; width: 100%; height: 100%">
+    <td style="text-align: left; vertical-align: top; background-color: #D7CCC8; width: 33%; height: 100%">
       <ul id="user_list_admin" >
         <c:forEach items="${users}" var="users">
           <li style="text-align: left" id="${users.getUsername()}">

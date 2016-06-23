@@ -49,43 +49,35 @@
     <li>
         <a class="active" href="#project_tab">Create Task</a></li>
 </ul>
-    <form action="${root}/admin/modify_task" method="post">
+    <form action="${root}/admin/add_project_task" method="post">
         <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
 
         <input name="task_id" hidden value="${task_id}"/>
         <table align="center" style="width: 100%; height: 95%; background-color: rgb(235, 248, 252)">
             <tbody>
-            <tr>
-                <td colspan="3"  style="text-align: center; font-size:24px; width: 50%">
+            <tr style="text-align: center; font-size:24px; width: 100%">
+                <td colspan="3" style="text-align: center; font-size:24px; width: 100%">
                     <a style="font-size:24px">Project:</a>
                     <input name="project" hidden style="font-size:24px" value="${project}"/>
                     <a style="font-size:24px">${project}</a>
                 </td>
             </tr>
-
-            <tr>
-                <td colspan="3" style="text-align: center; font-size:24px; width: 50%">
-                    <a style="text-decoration-color: #2f0407"> Current Assignee <br></a>
-                    <span id="assignee">${assignee}</span>
-                    <input name="assignee" hidden value="${assignee}"/>
-                </td>
-            </tr>
             <tr>
                 <td style="text-align: center; font-size:24px; width: 50%">
                     <span style="text-decoration-color: #2f0407">Task Story:</span><br />
-                    <textarea name="task_story" required="" rows="4" style="width: 90%">${task_story}</textarea>
+                    <textarea name="task_story" required="" rows="4" style="width: 90%"></textarea>
                 </td>
                 <td colspan="2" style="text-align: center; font-size:24px; width: 50%">
-                    Choose assignee to reassign task
+                    Choose assignee to for task
                 </td>
             </tr>
             <tr>
                 <td style="height: 150px; text-align: center; width: 50%;">
                         <span style="font-size: 24px;">Task Description:</span><br />
-                        <textarea name="task_description" rows="8" style="width: 90%;">${task_description}</textarea>
+                        <textarea name="task_description" rows="8" style="width: 90%"></textarea>
                 </td>
                 <td colspan="2" style="height: 100px; text-align: center; width: 50%;">
-                    <select name="user" size="8" style="width: 75%; font-size: 18px;">
+                    <select name="user" size="8" style="width: 80%; font-size: 18px;">
                         <c:forEach items="${users}" var="users">
                         <option>${users.getName()}</option>
                         </c:forEach>
@@ -94,7 +86,7 @@
             </tr>
             <tr>
                 <td colspan="3" style="text-align: center;">
-                    <input style="width:20%; height: 40px; position:relative; white-space:normal" type="submit" value="SUBMIT" /></td>
+                    <input style="width:20%; height:40px; position:relative; white-space:normal" type="submit" value="SUBMIT" /></td>
             </tr>
             </tbody>
         </table>
