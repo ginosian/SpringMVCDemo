@@ -50,12 +50,11 @@
         <a class="active" href="#project_tab">Create Task</a></li>
 </ul>
 <div style="color: black; text-align: center; background-color: rgb(235, 248, 252);">
-    <form action="${root}/${home}/${modify}" method="post">
         <c:set var="root" value="${pageContext.request.contextPath}"/>
-        <%--<c:set var="home" value="${home}"/>--%>
-        <input type="hidden" name="home" value="${home}"/>
-        <c:set var="modify" value="${modify}"/>
+    <form:form action="${root}/${home}/${modify}" method="post">
 
+        <c:set var="modify" value="${modify}"/>
+        <input type="hidden" name="home" value="${home}"/>
         <!--Received data-->
 
         <!--Root paths-->
@@ -64,7 +63,7 @@
 
         <!--Received data-->
         <c:set var="users" value="${users}"/>
-        <c:set var="projects" value="${projects}"/>
+        <c:set var="project" value="${project}"/>
 
 
         <!--If modified passes string task_story, task_description, taskId and userId.-->
@@ -76,46 +75,45 @@
         <table align="center" border="0" cellpadding="0" cellspacing="0" style="width: 100%; height: 100%">
             <tbody>
             <tr>
-                <td colspan="2" style="text-align: center; font-size:24px">
+                <td style="text-align: center; font-size:24px">
+                    <span>Project:</span><br />
+            </tr>
+            <tr>
+                <td style="text-align: center; font-size:24px">
+                    <span>${project.getStory()}</span>
+                    <input type="hidden" name="projectId" value="${project.getId()}">
+            </tr>
+            <tr>
+                <td style="text-align: center; font-size:24px">
                     <span>Task Story:</span><br />
                     <textarea name="task_story" required="" rows="1" style="width: 70%"></textarea></td>
             </tr>
             <tr>
-                <td colspan="2" style="text-align: center; font-size:24px">
+                <td style="text-align: center; font-size:24px">
                     <span>Task Description:</span><br />
                     <textarea name="task_description" rows="3" style="width: 70%"></textarea></td>
             </tr>
             <tr>
                 <td style="text-align: center;">
-                    <span style="font-size:20px">
-                        Choose Project</span>
-                </td>
-                <td style="text-align: center;">
-                    <p style="font-size:20px">
+                    <p style="font-size:20px" type="text">
                         Choose Assignee</p>
                 </td>
             </tr>
             <tr>
                 <td style="height: 150px; text-align: center;">
-                    <select name="projectId" required size="8" style="width:25%;font-size:18px">
-                        <c:forEach items="${projects}" var="project">
-                        <option value="${project.getId()}">${project.getStory()}</option>
-                        </c:forEach>
-                    </select></td>
-                <td style="height: 150px; text-align: center;">
                     <select name="userId" required size="8" style="width:25%;font-size:18px">
                         <c:forEach items="${users}" var="user">
-                        <option value=${user.getId()}>${user.getName()}</option>
+                        <option value="${user.getId()}">${user.getName()}</option>
                         </c:forEach>
                     </select></td>
             </tr>
             <tr>
-                <td colspan="2" style="text-align: center;">
+                <td tyle="text-align: center;">
                     <input style="width:25%; position:relative; white-space:normal" type="submit" value="SUBMIT" /></td>
             </tr>
             </tbody>
         </table>
-    </form></div>
+    </form:form></div>
 </body>
 </html>
 

@@ -9,8 +9,6 @@ import javax.persistence.*;
 @Table(name = "project")
 public class ProjectDTO {
     @Id @GeneratedValue
-//    @Column(name = "id", unique = true,
-//            nullable = false, length = 45)
     private Long id;
 
     private String story;

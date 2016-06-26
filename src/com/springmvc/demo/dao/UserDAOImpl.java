@@ -69,13 +69,13 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public UserDTO getUserByUsername(String login) {
+    public UserDTO getUserByUsername(String username) {
         Session session = openSession();
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
             Query query = openSession().createQuery("from UserDTO user where user.username = :username");
-            query.setParameter("username", login); // TODO check if this works fine
+            query.setParameter("username", username); // TODO check if this works fine
             List<UserDTO> userDTOList = query.list(); // TODO check if return type match
             Hibernate.initialize(userDTOList);
             transaction.commit();

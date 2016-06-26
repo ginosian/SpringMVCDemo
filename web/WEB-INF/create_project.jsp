@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Martha
@@ -52,8 +53,15 @@
 </ul>
 
 <div style="color: black; text-align: center; background-color: rgb(235, 248, 252);">
-    <form:form action="${root}/admin/add_project" method="post">
+    <form:form action="${root}/${home}/${modify}" method="post">
         <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
+        <c:set var="root" value="${pageContext.request.contextPath}"/>
+        <c:set var="home" value="${home}"/>
+        <input type="hidden" name="home" value="${home}"/>
+        <c:set var="modify" value="${modify}"/>
+
+        <c:set var="redirect_modify_to" value="${redirect_modify_to}"/>
+        <input type="hidden" name="redirect_modify_to" value="${redirect_modify_to}"/>
 
 <div style="background-color: rgb(235, 248, 252); color:black;">
         <table align="center" border="0" cellpadding="0" cellspacing="0" style="width: 100%; height: 70%">

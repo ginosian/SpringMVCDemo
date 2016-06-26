@@ -3,13 +3,13 @@ package com.springmvc.demo.dao;
 import com.springmvc.demo.dto.ProjectDTO;
 import com.springmvc.demo.dto.TaskDTO;
 import com.springmvc.demo.dto.UserDTO;
+import javassist.bytecode.Descriptor;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Martha on 6/14/2016.
@@ -180,5 +180,45 @@ public class TaskDAOImpl implements TaskDAO {
         }finally {
             session.close();
         }
+    }
+
+    @Override
+    public HashMap<String, ArrayList<TaskDTO>> userTasks(UserDTO userDTO) {
+        Session session = openSession();
+        Transaction transaction = null;
+        try{
+            transaction = session.beginTransaction();
+            String user = userDTO.getName();
+            Query query = openSession().createQuery("select task from TaskDTO task join task.userDTO assignee where assignee.name = :name");
+            query.setParameter("name", user);
+            List<TaskDTO> tasks = query.list();
+            Hibernate.initialize(tasks);
+            Set<String> projectsStory = new HashSet<>();
+            for (TaskDTO task : tasks){
+                projectsStory.add(task.getProjectDTO().getStory());
+            }
+            HashMap<String, ArrayList<TaskDTO>> userTasksByProject = new HashMap<>();
+            Iterator iteratror = projectsStory.iterator();
+            ArrayList<TaskDTO> tempTaskList = new ArrayList<>();
+            while (iteratror.hasNext()){
+                String tempStory = iteratror.next().toString();
+                for (int i = 0; i < tasks.size(); i++) {
+                    if(tasks.get(i).getProjectDTO().getStory().equals(tempStory)){
+                        tempTaskList.add(tasks.get(i));
+                    }
+                }
+                ArrayList<TaskDTO> taskList = new ArrayList<>();
+                taskList.addAll(tempTaskList);
+                userTasksByProject.put(tempStory, taskList);
+                tempTaskList.clear();
+            }
+            return userTasksByProject;
+        }catch (HibernateException e){
+            if(transaction != null)transaction.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return null;
     }
 }

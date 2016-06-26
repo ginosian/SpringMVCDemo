@@ -35,7 +35,7 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public UserDTO getUserByUsername(String login) {
-        return null;
+        return userDAO.getUserByUsername(login);
     }
 
     @Override

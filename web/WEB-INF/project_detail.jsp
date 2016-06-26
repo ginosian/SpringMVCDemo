@@ -41,6 +41,32 @@
         }		</style>
 </head>
 <body>
+
+<!--Received data-->
+
+<!--Root paths-->
+<c:set var="root" value="${pageContext.request.contextPath}"/>
+<c:set var="home" value="${home}"/>
+<c:set var="modify" value="${modify}"/>
+<c:set var="redirect_modify_to" value="${redirect_modify_to}"/>
+<c:set var="redirect_modify_task_to" value="${redirect_modify_task_to}"/>
+
+<!--Received data-->
+<c:set var="project" value="${project}"/>
+<c:set var="project_tasks" value="${project_tasks}"/>
+
+<!--Received data projects list for task_detail resource-->
+<c:set var="projects" value="${projects}"/>
+
+<!--Onclick directing resources to request on object detail pages-->
+<c:set var="task_detail_resource" value="${task_detail_resource}"/>
+<c:set var="create_task_resource" value="${create_task_resource}"/>
+
+
+
+<!--Passes taskId  to instantiate redirected page with data.
+If modified  string project_story, project_description and projectId-->
+
 <ul>
     <li>
         <a href="#home_tab">Home</a></li>
@@ -49,16 +75,18 @@
     <li>
         <a class="active" href="#project_tab">Create Task</a></li>
 </ul>
-    <form action="${root}/admin/modify_project" method="post">
+    <form action="${root}/${home}/${modify}" method="post">
+        <input type="hidden" name="home" value="${home}"/>
+        <input type="hidden" name="projectId" value="${project.getId()}"/>
+        <input type="hidden" name="redirect_modify_task_to" value="${redirect_modify_task_to}"/>
         <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
 
-        <input name="project_id" hidden value="${project_id}"/>
         <table align="center" style="width: 100%; height: 95%; background-color: rgb(235, 248, 252)">
             <tbody>
             <tr>
                 <td style="text-align: center; font-size:24px; width: 40%">
                     <span>Project Story:</span><br />
-                    <textarea style="font-size: 22px; width: 90%" name="project_story" required="" rows="4">${project_story}</textarea>
+                    <textarea style="font-size: 22px; width: 90%" name="project_story" required="" rows="4">${project.getStory()}</textarea>
                 </td>
                 <td colspan="2" style="text-align: center; font-size:24px; width: 40%">
                     Project Tasks
@@ -68,16 +96,16 @@
             <tr>
                 <td style="text-align: center; width: 40%;">
                         <span style="font-size: 24px;">Project Description:</span><br />
-                        <textarea style="font-size: 22px; width: 90%"  name="project_description" rows="8">${project_description}</textarea>
+                        <textarea style="font-size: 22px; width: 90%"  name="project_description" rows="8">${project.getDescription()}</textarea>
                 </td>
                 <td style="height: 100px; text-align: center; width: 60%;">
-                    <ul id="tasks_list_project" style="text-align: left; background-color: #dcfcc4">
-                        <c:forEach items="${tasks}" var="tasks" >
-                            <li onclick="location.href='${root}/admin/project_task_detail?story=${tasks.getStory()}'"
-                                style="text-align: left; font-size:24px; background-color: #dcfcc4" id="${tasks.getId()}">
-                                <span style="font-size:24px" >${tasks.getStory()}</span><wbr>
+                    <ul style="text-align: left; background-color: #dcfcc4">
+                        <c:forEach items="${project_tasks}" var="project_task" >
+                            <li onclick="location.href='${root}/${home}/${task_detail_resource}?taskId=${project_task.getId()}&projectId=${project.getId()}&home=${home}&redirect_modify_task_to=${redirect_modify_task_to}'"
+                                style="text-align: left; font-size:24px; background-color: #dcfcc4">
+                                <span style="font-size:24px" >${project_task.getStory()}</span><wbr>
                                 <span style="font-size:16px" >Assignee</span><wbr>
-                                <span style="font-size:24px" >${tasks.getUserDTO().getName()}</span>
+                                <span style="font-size:24px" >${project_task.getUserDTO().getName()}</span>
 
                             </li>
                             <p>
@@ -87,7 +115,7 @@
                     <p>
                         &nbsp;</p>
                     <input style="width:20%; height:40px; position:relative; white-space:normal" type="button" value="Add Task"
-                           onclick="location.href='${root}/admin/create_project_task?project_id=${project_id}'"/>
+                           onclick="location.href='${root}/${home}/${create_task_resource}?&projectId=${project.getId()}&home=${home}&redirect_modify_task_to=${redirect_modify_task_to}'"/>
                 </td>
             </tr>
             <tr>

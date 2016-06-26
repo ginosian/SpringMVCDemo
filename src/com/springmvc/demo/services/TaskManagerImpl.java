@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Created by Martha on 6/14/2016.
@@ -63,5 +65,10 @@ public class TaskManagerImpl implements TaskManager {
     @Override
     public void modifyTask(TaskDTO taskDTO) {
         taskDAO.modifyTask(taskDTO);
+    }
+
+    @Override
+    public HashMap<String, ArrayList<TaskDTO>> userTasks(UserDTO userDTO) {
+        return taskDAO.userTasks(userDTO);
     }
 }

@@ -49,8 +49,8 @@ public class RoleDAOImpl implements RoleDAO {
             transaction = session.beginTransaction();
             if (candidate != null) {
                 roleDTO.setId(candidate.getId());
-                session.merge(roleDTO);
-            } else {
+                session.update(roleDTO);
+//            } else {
                 session.save(roleDTO);
             }
             transaction.commit();

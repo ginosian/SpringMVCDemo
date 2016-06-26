@@ -50,7 +50,29 @@
         <a class="active" href="#project_tab">Create Task</a></li>
 </ul>
 <div style="color: black; text-align: center; background-color: rgb(235, 248, 252);">
-    <form:form action="${root}/admin/add_task" method="post"> <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
+    <form action="${root}/${home}/${modify}" method="post">
+        <c:set var="root" value="${pageContext.request.contextPath}"/>
+        <%--<c:set var="home" value="${home}"/>--%>
+        <input type="hidden" name="home" value="${home}"/>
+        <c:set var="modify" value="${modify}"/>
+
+        <!--Received data-->
+
+        <!--Root paths-->
+        <c:set var="redirect_modify_to" value="${redirect_modify_to}"/>
+        <input type="hidden" name="redirect_modify_to" value="${redirect_modify_to}"/>
+
+        <!--Received data-->
+        <c:set var="users" value="${users}"/>
+        <c:set var="projects" value="${projects}"/>
+
+
+        <!--If modified passes string task_story, task_description, taskId and userId.-->
+
+        <input type="hidden" name="taskId" value="${task.getId()}">
+
+
+        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
         <table align="center" border="0" cellpadding="0" cellspacing="0" style="width: 100%; height: 100%">
             <tbody>
             <tr>
@@ -65,25 +87,25 @@
             </tr>
             <tr>
                 <td style="text-align: center;">
-                    <p style="font-size:20px" type="text">
-                        Choose Project</p>
+                    <span style="font-size:20px">
+                        Choose Project</span>
                 </td>
                 <td style="text-align: center;">
-                    <p style="font-size:20px" type="text">
+                    <p style="font-size:20px">
                         Choose Assignee</p>
                 </td>
             </tr>
             <tr>
                 <td style="height: 150px; text-align: center;">
-                    <select name="projects" required size="8" style="width:25%;font-size:18px">
-                        <c:forEach items="${projects}" var="projects">
-                        <option>${projects.getStory()}</option>
+                    <select name="projectId" required size="8" style="width:25%;font-size:18px">
+                        <c:forEach items="${projects}" var="project">
+                        <option value="${project.getId()}">${project.getStory()}</option>
                         </c:forEach>
                     </select></td>
                 <td style="height: 150px; text-align: center;">
-                    <select name="users" required size="8" style="width:25%;font-size:18px">
-                        <c:forEach items="${users}" var="users">
-                        <option>${users.getName()}</option>
+                    <select name="userId" required size="8" style="width:25%;font-size:18px">
+                        <c:forEach items="${users}" var="user">
+                        <option value=${user.getId()}>${user.getName()}</option>
                         </c:forEach>
                     </select></td>
             </tr>
@@ -93,7 +115,7 @@
             </tr>
             </tbody>
         </table>
-    </form:form></div>
+    </form></div>
 </body>
 </html>
 
