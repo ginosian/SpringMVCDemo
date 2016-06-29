@@ -63,6 +63,7 @@
 <c:set var="user" value="${user}"/>
 <c:set var="map" value="${map}"/>
 <c:set var="button_label" value="${button_label}"/>
+<c:set var="button_redirection_page" value="${button_redirection_pag}"/>
 
 
 <!--Onclick directing resources to request on object detail pages-->
@@ -101,7 +102,7 @@ If modified  string project_story, project_description and projectId-->
 
         <tr>
             <td style="text-align: center; vertical-align: middle; height: 50px">
-                <input name="create_project" onclick="location.href='${root}/${home}'" style="width:20%;
+                <input name="create_project" onclick="location.href='${root}/${button_redirection_page}'" style="width:20%;
       position:relative; white-space:normal; background-color: #B0BEC5; font-size:24px" type="button" value="${button_label}" /></td>
         </tr>
         </tbody>

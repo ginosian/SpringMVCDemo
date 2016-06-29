@@ -26,8 +26,19 @@ import java.util.HashMap;
  */
 
 /**
- * Only users with role ADMIN specified in the config.properties file have access to this
- * resource. This controller provides all the administrator functionality.
+ * <p>Only users with role ADMIN specified in the config.properties file have access to this
+ * resource. This controller provides all the administrator functionality.</p>
+ * <p>Resources</p>
+ * <p>{@link #adminHome()}</p>
+ * <p>{@link #createUser(String)}</p>
+ * <p>{@link #register(String, String, String, String, String)}</p>
+ * <p>{@link #userDetail(String, String)}</p>
+ * <p>{@link #createProject(String)}</p>
+ * <p>{@link #projectDetail(String, String)}</p>
+ * <p>{@link #modifyProject(String, String, String, String, String)}</p>
+ * <p>{@link #createTask(String, String, String)}</p>
+ * <p>{@link #taskDetail(String, String, String)}</p>
+ * <p>{@link #modifyTask(String, String, String, String, String, String, String)}</p>
  */
 
 @Controller
@@ -45,6 +56,7 @@ public class AdminController {
     public static final String HOME = "home";
     public static final String REDIRECT_MODIFY_TO = "redirect_modify_to";
     public static final String REDIRECT_MODIFY_TASK_TO = "redirect_modify_task_to";
+    public static final String BUTTON_REDIRECTION_PAGE = "button_redirection_page";
     public static final String MODIFY = "modify";
 
     // JSP's names
@@ -102,48 +114,60 @@ public class AdminController {
     Environment environment;
     // endregion
 
-
     // region Home
     /**
-     * Provides all tasks, projects and also the user list of the application.
+     * A home page of "ADMIN" module. Displays all projects, tasks and users lists..
      * Only users with role USER specified in config.properties file are included in the returned
-     * user list.
-     * Also provides URL-s for creation and modification of above mentioned data objects.
-     * REDIRECT_MODIFY_TASK_TO parameter is returned to hint task detail page where to be redirected,
-     * as task detail page can be accessed from other pages.
-     * @return Admin home view with appropriate model.
+     * users list.
+     * @return
+     * <p>Admin home modelAndView with {@link #ADMIN_PAGE} JSP view.</p>
+     * <p>Model object under {@link #PROJECTS} key - all projects list from DB.</p>
+     * <p>Model object under {@link #PROJECT_DETAIL_RESOURCE} key with resource value {@link #projectDetail}- direction path to project detail page.
+     *      Is called when a click on project name occur.</p>
+     * <p>Model object under {@link #CREATE_PROJECT_RESOURCE} key with resource value {@link #createProject}- direction path to project creation form page.
+     *      Is called when a click on "Create project" button occur.</p>
+     * <p>Model object under {@link #TASKS} key - all tasks list from DB.</p>
+     * <p>Model object under {@link #TASK_DETAIL_RESOURCE} key with resource value {@link #taskDetail}- direction path to task detail page.
+     *      Is called when a click on task name occur.</p>
+     * <p>Model object under {@link #CREATE_TASK_RESOURCE} key with resource value {@link #createTask}- direction path to task creation form page.
+     *      Is called when a click on "Create task" button occur.</p>
+     * <p>Model object under {@link #USERS} key - all users list with role type of "USER" under {@link #USERS} key  from DB.</p>
+     * <p>Model object under {@link #USER_DETAIL_RESOURCE} key with resource value {@link #userDetail}- direction path to user detail page.
+     *      Is called when a click on user name occur.</p>
+     * <p>Model object under {@link #CREATE_USER_RESOURCE} key with resource value {@link #createUser}- direction path to user creation form page.
+     *      Is called when a click on "Create user" button occur.</p>
+     * <p>Model object under {@link #HOME} key - base URL path for "admin" module</p>
      */
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView adminHome(){
         ModelAndView modelAndView = new ModelAndView();
-
-        // Add user list and related resource paths.
-        modelAndView.addObject(USERS, userManager.allUsersByRole(environment.getProperty("role_user"))); // Users list with "USER" role
-        modelAndView.addObject(USER_DETAIL_RESOURCE, USER_DETAIL); // A resource to link to user detail page
-        modelAndView.addObject(CREATE_USER_RESOURCE, CREATE_USER); // A resource to link to create user page
-
         // Add project list and related resource paths.
-        modelAndView.addObject(PROJECTS, projectManager.allProjects());  // All projects list.
-        modelAndView.addObject(PROJECT_DETAIL_RESOURCE, PROJECT_DETAIL); // A resource to link to project detail page
-        modelAndView.addObject(CREATE_PROJECT_RESOURCE, CREATE_PROJECT); // A resource to link to create project page
+        modelAndView.addObject(PROJECTS, projectManager.allProjects());
+        modelAndView.addObject(PROJECT_DETAIL_RESOURCE, PROJECT_DETAIL);
+        modelAndView.addObject(CREATE_PROJECT_RESOURCE, CREATE_PROJECT);
 
         // Add task list and related resource paths.
-        modelAndView.addObject(TASKS, taskManager.allTasks(true)); // All task list.
-        modelAndView.addObject(TASK_DETAIL_RESOURCE, TASK_DETAIL); // A resource to link to task detail page
-        modelAndView.addObject(CREATE_TASK_RESOURCE, CREATE_TASK); // A resource to link to create task page
+        modelAndView.addObject(TASKS, taskManager.allTasks(true));
+        modelAndView.addObject(TASK_DETAIL_RESOURCE, TASK_DETAIL);
+        modelAndView.addObject(CREATE_TASK_RESOURCE, CREATE_TASK);
         modelAndView.addObject(REDIRECT_MODIFY_TASK_TO, "");
 
+        // Add user list and related resource paths.
+        modelAndView.addObject(USERS, userManager.allUsersByRole(environment.getProperty("role_user")));
+        modelAndView.addObject(USER_DETAIL_RESOURCE, USER_DETAIL);
+        modelAndView.addObject(CREATE_USER_RESOURCE, CREATE_USER);
+
         // Set home resource name.
-        modelAndView.addObject(HOME, "admin"); // Sub-root URL
+        modelAndView.addObject(HOME, "admin");
+
         // Set current view name.
-        modelAndView.setViewName(ADMIN_PAGE); // JSP name
+        modelAndView.setViewName(ADMIN_PAGE);
 
         return modelAndView;
     }
     // endregion
 
     // region User
-
     /**
      * Provides a JSP form view for user creation.
      * @param home Home redirection URL.
@@ -157,6 +181,7 @@ public class AdminController {
      */
     @RequestMapping(value = "/create_user", method = RequestMethod.GET)
     public ModelAndView createUser(@ModelAttribute(HOME) String home){
+        if (home.isEmpty()) throw new EmptyRequiredValueException();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject(ROLES, userManager.allRoles());
         modelAndView.addObject(HOME, home);
@@ -185,6 +210,7 @@ public class AdminController {
                                  @ModelAttribute(PASSWORD) String password,
                                  @ModelAttribute(ROLE) String role,
                                  @ModelAttribute(HOME) String home){
+        if (home.isEmpty()) throw new EmptyRequiredValueException();
         ModelAndView modelAndView = new ModelAndView();
         if(userManager.getUserByUsername(username) != null){
             modelAndView.setViewName("redirect:/" + home + "/create_user");
@@ -194,11 +220,74 @@ public class AdminController {
         modelAndView.setViewName("redirect:/" + home + "?success=true");
         return modelAndView;
     }
+
+    /**
+     * Provides a JSP form view to display existing specified user detail.
+     * Is invoked by clicking on the name of user from users list in {@link #adminHome} URL.
+     * @param userId Id of user under {@link #USERID} on which name a click has occur.
+     * @param home Home redirection URL.
+     * @return
+     * <p>ModelAndView object with JSP view named "user_detail" under {@link #USER_DETAIL} key.</p>
+     * <p>Model object under {@link #USER} key - user under {@link #USERID} from DB.</p>
+     * <p>Model object under {@link #MAP} key - Each key presents a project, value presents an ArrayList of task
+     * within the project that are assigned to current user. Map doesn't contain projects where tasks assigned to current user doesn't exist</p>
+     * <p>Model object under {@link #TASK_DETAIL_RESOURCE} key with resource value {@link #taskDetail}-
+     * For user to be able to navigate to task detail page from user detail page.</p>
+     * <p>Model object under {@link #BUTTON_LABEL} key represents label of submit button on user detail page.
+     * <p>Model object under {@link #BUTTON_REDIRECTION_PAGE} key navigaets back to home page.
+     * <p>Model object under {@link #REDIRECT_MODIFY_TASK_TO} key - a hint URL path for the page {@link #TASK_DETAIL_RESOURCE}
+     * to be redirected. For example if task detail was navigated from user detail page, task detail page
+     * submit should navigate back to user detail page.</p>
+     * <p>Model object under {@link #HOME} key - base URL path for "admin" module</p>
+     */
+    @RequestMapping(value = "/user_detail", method = RequestMethod.GET)
+    public ModelAndView userDetail(@ModelAttribute(USERID) String userId,
+                                   @ModelAttribute(HOME) String home){
+        if (home.isEmpty()) throw new EmptyRequiredValueException();
+        ModelAndView modelAndView = new ModelAndView();
+
+        UserDTO user = userManager.getUserById(userId);
+        HashMap<String, ArrayList<TaskDTO>>  map = taskManager.userTasks(user);
+
+        modelAndView.addObject(USER, user);
+        modelAndView.addObject(MAP, map);
+        modelAndView.addObject(TASK_DETAIL_RESOURCE, "task_detail");
+        modelAndView.addObject(BUTTON_LABEL, "SUBMIT");
+        modelAndView.addObject(BUTTON_REDIRECTION_PAGE, home);
+
+
+        modelAndView.addObject(REDIRECT_MODIFY_TASK_TO, "/user_detail");
+        modelAndView.addObject(HOME, home);
+
+        modelAndView.setViewName(USER_DETAIL);
+        return modelAndView;
+    }
     // endregion
 
     // region Project
+    /**
+     * Provides a JSP form view for project creation.
+     * @param home Home redirection URL.
+     * @return
+     * <p>ModelAndView object with JSP view named "create_project" under {@link #CREATE_PROJECT} key.</p>
+     * <p>Model object under {@link #HOME} key - base URL path for "admin" module</p>
+     * <p>Model object under {@link #MODIFY} key - universal mid- resource which is called when ""Submit" is pressed.
+     * see {@link #modifyProject}</p>
+     * <p>Model object under {@link #REDIRECT_MODIFY_TO} key - URL path for the page from where {@link #createProject} resource was called</p>
+     */
+    @RequestMapping(value = "/create_project", method = RequestMethod.GET)
+    public ModelAndView createProject(@ModelAttribute(HOME) String home){
+        if(home == null || home.isEmpty()) throw new EmptyRequiredValueException();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject(HOME, home);
+        modelAndView.addObject(MODIFY, "modify_project");
+        modelAndView.addObject(REDIRECT_MODIFY_TO, "");
 
-    // region Done
+        modelAndView.setViewName(CREATE_PROJECT);
+
+        return modelAndView;
+    }
+
     /**
      * Provides a JSP form view to display existing specified project detail.
      * Is invoked by clicking on the name of project from project list in {@link #adminHome} URL.
@@ -223,6 +312,7 @@ public class AdminController {
     @RequestMapping(value = "/project_detail", method = RequestMethod.GET)
     public ModelAndView projectDetail(@ModelAttribute(PROJECTID) String projectId,
                                       @ModelAttribute(HOME) String home){
+        if (home.isEmpty()) throw new EmptyRequiredValueException();
         ModelAndView modelAndView = new ModelAndView();
 
         ProjectDTO project = projectManager.getProjectById(projectId);
@@ -243,37 +333,12 @@ public class AdminController {
     }
 
     /**
-     * Provides a JSP form view for project creation.
-     * @param home Home redirection URL.
-     * @return
-     * <p>ModelAndView object with JSP view named "create_project" under {@link #CREATE_PROJECT} key.</p>
-     * <p>Model object under {@link #HOME} key - base URL path for "admin" module</p>
-     * <p>Model object under {@link #MODIFY} key - universal mid- resource which is called when ""Submit" is pressed.
-     * see {@link #modifyProject}</p>
-     * <p>Model object under {@link #REDIRECT_MODIFY_TO} key - URL path for the page from where {@link #createProject} resource was called</p>
-     */
-    @RequestMapping(value = "/create_project", method = RequestMethod.GET)
-    public ModelAndView createProject(@ModelAttribute(HOME) String home){
-
-        if(home == null || home.isEmpty()) throw new EmptyRequiredValueException();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject(HOME, home);
-        modelAndView.addObject(MODIFY, "modify_project");
-        modelAndView.addObject(REDIRECT_MODIFY_TO, "");
-
-        modelAndView.setViewName(CREATE_PROJECT);
-
-        return modelAndView;
-    }
-
-
-    /**
      *  <p>"Submit" in a {@link #createProject}  or {@link #projectDetail} resources invokes
      *  a call to a mid resource {@link #modifyProject} under {@link #MODIFY} key.</p>
      *  <p>{@link #modifyProject} doesn't hold view, it is only a mid resource to invoke project creation or modification
      *  business logic holder method and redirect context to resource page under {@link #REDIRECT_MODIFY_TO} key</p>
-     *  @param projectStory Story from {@link #createProject} filled form or modified value from {@link #projectDetail} form, NotNull field.
-     *  @param project_description description from {@link #createProject} filled form or modified value from {@link #projectDetail} form, NotNull field.
+     *  @param projectStory Story from {@link #createProject} filled form or modified-yes/no value from {@link #projectDetail} form, NotNull field.
+     *  @param project_description description from {@link #createProject} filled form or modified-yes/no value from {@link #projectDetail} form, NotNull field.
      *  @param id Id of project under {@link #PROJECTID} on which Story a click has occur
      *  @param home Home redirection URL.
      *  @param redirect_modify_to under {@link #REDIRECT_MODIFY_TO} key - URL path for the page from where {@link #createProject} or {@link #projectDetail} resource was called</p>
@@ -284,61 +349,42 @@ public class AdminController {
     public ModelAndView modifyProject(@ModelAttribute(PROJECT_STORY) String projectStory,
                                       @ModelAttribute(PROJECT_DESCRIPTION) String project_description,
                                       @ModelAttribute(PROJECTID) String id,
-                                      @ModelAttribute(HOME) String home,
-                                      @ModelAttribute(REDIRECT_MODIFY_TO) String redirect_modify_to){
+                                      @ModelAttribute(REDIRECT_MODIFY_TO) String redirect_modify_to,
+                                      @ModelAttribute(HOME) String home){
+        if (home.isEmpty()) throw new EmptyRequiredValueException();
         ModelAndView modelAndView = new ModelAndView();
         projectManager.addOrUpdateProject(id, projectStory, project_description);
         modelAndView.setViewName("redirect:/" + home + redirect_modify_to + "?success=true");
         return modelAndView;
     }
+    // endregion
 
+    // region Task
     /**
-     * Provides a JSP form view to display existing specified task detail.
-     * Is invoked by clicking on the name of task from tasks list either from {@link #adminHome} or from {@link #projectDetail}
-     * or from {@link #userDetail} URLs.
-     * @param taskId Id of task under {@link #TASKID} on which Story a click has occur.
+     * Provides a JSP form view for task creation.
+     * @param projectId Id of project under {@link #PROJECTID}, this field has value only if task creation is called from {@link #projectDetail} page.
+     *                  It represent id of the project.
+     * @param redirect_modify_task_to - a hint URL path under {@link #REDIRECT_MODIFY_TASK_TO} key , for {@link #modifyTask} to be redirected,
+     *                                key keeps the path of page fom where current {@link #createTask} was called.
      * @param home Home redirection URL.
      * @return
-     * <p>ModelAndView object with JSP view named "project_detail" under {@link #PROJECT_DETAIL} key.</p>
-     * <p>Model object under {@link #PROJECT} key - project under {@link #PROJECTID} from DB.</p>
-     * <p>Model object under {@link #PROJECT_TASKS} key - Tasks list assigned to this project</p>
-     * <p>Model object under {@link #TASK_DETAIL_RESOURCE} key with resource value {@link #taskDetail}-
-     * For user to be able to navigate to task detail page from project detail page.</p>
-     * <p>Model object under {@link #CREATE_TASK_RESOURCE} key with resource value {@link #createTask}-
-     * For user to be able to navigate to create task page and assign new task to this project</p>
-     * <p>Model object under {@link #HOME} key - base URL path for "admin" module</p>
-     * <p>Model object under {@link #MODIFY} key - universal mid- resource which is called when ""Submit" is pressed.
+     * <p>ModelAndView object with JSP view. If this resource was called from {@link #adminHome()}" page than a view named
+     * "create_task" under {@link #CREATE_TASK} key will be returned.If this resource was called from {@link #projectDetail}}" page
+     * than a view named "create_task_from_project" under {@link #CREATE_TASK_FROM_PROJECT} key will be returned.</p>
+     * <p>Model object under {@link #USERS} key - all users list with role type of "USER" from DB.</p>
+     * <p>Model object under {@link #PROJECTS} key - all projects list from DB. This field will be instantiated only if
+     * this resource was called from {@link #adminHome()} page</p>
+     * <p>Model object under {@link #PROJECT} key - ProjectDTO object under {@link #PROJECTID} key. This field will be instantiated only if
+     * this resource was called from {@link #projectDetail} page.</p>
      * see {@link #modifyProject}</p>
-     * <p>Model object under {@link #REDIRECT_MODIFY_TO} key - URL path for the page from where {@link #projectDetail} resource was called</p>
-     * <p>Model object under {@link #REDIRECT_MODIFY_TASK_TO} key - a hint URL path for the pages {@link #TASK_DETAIL_RESOURCE}
-     * and {@link #CREATE_TASK_RESOURCE} to be redirected. For example if task detail was navigated from project detail page, task detail page
-     * submit should navigate back to project detail page.</p>
+     * <p>Model object under {@link #MODIFY} key - universal mid- resource which is called when ""Submit" is pressed.
+     * <p>Model object under {@link #REDIRECT_MODIFY_TO} key - URL path for the page from where {@link #createTask} resource was called</p>
+     * <p>Model object under {@link #HOME} key - base URL path for "admin" module</p>
      */
-    @RequestMapping(value = "/task_detail", method = RequestMethod.GET)
-    public ModelAndView taskDetail(@ModelAttribute(TASKID) String taskId,
-                                   @ModelAttribute(HOME) String home,
-                                   @ModelAttribute(REDIRECT_MODIFY_TASK_TO) String redirect_modify_task_to){
-
-        ModelAndView modelAndView = new ModelAndView();
-
-        TaskDTO task = taskManager.getTaskById(taskId);
-        Collection<UserDTO> users = userManager.allUsersByRole(environment.getProperty("role_user"));
-
-        modelAndView.addObject(USERS, users);
-        modelAndView.addObject(TASK, task);
-        modelAndView.addObject(REDIRECT_MODIFY_TO, redirect_modify_task_to);
-
-        modelAndView.addObject(HOME, home);
-        modelAndView.addObject(MODIFY, "modify_task");
-        modelAndView.setViewName(TASK_DETAIL);
-        return modelAndView;
-    }
-
     @RequestMapping(value = "/create_task", method = RequestMethod.GET)
     public ModelAndView createTask(@ModelAttribute(PROJECTID) String projectId,
-                                   @ModelAttribute(HOME) String home,
-                                   @ModelAttribute(REDIRECT_MODIFY_TASK_TO) String redirect_modify_task_to){
-
+                                   @ModelAttribute(REDIRECT_MODIFY_TASK_TO) String redirect_modify_task_to,
+                                   @ModelAttribute(HOME) String home){
         if (home.isEmpty()) throw new EmptyRequiredValueException();
 
         ModelAndView modelAndView = new ModelAndView();
@@ -357,22 +403,76 @@ public class AdminController {
         }
 
         modelAndView.addObject(REDIRECT_MODIFY_TO, redirect_modify_task_to);
-
-        modelAndView.addObject(HOME, home);
         modelAndView.addObject(MODIFY, "modify_task");
+        modelAndView.addObject(HOME, home);
 
         return modelAndView;
     }
 
-    @RequestMapping(value = "/modify_task", method = RequestMethod.POST)
-    public ModelAndView modifyTask(@ModelAttribute(TASK_STORY) String taskStory,                    //yes   //yes   //yes
-                                   @ModelAttribute(TASK_DESCRIPTION) String taskDescription,        //yes   //yes   //yes
-                                   @ModelAttribute(TASKID) String taskId,                           //no    //yes   //yes
-                                   @ModelAttribute(PROJECTID) String projectId,                     //yes   //yes   //yes
-                                   @ModelAttribute(USERID) String userId,                      //yes   //no    //no
-                                   @ModelAttribute(REDIRECT_MODIFY_TO) String redirect_modify_to,   //no    //no    //no
-                                   @ModelAttribute(HOME) String home){                              //yes   //yes   //yes
+    /**
+     * Provides a JSP form view to display existing specified task detail.
+     * Is invoked by clicking on the name of task from tasks list either from {@link #adminHome} or from {@link #projectDetail}
+     * or from {@link #userDetail} URLs.
+     * @param taskId Id of task under {@link #TASKID} on which Story a click has occur.
+     * @param redirect_modify_task_to - a hint URL path under {@link #REDIRECT_MODIFY_TASK_TO} key , for {@link #modifyTask} to be redirected,
+     *                                key keep the path of page fom where current {@link #taskDetail} was called.
+     * @param home Home redirection URL.
+     * @return
+     * <p>ModelAndView object with JSP view named "task_detail" under {@link #TASK_DETAIL} key.</p>
+     * <p>Model object under {@link #USERS} key - all users list with role type of "USER" under {@link #USERS} key  from DB.</p>
+     * <p>Model object under {@link #TASK} key - The task object from DB</p>
+     * <p>Model object under {@link #HOME} key - base URL path for "admin" module</p>
+     * <p>Model object under {@link #MODIFY} key - universal mid- resource which is called when ""Submit" is pressed.
+     * Eee {@link #modifyTask} resource</p>
+     * <p>Model object under {@link #REDIRECT_MODIFY_TO} key - URL path for the page from where {@link #taskDetail} resource was called</p>
+     * <p>Model object under {@link #REDIRECT_MODIFY_TASK_TO} key - a hint URL path for the pages {@link #TASK_DETAIL_RESOURCE}
+     * and {@link #CREATE_TASK_RESOURCE} to be redirected. For example if task detail was navigated from project detail page, task detail page
+     * submit should navigate back to project detail page.</p>
+     */
+    @RequestMapping(value = "/task_detail", method = RequestMethod.GET)
+    public ModelAndView taskDetail(@ModelAttribute(TASKID) String taskId,
+                                   @ModelAttribute(REDIRECT_MODIFY_TASK_TO) String redirect_modify_task_to,
+                                   @ModelAttribute(HOME) String home){
+        if (home.isEmpty()) throw new EmptyRequiredValueException();
+        ModelAndView modelAndView = new ModelAndView();
 
+        TaskDTO task = taskManager.getTaskById(taskId);
+        Collection<UserDTO> users = userManager.allUsersByRole(environment.getProperty("role_user"));
+
+        modelAndView.addObject(USERS, users);
+        modelAndView.addObject(TASK, task);
+        modelAndView.addObject(HOME, home);
+        modelAndView.addObject(MODIFY, "modify_task");
+        modelAndView.addObject(REDIRECT_MODIFY_TO, redirect_modify_task_to);
+        modelAndView.setViewName(TASK_DETAIL);
+        return modelAndView;
+    }
+
+    /**
+     *  <p>"Submit" in a {@link #createTask}  or {@link #taskDetail} resources invokes
+     *  a call to a mid resource {@link #modifyTask} under {@link #MODIFY} key.</p>
+     *  <p>{@link #modifyTask} doesn't hold view, it is only a mid resource to invoke task creation or modification
+     *  business logic holder method and redirect context to resource page under {@link #REDIRECT_MODIFY_TO} key</p>
+     *  @param taskStory Story from {@link #createTask} filled form or modified-yes/no value from {@link #taskDetail} form, NotNull field.
+     *  @param taskDescription description from {@link #createTask} filled form or modified-yes/no value from {@link #taskDetail} form, NotNull field.
+     *  @param taskId Id of task under {@link #TASKID} on which Story a click has occur, this field can be empty if resource call was made
+     *                to by submitting "Create/Add task" buttons either from {@link #adminHome()} or from {@link #projectDetail}.
+     *  @param projectId Id of project under {@link #PROJECTID}, this field can be empty only if provided param {@link #TASKID} has value.
+     *  @param userId Id of user under {@link #USERID}, this field can be empty only if provided param {@link #TASKID} has value.
+     *  @param redirect_modify_to under {@link #REDIRECT_MODIFY_TO} key - URL path for the page from where {@link #createTask} or {@link #taskDetail} resource was called</p>
+     *  @param home Home redirection URL.
+     *  @return
+     *  <p>ModelAndView object with JSP view under {@link #REDIRECT_MODIFY_TO} key.</p>
+     */
+    @RequestMapping(value = "/modify_task", method = RequestMethod.POST)
+    public ModelAndView modifyTask(@ModelAttribute(TASK_STORY) String taskStory,
+                                   @ModelAttribute(TASK_DESCRIPTION) String taskDescription,
+                                   @ModelAttribute(TASKID) String taskId,
+                                   @ModelAttribute(PROJECTID) String projectId,
+                                   @ModelAttribute(USERID) String userId,
+                                   @ModelAttribute(REDIRECT_MODIFY_TO) String redirect_modify_to,
+                                   @ModelAttribute(HOME) String home){
+        if (home.isEmpty()) throw new EmptyRequiredValueException();
         TaskDTO task = taskManager.addOrModifyTask(taskId, taskStory, taskDescription, projectId, userId);
         String taskProjectId = task.getProjectDTO().getId().toString();
         String taskUserId = task.getUserDTO().getId().toString();
@@ -382,34 +482,6 @@ public class AdminController {
         modelAndView.setViewName("redirect:/" + home + redirect_modify_to + "?success=true&projectId=" + taskProjectId + "&userId=" + taskUserId + "&home=" + home);
         return modelAndView;
     }
-
     // endregion
-
-    // endregion
-
-    // region User
-    @RequestMapping(value = "/user_detail", method = RequestMethod.GET)
-    public ModelAndView userDetail(@ModelAttribute(USERID) String userId,
-                                   @ModelAttribute(HOME) String home){
-        ModelAndView modelAndView = new ModelAndView();
-
-        UserDTO user = userManager.getUserById(userId);
-        HashMap<String, ArrayList<TaskDTO>>  map = taskManager.userTasks(user);
-
-        modelAndView.addObject(USER, user);
-        modelAndView.addObject(MAP, map);
-        modelAndView.addObject(TASK_DETAIL_RESOURCE, "task_detail");
-        modelAndView.addObject(BUTTON_LABEL, "SUBMIT");
-
-        modelAndView.addObject(REDIRECT_MODIFY_TASK_TO, "/user_detail");
-        modelAndView.addObject(HOME, home);
-
-        modelAndView.setViewName(USER_DETAIL);
-        return modelAndView;
-    }
-
-
-    // endregion
-
 
 }
