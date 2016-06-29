@@ -46,26 +46,28 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void addUser(UserDTO userDTO) {
+    public UserDTO addUser(UserDTO userDTO) {
         UserDTO candidate = getUserByUsername(userDTO.getUsername());
-        Hibernate.initialize(candidate);
         Session session = openSession();
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
             if (candidate != null) {
                 userDTO.setId(candidate.getId());
+                Hibernate.initialize(candidate);
                 session.merge(userDTO);
             } else {
                 session.save(userDTO);
             }
             transaction.commit();
+            return userDTO;
         }catch (HibernateException e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }finally {
             session.close();
         }
+        return null;
     }
 
     @Override

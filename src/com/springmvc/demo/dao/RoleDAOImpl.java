@@ -42,17 +42,11 @@ public class RoleDAOImpl implements RoleDAO {
 
     @Override
     public void addRole(RoleDTO roleDTO) {
-        RoleDTO candidate = getRoleByName(roleDTO.getRole());
         Session session = openSession();
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            if (candidate != null) {
-                roleDTO.setId(candidate.getId());
-                session.update(roleDTO);
-//            } else {
-                session.save(roleDTO);
-            }
+                 session.save(roleDTO);
             transaction.commit();
         } catch (HibernateException e){
             if (transaction != null) transaction.rollback();

@@ -48,22 +48,6 @@ public class TaskDAOImpl implements TaskDAO {
     }
 
     @Override
-    public void addTask(TaskDTO taskDTO) {
-        Session session = openSession();
-        Transaction transaction = null;
-        try{
-            transaction = session.beginTransaction();
-            session.save(taskDTO);
-            transaction.commit();
-        }catch (HibernateException e) {
-            if (transaction!=null) transaction.rollback();
-            e.printStackTrace();
-        }finally {
-            session.close();
-        }
-    }
-
-    @Override
     public TaskDTO reassignTask(TaskDTO taskDTO, UserDTO newAssignee) {
         return null;
     }
@@ -94,14 +78,13 @@ public class TaskDAOImpl implements TaskDAO {
     }
 
     @Override
-    public Collection<TaskDTO> getTasksWithinProjects(ProjectDTO projectDTO) {
-        String project = projectDTO.getStory();
+    public Collection<TaskDTO> getTasksWithinProjects(Long id) {
         Session session = openSession();
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
-            Query query = openSession().createQuery("select task from TaskDTO task join task.projectDTO project where project.story = :story");
-            query.setParameter("story", project);
+            Query query = openSession().createQuery("select task from TaskDTO task join task.projectDTO project where project.id = :id");
+            query.setParameter("id", id);
             List<TaskDTO> taskDTOList = query.list();
             Hibernate.initialize(taskDTOList);
             transaction.commit();
@@ -161,18 +144,28 @@ public class TaskDAOImpl implements TaskDAO {
     }
 
     @Override
-    public void modifyTask(TaskDTO taskDTO) {
-        TaskDTO candidate = getTaskById(taskDTO.getId());
-        Hibernate.initialize(candidate);
+    public void addTask(TaskDTO taskDTO) {
         Session session = openSession();
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
-            if (candidate != null) {
-                session.update(taskDTO);
-            } else {
                 session.save(taskDTO);
-            }
+            transaction.commit();
+        }catch (HibernateException e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void modifyTask(TaskDTO taskDTO) {
+        Session session = openSession();
+        Transaction transaction = null;
+        try{
+            transaction = session.beginTransaction();
+            session.update(taskDTO);
             transaction.commit();
         }catch (HibernateException e) {
             if (transaction!=null) transaction.rollback();

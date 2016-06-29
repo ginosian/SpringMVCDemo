@@ -4,13 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
@@ -22,35 +25,28 @@ import java.util.Properties;
  * Created by Martha on 6/16/2016.
  */
 
+
+/**
+ * Configures Web application context and hibernate properties.
+ */
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan("com.springmvc.demo")
-//@SpringBootApplication(exclude={HibernateJpaAuto})
-//@PropertySource("classpath:application.properties")
-//@ImportResource("classpath:spring-security.xml")
-    public class DataConfiguration extends WebMvcConfigurerAdapter {
-
-    private static final String PROPERTY_NAME_DATABASE_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String PROPERTY_NAME_DATABASE_PASSWORD = "";
-    private static final String PROPERTY_NAME_DATABASE_URL = "jdbc:mysql://localhost:3306/spring_mvc_demo_db";
-    private static final String PROPERTY_NAME_DATABASE_USERNAME = "root";
-
-    private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "org.hibernate.dialect.SQLServer2005Dialect";
-    private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "true";
-    private static final String PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN = "com.springmvc.demo.dto";
+@PropertySource(value = "classpath:config.properties")
+public class WebContextConfiguration extends WebMvcConfigurerAdapter {
 
     @Autowired
     @Resource
-    private Environment env;
+    private Environment env; // Environment object is needed to get db properties
 
 
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(PROPERTY_NAME_DATABASE_DRIVER);
-        dataSource.setUrl(PROPERTY_NAME_DATABASE_URL);
-        dataSource.setUsername(PROPERTY_NAME_DATABASE_USERNAME);
-        dataSource.setPassword(PROPERTY_NAME_DATABASE_PASSWORD);
+        dataSource.setDriverClassName(env.getProperty("database_driver"));
+        dataSource.setUrl(env.getProperty("database_url"));
+        dataSource.setUsername(env.getProperty("database_username"));
+        dataSource.setPassword(env.getProperty("database_password"));
         return dataSource;
     }
 
@@ -88,27 +84,10 @@ import java.util.Properties;
     }
 
     @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("login_page");
-        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-    }
-
-//    @Order
-//    @Bean
-//    public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/home").setViewName("login_page");
-//        registry.addViewController("/").setViewName("login_page");
-//        registry.addViewController("/hello").setViewName("login_page");
-//        registry.addViewController("/login").setViewName("login_page");
-//    }
-
-    //     equivalents for <mvc:resources/> tags
-    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/image/**").addResourceLocations("/resources/image/").setCachePeriod(0);
     }
 
-    // equivalent for <mvc:default-servlet-handler/> tag
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();

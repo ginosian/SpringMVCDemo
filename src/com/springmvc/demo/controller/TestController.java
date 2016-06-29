@@ -86,7 +86,7 @@ public class TestController {
 //    public ModelAndView test(){
 ////        ProjectDTO project = new ProjectDTO();
 ////        project.set("bla", "mla");
-////        projectManager.addProject(project);
+////        projectManager.addOrUpdateProject(project);
 ////        return new ModelAndView("admin_page");
 //
 //        UserDTO userDTO = new UserDTO();
