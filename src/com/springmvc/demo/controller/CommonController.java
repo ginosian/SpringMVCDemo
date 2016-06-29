@@ -1,6 +1,5 @@
 package com.springmvc.demo.controller;
 
-import com.springmvc.demo.dto.ProjectDTO;
 import com.springmvc.demo.dto.RoleDTO;
 import com.springmvc.demo.dto.TaskDTO;
 import com.springmvc.demo.dto.UserDTO;
@@ -77,36 +76,6 @@ public class CommonController {
         modelAndView.addObject("home", home);
         modelAndView.addObject("modify", "modify_task");
         modelAndView.setViewName("task_detail");
-        return modelAndView;
-    }
-    @RequestMapping(value = "/modify_task", method = RequestMethod.POST)
-    public ModelAndView modifyTask(@ModelAttribute("task_story") String taskStory,
-                                   @ModelAttribute("task_description") String taskDescription,
-                                   @ModelAttribute("taskId") String taskId,
-                                   @ModelAttribute("projectId") String projectId,
-                                   @ModelAttribute("userId") String newAssignee,
-                                   @ModelAttribute("redirect_modify_to") String redirect_modify_to,
-                                   @ModelAttribute("home") String home){
-
-        UserDTO assignee;
-        if(taskId == null || taskId.isEmpty()){
-            TaskDTO newTask = new TaskDTO();
-            ProjectDTO tasksProject = projectManager.getProjectById(projectId);
-            assignee = userManager.getUserById(newAssignee);
-            newTask.set(taskStory, taskDescription, tasksProject, assignee);
-            taskManager.addTask(newTask);
-        } else{
-            TaskDTO taskDTO = taskManager.getTaskById(taskId);
-            if(newAssignee == null || newAssignee.isEmpty()){
-                assignee = userManager.getUserByName(taskDTO.getUserDTO().getName());
-            } else {assignee = userManager.getUserByName(newAssignee);}
-            taskDTO.set(taskStory, taskDescription, assignee);
-            taskManager.modifyTask(taskDTO);
-        }
-
-        ModelAndView modelAndView = new ModelAndView();
-
-        modelAndView.setViewName("redirect:/" + home + redirect_modify_to + "?success=true&projectId=" + projectId + "&userId=" + assignee.getId() + "&home=" + home);
         return modelAndView;
     }
 }

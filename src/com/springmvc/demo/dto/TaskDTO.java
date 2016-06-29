@@ -52,6 +52,12 @@ public class TaskDTO {
         this.complete = true;
     }
 
+    public void set(String story, String description) {
+        this.story = story;
+        this.description = description;
+        this.complete = true;
+    }
+
     public Long getId() {
         return id;
     }

@@ -95,12 +95,12 @@ public class AdminControllerTest {
             @Override
             public ArrayList<UserDTO> answer(InvocationOnMock invocation) throws Throwable {
                 if (invocation.getArguments()[0] == null) throw new EmptyRequiredValueException();
-                RoleDTO roleDTO = (RoleDTO) invocation.getArguments()[0];
-                if (roleDTO.getRole().isEmpty()) throw new EmptyRequiredValueException();
+                String role = (String) invocation.getArguments()[0];
+                if (role.isEmpty()) throw new EmptyRequiredValueException();
                 ArrayList<UserDTO> userList = DTOMockUtils.generateUsersList(USER_QUANTITY);
                 for (UserDTO user : userList) {
                     Set<RoleDTO> roles = new HashSet<RoleDTO>();
-                    roles.add(roleDTO);
+                    roles.add(new RoleDTO(role));
                     user.setUserRoles(roles);
                 }
                 return userList;

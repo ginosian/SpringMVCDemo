@@ -13,13 +13,12 @@ import java.util.HashMap;
 public interface TaskManager {
     TaskDTO getTaskById(String id);
     TaskDTO getTaskByStory(String story);
-    void addTask(TaskDTO taskDTO);
+    TaskDTO addOrModifyTask(String taskId, String taskStory, String taskDescription, String projectId, String userId);
     TaskDTO reassignTask(TaskDTO taskDTO, UserDTO newAssignee);
     TaskDTO markTaskAsComplete();
     Collection<TaskDTO> allTasks(boolean complete);
     Collection<TaskDTO> getTasksWithinProject(String id);
     Collection<TaskDTO> getTaskByUser(UserDTO userDTO);
-    void modifyTask(TaskDTO taskDTO);
     HashMap<String, ArrayList<TaskDTO>> userTasks(UserDTO userDTO); // String stands for project story, ArrayList for tasks within project
 }
 

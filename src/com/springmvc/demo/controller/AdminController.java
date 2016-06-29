@@ -326,10 +326,7 @@ public class AdminController {
 
         modelAndView.addObject(USERS, users);
         modelAndView.addObject(TASK, task);
-
-        if(redirect_modify_task_to == null || redirect_modify_task_to.isEmpty()){
-            modelAndView.addObject(REDIRECT_MODIFY_TO, "");
-        } else {modelAndView.addObject(REDIRECT_MODIFY_TO, redirect_modify_task_to);}
+        modelAndView.addObject(REDIRECT_MODIFY_TO, redirect_modify_task_to);
 
         modelAndView.addObject(HOME, home);
         modelAndView.addObject(MODIFY, "modify_task");
@@ -359,9 +356,8 @@ public class AdminController {
             modelAndView.setViewName(CREATE_TASK_FROM_PROJECT);
         }
 
-        if(redirect_modify_task_to == null || redirect_modify_task_to.isEmpty()){
-            modelAndView.addObject(REDIRECT_MODIFY_TO, "");
-        } else {modelAndView.addObject(REDIRECT_MODIFY_TO, redirect_modify_task_to);}
+        modelAndView.addObject(REDIRECT_MODIFY_TO, redirect_modify_task_to);
+
         modelAndView.addObject(HOME, home);
         modelAndView.addObject(MODIFY, "modify_task");
 
@@ -373,29 +369,17 @@ public class AdminController {
                                    @ModelAttribute(TASK_DESCRIPTION) String taskDescription,        //yes   //yes   //yes
                                    @ModelAttribute(TASKID) String taskId,                           //no    //yes   //yes
                                    @ModelAttribute(PROJECTID) String projectId,                     //yes   //yes   //yes
-                                   @ModelAttribute(USERID) String newAssignee,                      //yes   //no    //no
+                                   @ModelAttribute(USERID) String userId,                      //yes   //no    //no
                                    @ModelAttribute(REDIRECT_MODIFY_TO) String redirect_modify_to,   //no    //no    //no
                                    @ModelAttribute(HOME) String home){                              //yes   //yes   //yes
 
-        UserDTO assignee;
-        if(taskId == null || taskId.isEmpty()){
-            TaskDTO newTask = new TaskDTO();
-            ProjectDTO tasksProject = projectManager.getProjectById(projectId);
-            assignee = userManager.getUserById(newAssignee);
-            newTask.set(taskStory, taskDescription, tasksProject, assignee);
-            taskManager.addTask(newTask);
-        } else{
-            TaskDTO taskDTO = taskManager.getTaskById(taskId);
-            if(newAssignee == null || newAssignee.isEmpty()){
-                assignee = userManager.getUserByName(taskDTO.getUserDTO().getName());
-            } else {assignee = userManager.getUserById(newAssignee);}
-            taskDTO.set(taskStory, taskDescription, assignee);
-            taskManager.modifyTask(taskDTO);
-        }
+        TaskDTO task = taskManager.addOrModifyTask(taskId, taskStory, taskDescription, projectId, userId);
+        String taskProjectId = task.getProjectDTO().getId().toString();
+        String taskUserId = task.getUserDTO().getId().toString();
 
         ModelAndView modelAndView = new ModelAndView();
 
-        modelAndView.setViewName("redirect:/" + home + redirect_modify_to + "?success=true&projectId=" + projectId + "&userId=" + assignee.getId() + "&home=" + home);
+        modelAndView.setViewName("redirect:/" + home + redirect_modify_to + "?success=true&projectId=" + taskProjectId + "&userId=" + taskUserId + "&home=" + home);
         return modelAndView;
     }
 
