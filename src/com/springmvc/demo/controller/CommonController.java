@@ -66,7 +66,7 @@ public class CommonController {
         RoleDTO user = new RoleDTO();
         user.set("USER");
 
-        TaskDTO task = taskManager.getTaskById(Long.parseLong(taskId));
+        TaskDTO task = taskManager.getTaskById(taskId);
         Collection<UserDTO> users = userManager.allUsersByRole(user);
 
 
@@ -90,12 +90,12 @@ public class CommonController {
         UserDTO assignee;
         if(taskId == null || taskId.isEmpty()){
             TaskDTO newTask = new TaskDTO();
-            ProjectDTO tasksProject = projectManager.getProjectById(Long.parseLong(projectId));
-            assignee = userManager.getUserById(Long.parseLong(newAssignee));
+            ProjectDTO tasksProject = projectManager.getProjectById(projectId);
+            assignee = userManager.getUserById(newAssignee);
             newTask.set(taskStory, taskDescription, tasksProject, assignee);
             taskManager.addTask(newTask);
         } else{
-            TaskDTO taskDTO = taskManager.getTaskById(Long.parseLong(taskId));
+            TaskDTO taskDTO = taskManager.getTaskById(taskId);
             if(newAssignee == null || newAssignee.isEmpty()){
                 assignee = userManager.getUserByName(taskDTO.getUserDTO().getName());
             } else {assignee = userManager.getUserByName(newAssignee);}

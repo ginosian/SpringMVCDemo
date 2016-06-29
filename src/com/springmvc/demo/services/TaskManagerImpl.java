@@ -1,9 +1,9 @@
 package com.springmvc.demo.services;
 
 import com.springmvc.demo.dao.TaskDAO;
-import com.springmvc.demo.dto.ProjectDTO;
 import com.springmvc.demo.dto.TaskDTO;
 import com.springmvc.demo.dto.UserDTO;
+import com.springmvc.demo.exceptions.EmptyRequiredValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,8 +23,9 @@ public class TaskManagerImpl implements TaskManager {
     TaskDAO taskDAO;
 
     @Override
-    public TaskDTO getTaskById(long id) {
-        return taskDAO.getTaskById(id);
+    public TaskDTO getTaskById(String id) {
+        if (id == null || id.isEmpty()) throw new EmptyRequiredValueException();
+        return taskDAO.getTaskById(Long.parseLong(id));
     }
 
     @Override
@@ -49,12 +50,15 @@ public class TaskManagerImpl implements TaskManager {
 
     @Override
     public Collection<TaskDTO> allTasks(boolean complete) {
-        return taskDAO.allTasks(complete);
+        ArrayList<TaskDTO> tasks = (ArrayList<TaskDTO>)taskDAO.allTasks(complete);
+        if (tasks == null) tasks = new ArrayList<>();
+        return tasks;
     }
 
     @Override
-    public Collection<TaskDTO> getTasksWithinProject(ProjectDTO projectDTO) {
-        return taskDAO.getTasksWithinProjects(projectDTO);
+    public Collection<TaskDTO> getTasksWithinProject(String id) {
+        if(id == null || id.isEmpty()) throw new EmptyRequiredValueException();
+        return taskDAO.getTasksWithinProjects(Long.parseLong(id));
     }
 
     @Override

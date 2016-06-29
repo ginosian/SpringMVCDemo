@@ -1,7 +1,6 @@
 package com.springmvc.demo.dao;
 
 import com.springmvc.demo.dto.ProjectDTO;
-import com.springmvc.demo.dto.TaskDTO;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -65,29 +64,25 @@ public class ProjectDAOImpl implements ProjectDAO {
     }
 
     @Override
-    public void addProject(ProjectDTO projectDTO) {
-        ProjectDTO candidate = getProjectByStory(projectDTO.getStory());
+    public ProjectDTO addProject(ProjectDTO projectDTO) {
         Session session = openSession();
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
-            if (candidate != null) {
-                projectDTO.setId(candidate.getId());
-                session.update(projectDTO);
-            } else {
-                session.save(projectDTO);
-            }
+            session.save(projectDTO);
             transaction.commit();
+            return projectDTO;
         }catch (HibernateException e) {
             if (transaction!=null) transaction.rollback();
             e.printStackTrace();
         }finally {
             session.close();
         }
+        return null;
     }
 
     @Override
-    public void modifyProject(Long id, String story, String description) {
+    public ProjectDTO modifyProject(Long id, String story, String description) {
         Session session = openSession();
         Transaction transaction = null;
         try{
@@ -97,12 +92,14 @@ public class ProjectDAOImpl implements ProjectDAO {
             project.setDescription(description);
             session.update(project);
             transaction.commit();
+            return project;
         }catch (HibernateException e) {
             if (transaction!=null) transaction.rollback();
             e.printStackTrace();
         }finally {
             session.close();
         }
+        return null;
     }
 
     @Override

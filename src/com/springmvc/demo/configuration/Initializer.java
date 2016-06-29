@@ -12,18 +12,12 @@ import java.util.EnumSet;
 /**
  * Created by Martha on 6/16/2016.
  */
-/**If any servlet Filter mappings are added after AbstractSecurityWebApplicationInitializer is invoked,
- * they might be accidentally added before springSecurityFilterChain.
- * Unless an application contains Filter instances that do not need to be secured,
- * springSecurityFilterChain should be before any other Filter mappings.
- *  The @Order annotation can be used to help ensure that any WebApplicationInitializer is loaded in a deterministic order.
- */
 
 public class Initializer implements WebApplicationInitializer { //AbstractAnnotationConfigDispatcherServletInitializer is implementer of this interface
     public void onStartup(ServletContext servletContext)
             throws ServletException {
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-        ctx.register(DataConfiguration.class);
+        ctx.register(WebContextConfiguration.class);
 
         servletContext.addListener(new ContextLoaderListener(ctx));
 

@@ -51,11 +51,16 @@
     <a class="active" href="#project_tab">Project Name</a></li>
 </ul>
 
-<div style="background-color: rgb(235, 248, 252); color:black;"/>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
-<form:form action="${root}/admin/register" method="post">
+<form:form action="${root}/${home}/${modify}" method="post">
     <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
-  <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 100%; height: 100%">
+  <c:set var="root" value="${pageContext.request.contextPath}"/>
+  <c:set var="home" value="${home}"/>
+  <input type="hidden" name="home" value="${home}"/>
+  <c:set var="modify" value="${modify}"/>
+  <c:set var="redirect_modify_to" value="${redirect_modify_to}"/>
+  <input type="hidden" name="redirect_modify_to" value="${redirect_modify_to}"/>
+  <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 100%; background-color: rgb(235, 248, 252); height: 100%">
     <tbody>
     <tr>
       <td colspan="3" style="text-align: center;">
@@ -64,11 +69,11 @@
     <br>User Login:<br />
     <br><input name="username" style="height:40px;width:25%" type="email" required/><br />
     <br>Password:<br />
-    <p><input id="password" name="password" style="height:40px;width:25%" type="password" required/></p>
+    <p><input name="password" style="height:40px;width:25%" type="password" required/></p>
     <br>Approve with authorization:<br />
           <select name="role" style="height:40px;width:25%" required>
-            <c:forEach items="${roles}" var="roles">
-              <option>${roles.getRole()}</option>
+            <c:forEach items="${roles}" var="role">
+              <option>${role.getRole()}</option>
             </c:forEach>
           </select>
           <p>
@@ -78,7 +83,8 @@
     </tr>
     </tbody>
   </table>
+
+
 </form:form>
-</div>
 </body>
 </html>

@@ -17,6 +17,11 @@ public class ProjectDTO {
     public ProjectDTO() {
     }
 
+    public ProjectDTO(String story, String description) {
+        this.story = story;
+        this.description = description;
+    }
+
     public void set(String story, String description) {
         this.story = story;
         this.description = description;
