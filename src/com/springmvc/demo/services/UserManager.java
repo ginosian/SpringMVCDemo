@@ -15,7 +15,7 @@ public interface UserManager {
     UserDTO getUserByName(String name);
     Collection<RoleDTO> allRoles();
     RoleDTO getRoleByName(String roleName);
-    Collection<UserDTO> allUsersByRole(RoleDTO roleDTO);
+    Collection<UserDTO> allUsersByRole(String role);
     void addRole(RoleDTO roleDTO);
     void initDefaults();
 

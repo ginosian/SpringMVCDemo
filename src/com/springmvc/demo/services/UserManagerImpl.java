@@ -102,8 +102,10 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
-    public Collection<UserDTO> allUsersByRole(RoleDTO roleDTO) {
-        if (roleDTO == null || roleDTO.getRole().isEmpty()) throw new EmptyRequiredValueException();
+    public Collection<UserDTO> allUsersByRole(String role) {
+        if(role == null || role.isEmpty()) throw new EmptyRequiredValueException();
+        RoleDTO roleDTO = new RoleDTO();
+        roleDTO.set(role);
         ArrayList<UserDTO> users = (ArrayList<UserDTO>)userDAO.getAllUsersByRole(roleDTO);
         if (users == null) users = new ArrayList<>();
         return users;
