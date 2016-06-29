@@ -4,25 +4,18 @@
     <bookmark url="jar://$USER_HOME$/.ideaLibSources/spring-web-4.2.6.RELEASE-sources.jar!/org/springframework/web/method/support/InvocableHandlerMethod.java" description="return getBridgedMethod().invoke(getBean(), args);" line="220" />
     <bookmark url="jar://$USER_HOME$/.ideaLibSources/spring-web-4.2.6.RELEASE-sources.jar!/org/springframework/web/method/support/InvocableHandlerMethod.java" description="Object returnValue = doInvoke(args);" line="135" />
     <bookmark url="jar://$USER_HOME$/.ideaLibSources/spring-web-4.2.6.RELEASE-sources.jar!/org/springframework/web/method/support/InvocableHandlerMethod.java" description="return returnValue;" line="139" />
-    <bookmark url="file://$PROJECT_DIR$/src/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(value = &quot;/task_detail&quot;, method = R..." line="317" />
-    <bookmark url="file://$PROJECT_DIR$/src/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(value = &quot;/project_detail&quot;, method ..." line="223" />
-    <bookmark url="file://$PROJECT_DIR$/src/com/springmvc/demo/controller/AdminController.java" description="project_title_visibility" line="340" />
-    <bookmark url="file://$PROJECT_DIR$/src/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(value = &quot;/modify_project&quot;, method ..." line="283" />
-    <bookmark url="file://$PROJECT_DIR$/src/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(value = &quot;/create_project&quot;, method ..." line="255" />
-    <bookmark url="file://$PROJECT_DIR$/src/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(value = &quot;/modify_task&quot;, method = R..." line="371" />
-    <bookmark url="file://$PROJECT_DIR$/src/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(&quot;/user_detail&quot;)" line="407" />
+    <bookmark url="file://$PROJECT_DIR$/src/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(value = &quot;/task_detail&quot;, method = R..." line="316" />
+    <bookmark url="file://$PROJECT_DIR$/src/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(value = &quot;/project_detail&quot;, method ..." line="222" />
+    <bookmark url="file://$PROJECT_DIR$/src/com/springmvc/demo/controller/AdminController.java" description="project_title_visibility" line="339" />
+    <bookmark url="file://$PROJECT_DIR$/src/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(value = &quot;/modify_project&quot;, method ..." line="282" />
+    <bookmark url="file://$PROJECT_DIR$/src/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(value = &quot;/create_project&quot;, method ..." line="254" />
+    <bookmark url="file://$PROJECT_DIR$/src/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(value = &quot;/modify_task&quot;, method = R..." line="370" />
+    <bookmark url="file://$PROJECT_DIR$/src/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(&quot;/user_detail&quot;)" line="406" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1bc91d41-583c-4e30-bc4d-ed1ee259611f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVCDemo_war_exploded/WEB-INF/classes/com/springmvc/demo/controller/AdminController.class" afterPath="$PROJECT_DIR$/out/artifacts/SpringMVCDemo_war_exploded/WEB-INF/classes/com/springmvc/demo/controller/AdminController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SpringMVCDemo/com/springmvc/demo/controller/AdminController.class" afterPath="$PROJECT_DIR$/out/production/SpringMVCDemo/com/springmvc/demo/controller/AdminController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVCDemo_war_exploded/WEB-INF/classes/com/springmvc/demo/configuration/Initializer.class" afterPath="$PROJECT_DIR$/out/artifacts/SpringMVCDemo_war_exploded/WEB-INF/classes/com/springmvc/demo/configuration/Initializer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SpringMVCDemo/com/springmvc/demo/configuration/Initializer.class" afterPath="$PROJECT_DIR$/out/production/SpringMVCDemo/com/springmvc/demo/configuration/Initializer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVCDemo_war_exploded/WEB-INF/classes/com/springmvc/demo/configuration/SecurityConfiguration.class" afterPath="$PROJECT_DIR$/out/artifacts/SpringMVCDemo_war_exploded/WEB-INF/classes/com/springmvc/demo/configuration/SecurityConfiguration.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SpringMVCDemo/com/springmvc/demo/configuration/SecurityConfiguration.class" afterPath="$PROJECT_DIR$/out/production/SpringMVCDemo/com/springmvc/demo/configuration/SecurityConfiguration.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/SpringMVCDemo_war_exploded/WEB-INF/classes/com/springmvc/demo/configuration/WebContextConfiguration.class" afterPath="$PROJECT_DIR$/out/artifacts/SpringMVCDemo_war_exploded/WEB-INF/classes/com/springmvc/demo/configuration/WebContextConfiguration.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SpringMVCDemo/com/springmvc/demo/configuration/WebContextConfiguration.class" afterPath="$PROJECT_DIR$/out/production/SpringMVCDemo/com/springmvc/demo/configuration/WebContextConfiguration.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/springmvc/demo/controller/AdminController.java" afterPath="$PROJECT_DIR$/src/com/springmvc/demo/controller/AdminController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/springmvc/demo/controller/CommonController.java" afterPath="$PROJECT_DIR$/src/com/springmvc/demo/controller/CommonController.java" />
     </list>
     <ignored path="SpringMVCDemo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -90,16 +83,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdminController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AdminController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/springmvc/demo/controller/AdminController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.77833754">
-              <caret line="309" column="67" selection-start-line="309" selection-start-column="67" selection-end-line="309" selection-end-column="67" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="120" column="101" selection-start-line="120" selection-start-column="65" selection-end-line="120" selection-end-column="101" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="n#!!doc;n#USER_DETAIL_RESOURCE#0;n#AdminController#0" expanded="false" />
                 <element signature="n#!!doc;n#projectManager#0;n#AdminController#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommonController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/springmvc/demo/controller/CommonController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.92045456">
+              <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -202,7 +205,6 @@
         <option value="$PROJECT_DIR$/src/com/springmvc/demo/dao/TaskDAO.java" />
         <option value="$PROJECT_DIR$/src/com/springmvc/demo/services/TaskManagerImpl.java" />
         <option value="$PROJECT_DIR$/test/com/springmvc/demo/utils/DTOMockUtils.java" />
-        <option value="$PROJECT_DIR$/src/com/springmvc/demo/controller/CommonController.java" />
         <option value="$PROJECT_DIR$/test/com/springmvc/demo/controller/AdminControllerTest.java" />
         <option value="$PROJECT_DIR$/src/com/springmvc/demo/configuration/DataConfiguration.java" />
         <option value="$PROJECT_DIR$/src/config.properties" />
@@ -212,6 +214,7 @@
         <option value="$PROJECT_DIR$/src/com/springmvc/demo/services/UserManager.java" />
         <option value="$PROJECT_DIR$/src/com/springmvc/demo/services/UserManagerImpl.java" />
         <option value="$PROJECT_DIR$/src/com/springmvc/demo/controller/AdminController.java" />
+        <option value="$PROJECT_DIR$/src/com/springmvc/demo/controller/CommonController.java" />
       </list>
     </option>
   </component>
@@ -268,6 +271,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
@@ -548,7 +552,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -971,8 +974,8 @@
       </method>
     </configuration>
     <list size="3">
-      <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.create_task.jsp" />
-      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.Tomcat 8.0.32" />
+      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.Tomcat 8.0.32" />
+      <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.create_task.jsp" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.AdminControllerTest" />
     </list>
     <recent_temporary>
@@ -1002,6 +1005,7 @@
       <workItem from="1466610651164" duration="101843000" />
       <workItem from="1466883229812" duration="45075000" />
       <workItem from="1467024720247" duration="72926000" />
+      <workItem from="1467186317482" duration="244000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit.&#10;Configures project.&#10;Some functionality pre-test implementation.">
       <created>1466173998226</created>
@@ -1049,11 +1053,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="471490000" />
+    <option name="totallyTimeSpent" value="471734000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1064,15 +1068,14 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328594" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5387046" sideWeight="0.4969743" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5387046" sideWeight="0.4969743" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328594" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.328594" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328594" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22671756" sideWeight="0.51026857" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21104388" sideWeight="0.48973143" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21104388" sideWeight="0.48973143" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18381241" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328594" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1083,6 +1086,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328594" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1164,7 +1168,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5930435">
           <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1172,7 +1175,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.0643477">
           <caret line="110" column="31" selection-start-line="110" selection-start-column="31" selection-end-line="110" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1180,7 +1182,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15304348">
           <caret line="52" column="8" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1188,7 +1189,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.1182609">
           <caret line="108" column="29" selection-start-line="108" selection-start-column="29" selection-end-line="108" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1196,7 +1196,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.35130435">
           <caret line="68" column="67" selection-start-line="68" selection-start-column="67" selection-end-line="68" selection-end-column="67" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1219,7 +1218,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
           <caret line="63" column="86" selection-start-line="62" selection-start-column="8" selection-end-line="63" selection-end-column="86" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1302,7 +1300,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4446281">
           <caret line="63" column="18" selection-start-line="63" selection-start-column="18" selection-end-line="63" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1337,7 +1334,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.7777777">
           <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1345,7 +1341,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1353,7 +1348,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-27.6">
           <caret line="89" column="7" selection-start-line="89" selection-start-column="7" selection-end-line="89" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1464,7 +1458,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.93057853">
           <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1477,14 +1470,6 @@
             <element signature="e#3880#3889#0" expanded="true" />
             <element signature="e#10318#10346#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/springmvc/demo/controller/CommonController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21818182">
-          <caret line="93" column="58" selection-start-line="93" selection-start-column="58" selection-end-line="93" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1586,13 +1571,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/springmvc/demo/controller/AdminController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.77833754">
-          <caret line="309" column="67" selection-start-line="309" selection-start-column="67" selection-end-line="309" selection-end-column="67" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="120" column="101" selection-start-line="120" selection-start-column="65" selection-end-line="120" selection-end-column="101" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="n#!!doc;n#USER_DETAIL_RESOURCE#0;n#AdminController#0" expanded="false" />
             <element signature="n#!!doc;n#projectManager#0;n#AdminController#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/springmvc/demo/controller/CommonController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.92045456">
+          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

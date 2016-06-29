@@ -8,6 +8,7 @@ import com.springmvc.demo.services.ProjectManager;
 import com.springmvc.demo.services.TaskManager;
 import com.springmvc.demo.services.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,9 @@ public class CommonController {
 
     @Autowired
     UserManager userManager;
+
+    @Autowired
+    Environment environment;
 
     @RequestMapping(value = "")
     public ModelAndView userDetail(){
@@ -63,11 +67,8 @@ public class CommonController {
 
         ModelAndView modelAndView = new ModelAndView();
 
-        RoleDTO user = new RoleDTO();
-        user.set("USER");
-
         TaskDTO task = taskManager.getTaskById(taskId);
-        Collection<UserDTO> users = userManager.allUsersByRole(user);
+        Collection<UserDTO> users = userManager.allUsersByRole(environment.getProperty("role_user"));
 
 
         modelAndView.addObject("users", users);

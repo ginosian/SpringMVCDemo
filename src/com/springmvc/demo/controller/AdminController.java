@@ -1,7 +1,6 @@
 package com.springmvc.demo.controller;
 
 import com.springmvc.demo.dto.ProjectDTO;
-import com.springmvc.demo.dto.RoleDTO;
 import com.springmvc.demo.dto.TaskDTO;
 import com.springmvc.demo.dto.UserDTO;
 import com.springmvc.demo.exceptions.EmptyRequiredValueException;
@@ -119,7 +118,7 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView();
 
         // Add user list and related resource paths.
-        modelAndView.addObject(USERS, userManager.allUsersByRole(new RoleDTO(environment.getProperty("role_user")))); // Users list with "USER" role
+        modelAndView.addObject(USERS, userManager.allUsersByRole(environment.getProperty("role_user"))); // Users list with "USER" role
         modelAndView.addObject(USER_DETAIL_RESOURCE, USER_DETAIL); // A resource to link to user detail page
         modelAndView.addObject(CREATE_USER_RESOURCE, CREATE_USER); // A resource to link to create user page
 
