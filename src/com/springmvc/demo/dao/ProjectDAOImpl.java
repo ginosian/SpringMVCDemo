@@ -1,6 +1,7 @@
 package com.springmvc.demo.dao;
 
 import com.springmvc.demo.dto.ProjectDTO;
+import com.springmvc.demo.exceptions.NoSuchProjectException;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,32 +31,12 @@ public class ProjectDAOImpl implements ProjectDAO {
             transaction = session.beginTransaction();
             Query query = openSession().createQuery("from ProjectDTO project where project.id = :id");
             query.setParameter("id", id);
-            List<ProjectDTO> projectDTOList = query.list(); // TODO check if return type match , ask Lyov if why not to close session
+            List<ProjectDTO> projectDTOList = query.list();
             transaction.commit();
-            if (projectDTOList.size() == 0)return null;
+            if (projectDTOList.size() == 0)throw new NoSuchProjectException();
             return projectDTOList.get(0);
         }catch (HibernateException e) {
             if (transaction!=null) transaction.rollback();
-            e.printStackTrace();
-        }finally {
-            session.close();
-        }
-        return null;
-    }
-
-    @Override
-    public ProjectDTO getProjectByStory(String story) {
-        Session session = openSession();
-        Transaction transaction = null;
-        try{
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("from ProjectDTO project where project.story = :story");
-            query.setParameter("story", story);
-            List<ProjectDTO> project = query.list();
-            if(project.size() == 0) return null;
-            return project.get(0);
-        }catch (HibernateException e){
-            if(transaction != null)transaction.rollback();
             e.printStackTrace();
         }finally {
             session.close();
@@ -88,6 +69,7 @@ public class ProjectDAOImpl implements ProjectDAO {
         try{
             transaction = session.beginTransaction();
             ProjectDTO project = (ProjectDTO)session.get(ProjectDTO.class, id);
+            if(project == null) throw new NoSuchProjectException();
             project.setStory(story);
             project.setDescription(description);
             session.update(project);
@@ -110,7 +92,7 @@ public class ProjectDAOImpl implements ProjectDAO {
             transaction = session.beginTransaction();
             List<ProjectDTO> projects = session.createQuery("from ProjectDTO").list();
             transaction.commit();
-            if(projects.size() == 0)return null;
+            if(projects.size() == 0) return null;
             return projects;
         }catch (HibernateException e){
             if(transaction != null)transaction.rollback();

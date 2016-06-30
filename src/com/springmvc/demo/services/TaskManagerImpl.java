@@ -13,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * Created by Martha on 6/14/2016.
@@ -40,35 +38,23 @@ public class TaskManagerImpl implements TaskManager {
     }
 
     @Override
-    public TaskDTO getTaskByStory(String story) {
-        return taskDAO.getTaskByStory(story);
-    }
-
-    @Override
     public TaskDTO addOrModifyTask(String taskId, String taskStory, String taskDescription, String projectId, String userId) {
         if(taskStory == null || taskStory.isEmpty()
                 || taskDescription == null || taskDescription.isEmpty()) throw new EmptyRequiredValueException();
-
         TaskDTO task;
-        if (taskId != null && !taskId.isEmpty()) {
-             task = modifyTask(taskId, taskStory, taskDescription, userId);
-            return task;
-        }else {
+        if (taskId != null && !taskId.isEmpty()){
+                task = modifyTask(taskId, taskStory, taskDescription, userId);
+        } else {
             if (projectId == null || projectId.isEmpty()
-                    || userId == null || userId.isEmpty()) throw new EmptyRequiredValueException();
-
+                        || userId == null || userId.isEmpty()) throw new EmptyRequiredValueException();
             task = addTask(taskStory, taskDescription, projectId, userId);
-            return task;
         }
+            return task;
     }
 
     private TaskDTO addTask(@NotNull String taskStory, @NotNull String taskDescription, @NotNull String projectId, @NotNull String userId) {
         ProjectDTO project = projectManager.getProjectById(projectId);
-        if (project == null) throw new NoSuchProjectException();
-
         UserDTO user = userManager.getUserById(userId);
-        if (user == null) throw new NoSuchUserException();
-
         TaskDTO taskDTO = new TaskDTO();
         taskDTO.set(taskStory, taskDescription, project, user);
         taskDAO.addTask(taskDTO);
@@ -77,12 +63,8 @@ public class TaskManagerImpl implements TaskManager {
 
     private TaskDTO modifyTask(@NotNull String taskId, @NotNull String taskStory, @NotNull String taskDescription, String newAssigneeId) {
         TaskDTO taskDTO = getTaskById(taskId);
-        if (taskDTO == null) throw new NoSuchTaskException();
-
         if (newAssigneeId != null && !newAssigneeId.isEmpty()) {
-            UserDTO assignee = userManager.getUserById(newAssigneeId);
-            if(assignee == null) throw new NoSuchUserException();
-            taskDTO.setUserDTO(assignee);
+            taskDTO.setUserDTO(userManager.getUserById(newAssigneeId));
         }
         taskDTO.set(taskStory, taskDescription);
         taskDAO.modifyTask(taskDTO);
@@ -90,35 +72,50 @@ public class TaskManagerImpl implements TaskManager {
     }
 
     @Override
-    public TaskDTO reassignTask(TaskDTO taskDTO, UserDTO newAssignee) {
-        return null;
+    public Collection<TaskDTO> allTasks() {
+        return taskDAO.allTasks();
     }
 
     @Override
-    public TaskDTO markTaskAsComplete() {
-        return null;
+    public Collection<TaskDTO> getTasksWithinProject(String projectId) {
+        if(projectId == null || projectId.isEmpty()) throw new EmptyRequiredValueException();
+        if(projectManager.getProjectById(projectId) == null) throw new NoSuchProjectException();
+        return taskDAO.getTasksWithinProjects(Long.parseLong(projectId));
     }
 
     @Override
-    public Collection<TaskDTO> allTasks(boolean complete) {
-        ArrayList<TaskDTO> tasks = (ArrayList<TaskDTO>)taskDAO.allTasks(complete);
-        if (tasks == null) tasks = new ArrayList<>();
-        return tasks;
-    }
+    public HashMap<String, ArrayList<TaskDTO>> userTasksMap(String userId) {
+        if(userManager.getUserById(userId)== null) throw new NoSuchUserException();
+        ArrayList<TaskDTO> allTasks;
+        HashMap<String, ArrayList<TaskDTO>> userTasksByProject = new HashMap<>();
+        try{
+            allTasks = (ArrayList<TaskDTO>)taskDAO.getTasksByUser(Long.parseLong(userId));
+        } catch (NoSuchTaskException e){
+            e.printStackTrace();
+            return userTasksByProject;
+        }
 
-    @Override
-    public Collection<TaskDTO> getTasksWithinProject(String id) {
-        if(id == null || id.isEmpty()) throw new EmptyRequiredValueException();
-        return taskDAO.getTasksWithinProjects(Long.parseLong(id));
-    }
-
-    @Override
-    public Collection<TaskDTO> getTaskByUser(UserDTO userDTO) {
-        return taskDAO.getTaskByUser(userDTO);
-    }
-
-    @Override
-    public HashMap<String, ArrayList<TaskDTO>> userTasks(UserDTO userDTO) {
-        return taskDAO.userTasks(userDTO);
+        Set<Long> projectsId = new HashSet<>();
+        for (TaskDTO task : allTasks){
+            projectsId.add(task.getProjectDTO().getId());
+        }
+        Iterator iterator = projectsId.iterator();
+        ArrayList<TaskDTO> tempTaskList = new ArrayList<>();
+        while (iterator.hasNext()){
+            Long tempId = (Long)iterator.next();
+            String projectStory = null;
+            for (int i = 0; i < allTasks.size(); i++) {
+                ProjectDTO tempProject = allTasks.get(i).getProjectDTO();
+                if(tempProject.getId().equals(tempId)){
+                    tempTaskList.add(allTasks.get(i));
+                    projectStory = tempProject.getStory();
+                }
+            }
+            ArrayList<TaskDTO> taskList = new ArrayList<>();
+            taskList.addAll(tempTaskList);
+            userTasksByProject.put(projectStory, taskList);
+            tempTaskList.clear();
+        }
+        return userTasksByProject;
     }
 }

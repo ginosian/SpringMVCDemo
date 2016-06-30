@@ -31,7 +31,7 @@ public class DTOMockUtils {
         for (int i = 0; i < quantity; i++) {
             UserDTO user = generateUser();
             ProjectDTO project = generateProject();
-            TaskDTO task = new TaskDTO((i + "TestTaskStory"), ("TestTaskDescription" + i), true, project, user);
+            TaskDTO task = new TaskDTO((i + "TestTaskStory"), ("TestTaskDescription" + i), project, user);
             task.setId((long) i + 1);
             result.add(task);
         }
@@ -41,7 +41,7 @@ public class DTOMockUtils {
     public static TaskDTO generateTask(){
         UserDTO user = generateUser();
         ProjectDTO project = generateProject();
-        TaskDTO task = new TaskDTO("TestTaskStory", "TestTaskDescription", true, project, user);
+        TaskDTO task = new TaskDTO("TestTaskStory", "TestTaskDescription", project, user);
         task.setId(1L);
         return task;
     }

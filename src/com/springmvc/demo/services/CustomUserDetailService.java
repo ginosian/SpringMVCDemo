@@ -32,7 +32,7 @@ public class CustomUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         UserDTO user = userDAO.getUserByUsername(s);
         List<GrantedAuthority> rolesList = buildUserRoleList(user.getUserRoles());
-        return buidUserForAuthentication(user, rolesList);
+        return buildUserForAuthentication(user, rolesList);
     }
 
     private List<GrantedAuthority> buildUserRoleList(Set<RoleDTO> userRoles){
@@ -43,7 +43,7 @@ public class CustomUserDetailService implements UserDetailsService {
         return new ArrayList<>(tempUserRoles);
     }
 
-    private User buidUserForAuthentication(UserDTO user, List<GrantedAuthority> userRolesList){
+    private User buildUserForAuthentication(UserDTO user, List<GrantedAuthority> userRolesList){
         return new User(user.getUsername(), user.getPassword(), user.isEnabled(), true, true, true, userRolesList);
     }
 }

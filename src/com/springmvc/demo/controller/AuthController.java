@@ -19,7 +19,6 @@ public class AuthController {
     @Autowired
     UserManager userManager;
 
-
     @RequestMapping(value = "")
     public ModelAndView root(){
        userManager.initDefaults();

@@ -18,8 +18,7 @@ public class SecuritySuccessHandler extends SimpleUrlAuthenticationSuccessHandle
     public void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication){
         String targetURL = determineTargetUrl(authentication);
 
-        if (response.isCommitted()) { //TODO remove this block later
-            System.out.println("Can't redirect");
+        if (response.isCommitted()) {
             return;
         }
         try {
@@ -29,6 +28,7 @@ public class SecuritySuccessHandler extends SimpleUrlAuthenticationSuccessHandle
         }
     }
 
+    // Designed only for two roles, and to be changed if a role adding functionality will be implemented
     public String determineTargetUrl(Authentication authentication){
         String url;
         if(isUser(authentication.getAuthorities().toString())){

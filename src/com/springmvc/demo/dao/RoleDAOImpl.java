@@ -1,6 +1,7 @@
 package com.springmvc.demo.dao;
 
 import com.springmvc.demo.dto.RoleDTO;
+import com.springmvc.demo.exceptions.NoSuchRoleException;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -41,32 +42,35 @@ public class RoleDAOImpl implements RoleDAO {
     }
 
     @Override
-    public void addRole(RoleDTO roleDTO) {
+    public RoleDTO addRole(RoleDTO roleDTO) {
         Session session = openSession();
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
                  session.save(roleDTO);
             transaction.commit();
+            return roleDTO;
         } catch (HibernateException e){
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
         } finally {
             session.close();
         }
+        return null;
     }
     @Override
-    public RoleDTO getRoleByName(String name) {
+    public RoleDTO getRole(RoleDTO roleDTO) {
         Session session = openSession();
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
             Query query = openSession().createQuery("from RoleDTO role where role.role = :role");
-            query.setParameter("role", name); // TODO check if this works fine
+            String role = roleDTO.getRole();
+            query.setParameter("role", role);
             List<RoleDTO> roleDTOs = query.list();
             transaction.commit();
-            if(roleDTOs.size() > 0) return roleDTOs.get(0);
-            return null;
+            if(roleDTOs.size() == 0) return null;
+            return roleDTOs.get(0);
         }catch (HibernateException e) {
             if (transaction!=null) transaction.rollback();
             e.printStackTrace();

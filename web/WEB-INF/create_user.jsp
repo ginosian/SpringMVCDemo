@@ -41,21 +41,19 @@
     }		</style>
 </head>
 <body>
+  <c:set var="root" value="${pageContext.request.contextPath}"/>
+  <c:set var="home" value="${home}"/>
 
 <ul>
   <li>
-    <a href="#home_tab">Home</a></li>
+    <a href="${root}/${home}">Home</a></li>
   <li>
-    <a href="#projects_tab">Projects</a></li>
-  <li>
-    <a class="active" href="#project_tab">Project Name</a></li>
+    <a class="active" >Create user</a></li>
 </ul>
 
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <form:form action="${root}/${home}/${modify}" method="post">
-    <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
-  <c:set var="root" value="${pageContext.request.contextPath}"/>
-  <c:set var="home" value="${home}"/>
+  <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
   <input type="hidden" name="home" value="${home}"/>
   <c:set var="modify" value="${modify}"/>
   <c:set var="redirect_modify_to" value="${redirect_modify_to}"/>
@@ -64,21 +62,21 @@
     <tbody>
     <tr>
       <td colspan="3" style="text-align: center;">
-            <br>User First Name:<br />
-    <br><input name="name" style="height:40px;width:25%" type="text" required/><br />
-    <br>User Login:<br />
-    <br><input name="username" style="height:40px;width:25%" type="email" required/><br />
-    <br>Password:<br />
-    <p><input name="password" style="height:40px;width:25%" type="password" required/></p>
-    <br>Approve with authorization:<br />
-          <select name="role" style="height:40px;width:25%" required>
+        <br>User First Name:<br/>
+        <br><input name="name" style="height:40px; width:25%; resize: none" type="text" required="required"/><br/>
+        <br>User Login:<br/>
+        <br><input name="username" style="height:40px; width:25%; resize: none" type="email" required="required"/><br/>
+        <br>Password:<br/>
+        <br><input name="password" style="height:40px; width:25%; resize: none" type="password" required="required"/><br/>
+        <br>Approve with authorization:<br/>
+          <select name="role" style="height:40px; width:25%; resize: none" required="required">
             <c:forEach items="${roles}" var="role">
               <option>${role.getRole()}</option>
             </c:forEach>
           </select>
           <p>
               &nbsp;</p>
-          <p><input style="width:25%; height:40px; position:relative; white-space:normal" type="submit" value="Create" /></p>
+        <br><input style="width:25%; font-size:24px; position:relative; white-space:normal" type="submit" value="Create" /></br>
       </td>
     </tr>
     </tbody>

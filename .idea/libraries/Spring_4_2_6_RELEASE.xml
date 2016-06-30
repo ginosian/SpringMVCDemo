@@ -30,6 +30,7 @@
       <root url="jar://$USER_HOME$/.ideaLibSources/spring-aop-4.2.6.RELEASE-sources.jar!/" />
       <root url="jar://$USER_HOME$/.ideaLibSources/spring-test-4.2.6.RELEASE-sources.jar!/" />
       <root url="jar://$USER_HOME$/.ideaLibSources/spring-core-4.2.6.RELEASE-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.ideaLibSources/spring-jdbc-4.2.6.RELEASE-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

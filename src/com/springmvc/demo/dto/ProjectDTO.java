@@ -1,5 +1,7 @@
 package com.springmvc.demo.dto;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 
 /**
@@ -8,10 +10,12 @@ import javax.persistence.*;
 @Entity
 @Table(name = "project")
 public class ProjectDTO {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
-
+    @Type(type = "text")
     private String story;
+    @Type(type = "text")
     private String description;
 
     public ProjectDTO() {
@@ -27,7 +31,6 @@ public class ProjectDTO {
         this.description = description;
     }
 
-    @GeneratedValue
     public Long getId() {
         return id;
     }
@@ -36,8 +39,6 @@ public class ProjectDTO {
         this.id = id;
     }
 
-
-    @Column(length = 100000)
     public String getStory() {
         return story;
     }
@@ -46,7 +47,6 @@ public class ProjectDTO {
         this.story = story;
     }
 
-    @Column(length = 100000)
     public String getDescription() {
         return description;
     }

@@ -38,7 +38,7 @@ import java.util.HashMap;
  * <p>{@link #modifyProject(String, String, String, String, String)}</p>
  * <p>{@link #createTask(String, String, String)}</p>
  * <p>{@link #taskDetail(String, String, String)}</p>
- * <p>{@link #modifyTask(String, String, String, String, String, String, String)}</p>
+ * <p>{@link #modifyTask(String, String, String, String, String, String, String, String)}</p>
  */
 
 @Controller
@@ -77,6 +77,7 @@ public class AdminController {
     public static final String ROLES = "roles";
     public static final String USER = "user";
     public static final String USERID = "userId";
+    public static final String USERIDFORUSERDT = "userIdForUserTD";
     public static final String USERNAME = "username";
     public static final String NAME = "name";
     public static final String PASSWORD = "password";
@@ -147,7 +148,7 @@ public class AdminController {
         modelAndView.addObject(CREATE_PROJECT_RESOURCE, CREATE_PROJECT);
 
         // Add task list and related resource paths.
-        modelAndView.addObject(TASKS, taskManager.allTasks(true));
+        modelAndView.addObject(TASKS, taskManager.allTasks());
         modelAndView.addObject(TASK_DETAIL_RESOURCE, TASK_DETAIL);
         modelAndView.addObject(CREATE_TASK_RESOURCE, CREATE_TASK);
         modelAndView.addObject(REDIRECT_MODIFY_TASK_TO, "");
@@ -241,23 +242,25 @@ public class AdminController {
      * <p>Model object under {@link #HOME} key - base URL path for "admin" module</p>
      */
     @RequestMapping(value = "/user_detail", method = RequestMethod.GET)
-    public ModelAndView userDetail(@ModelAttribute(USERID) String userId,
+    public ModelAndView userDetail(@ModelAttribute(USERIDFORUSERDT) String userId,
                                    @ModelAttribute(HOME) String home){
         if (home.isEmpty()) throw new EmptyRequiredValueException();
         ModelAndView modelAndView = new ModelAndView();
-
         UserDTO user = userManager.getUserById(userId);
-        HashMap<String, ArrayList<TaskDTO>>  map = taskManager.userTasks(user);
+        HashMap<String, ArrayList<TaskDTO>>  map = taskManager.userTasksMap(userId);
+        if(map.size() == 0){
+
+        }
 
         modelAndView.addObject(USER, user);
         modelAndView.addObject(MAP, map);
         modelAndView.addObject(TASK_DETAIL_RESOURCE, "task_detail");
         modelAndView.addObject(BUTTON_LABEL, "SUBMIT");
-        modelAndView.addObject(BUTTON_REDIRECTION_PAGE, home);
 
 
         modelAndView.addObject(REDIRECT_MODIFY_TASK_TO, "/user_detail");
         modelAndView.addObject(HOME, home);
+        modelAndView.addObject(BUTTON_REDIRECTION_PAGE, home);
 
         modelAndView.setViewName(USER_DETAIL);
         return modelAndView;
@@ -471,6 +474,7 @@ public class AdminController {
                                    @ModelAttribute(PROJECTID) String projectId,
                                    @ModelAttribute(USERID) String userId,
                                    @ModelAttribute(REDIRECT_MODIFY_TO) String redirect_modify_to,
+                                   @ModelAttribute(USERIDFORUSERDT) String previousUserId,
                                    @ModelAttribute(HOME) String home){
         if (home.isEmpty()) throw new EmptyRequiredValueException();
         TaskDTO task = taskManager.addOrModifyTask(taskId, taskStory, taskDescription, projectId, userId);
@@ -479,9 +483,9 @@ public class AdminController {
 
         ModelAndView modelAndView = new ModelAndView();
 
-        modelAndView.setViewName("redirect:/" + home + redirect_modify_to + "?success=true&projectId=" + taskProjectId + "&userId=" + taskUserId + "&home=" + home);
+        modelAndView.setViewName("redirect:/" + home + redirect_modify_to + "?success=true&projectId=" + taskProjectId
+                + "&userId=" + taskUserId + "&home=" + home + "&userIdForUserTD=" + previousUserId);
         return modelAndView;
     }
     // endregion
-
 }

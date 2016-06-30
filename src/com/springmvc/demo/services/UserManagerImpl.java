@@ -6,7 +6,6 @@ import com.springmvc.demo.dto.RoleDTO;
 import com.springmvc.demo.dto.UserDTO;
 import com.springmvc.demo.exceptions.EmptyRequiredValueException;
 import com.springmvc.demo.exceptions.NoSuchRoleException;
-import com.sun.istack.internal.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -33,6 +32,7 @@ public class UserManagerImpl implements UserManager {
     @Autowired
     Environment environment;
 
+
     @Override
     public void initDefaults() {
         //Get all parameters from .property file
@@ -43,8 +43,10 @@ public class UserManagerImpl implements UserManager {
         String role_user = environment.getProperty("role_user");
 
         // Create "admin" and "user" roles if doesn't exist.
-        RoleDTO adminRoleDTO = roleDAO.getRoleByName(role_admin);
-        RoleDTO userRoleDTO = roleDAO.getRoleByName(role_user);
+        RoleDTO adminRole = new RoleDTO(role_admin);
+        RoleDTO userRole = new RoleDTO(role_user);
+        RoleDTO adminRoleDTO = roleDAO.getRole(adminRole);
+        RoleDTO userRoleDTO = roleDAO.getRole(userRole);
 
         if (adminRoleDTO == null){
             adminRoleDTO = new RoleDTO(role_admin);
@@ -74,6 +76,10 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public UserDTO addUser(String name, String username, String password, boolean enabled, String role) {
+        UserDTO user = userDAO.getUserByUsername(username);
+        if(user != null){
+            return null;
+        }
         UserDTO userDTO = new UserDTO();
         Set<RoleDTO> roles = new HashSet<>();
         RoleDTO localRole = getRoleByName(role);
@@ -96,9 +102,12 @@ public class UserManagerImpl implements UserManager {
     public Collection<RoleDTO> allRoles() {
         return roleDAO.allRoles();
     }
+
     @Override
     public RoleDTO getRoleByName(String roleName) {
-        return roleDAO.getRoleByName(roleName);
+        if(roleName == null || roleName.isEmpty()) throw new NoSuchRoleException();
+        RoleDTO role = new RoleDTO(roleName);
+        return roleDAO.getRole(role);
     }
 
     @Override
@@ -109,18 +118,5 @@ public class UserManagerImpl implements UserManager {
         ArrayList<UserDTO> users = (ArrayList<UserDTO>)userDAO.getAllUsersByRole(roleDTO);
         if (users == null) users = new ArrayList<>();
         return users;
-    }
-
-    @Override
-    public void addRole(@NotNull RoleDTO roleDTO) {
-        if (!roleDTO.getRole().isEmpty() && roleDAO.getRoleByName(roleDTO.getRole()) != null){
-            return;
-        }
-        roleDAO.addRole(roleDTO);
-    }
-
-    @Override
-    public UserDTO getUserByName(String name) {
-        return userDAO.getUserByName(name);
     }
 }

@@ -42,9 +42,7 @@
 <body>
     <ul>
         <li>
-            <a href="${root}/${home}">Home</a></li>
-        <li>
-            <a class="active">User detail</a></li>
+            <a class="active">Home</a></li>
     </ul>
     <form action="${root}/${home}" method="get">
         <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />

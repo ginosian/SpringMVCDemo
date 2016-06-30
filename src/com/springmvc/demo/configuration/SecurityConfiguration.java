@@ -15,12 +15,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  * Created by Martha on 6/17/2016.
  */
 
-/**If any servlet Filter mappings are added after AbstractSecurityWebApplicationInitializer is invoked,
- * they might be accidentally added before springSecurityFilterChain.
- * Unless an application contains Filter instances that do not need to be secured,
- * springSecurityFilterChain should be before any other Filter mappings.
- *  The @Order annotation can be used to help ensure that any WebApplicationInitializer is loaded in a deterministic order.
- */
 @Configuration
 @EnableWebMvc
 @Order
@@ -38,10 +32,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/login", "/").permitAll() // not secured, anyone can access
                 .antMatchers("/admin/**").hasRole("ADMIN") //can only be accessed by someone who have ADMIN role
-                .antMatchers("/common/**").hasRole("USER")
-                .and().formLogin().loginPage("/login").successHandler(new SecuritySuccessHandler())//  creates a custom login page with ‘/login’ url
+                .antMatchers("/common/**").hasRole("USER") //can only be accessed by someone who have USER role
+                .and().formLogin().loginPage("/login").successHandler(new SecuritySuccessHandler())//  creates a custom login page with "/login" url
                 .usernameParameter("username").passwordParameter("password") // will accept username and password Http request parameters
-                .and().exceptionHandling() // will catch all 403 [http access denied] exceptions and display our user defined page
+                .and().exceptionHandling() // will catch all 403 [http access denied] exceptions and display on user defined page
                 .and().csrf(); //  active by default, stands for Cross Site Request Forgery, a Synchronizer Token Pattern where each request requires, in addition to our session cookie, a randomly generated token as an HTTP parameter
     }
 
@@ -56,24 +50,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
      <csrf/>
     </http> */
 
-//    @Bean
-//    public SavedRequestAwareAuthenticationSuccessHandler
-//    savedRequestAwareAuthenticationSuccessHandler() {
-//
-//        SavedRequestAwareAuthenticationSuccessHandler auth
-//                = new SavedRequestAwareAuthenticationSuccessHandler();
-//
-//        auth.setTargetUrlParameter("targetUrl");
-//        return auth;
-//    }
-    // region In-memory authentication
 
     /** @param auth  configures AuthenticationManagerBuilder with user credentials and allowed roles.
      *               This AuthenticationManagerBuilder creates AuthenticationManager which is responsible for processing any authentication request.
-     *               In-memory authentication is applied.
      **/
-
-    // In memory authentication
      @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);

@@ -41,79 +41,60 @@
         }		</style>
 </head>
 <body>
+        <c:set var="root" value="${pageContext.request.contextPath}"/>
+        <c:set var="project" value="${project}"/>
+        <c:set var="modify" value="${modify}"/>
+        <c:set var="redirect_modify_to" value="${redirect_modify_to}"/>
+        <c:set var="users" value="${users}"/>
 <ul>
     <li>
-        <a href="#home_tab">Home</a></li>
+        <a href="${root}/${home}">Home</a></li>
     <li>
-        <a href="#projects_tab">Tasks</a></li>
-    <li>
-        <a class="active" href="#project_tab">Create Task</a></li>
+        <a class="active">Create task for project</a></li>
 </ul>
-<div style="color: black; text-align: center; background-color: rgb(235, 248, 252);">
-        <c:set var="root" value="${pageContext.request.contextPath}"/>
-    <form:form action="${root}/${home}/${modify}" method="post">
-
-        <c:set var="modify" value="${modify}"/>
-        <input type="hidden" name="home" value="${home}"/>
-        <!--Received data-->
-
-        <!--Root paths-->
-        <c:set var="redirect_modify_to" value="${redirect_modify_to}"/>
-        <input type="hidden" name="redirect_modify_to" value="${redirect_modify_to}"/>
-
-        <!--Received data-->
-        <c:set var="users" value="${users}"/>
-        <c:set var="project" value="${project}"/>
-
-
-        <!--If modified passes string task_story, task_description, taskId and userId.-->
-
-        <input type="hidden" name="taskId" value="${task.getId()}">
-
-
+    <form action="${root}/${home}/${modify}" method="post">
         <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
-        <table align="center" border="0" cellpadding="0" cellspacing="0" style="width: 100%; height: 100%">
+        <input type="hidden" name="home" value="${home}"/>
+        <input type="hidden" name="redirect_modify_to" value="${redirect_modify_to}"/>
+        <input type="hidden" name="taskId" value="${task.getId()}">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" style="width: 100%; height: 95%; background-color: rgb(235, 248, 252)">
             <tbody>
-            <tr>
-                <td style="text-align: center; font-size:24px">
-                    <span>Project:</span><br />
-            </tr>
-            <tr>
-                <td style="text-align: center; font-size:24px">
-                    <span>${project.getStory()}</span>
-                    <input type="hidden" name="projectId" value="${project.getId()}">
-            </tr>
-            <tr>
-                <td style="text-align: center; font-size:24px">
-                    <span>Task Story:</span><br />
-                    <textarea name="task_story" required="" rows="1" style="width: 70%"></textarea></td>
-            </tr>
-            <tr>
-                <td style="text-align: center; font-size:24px">
-                    <span>Task Description:</span><br />
-                    <textarea name="task_description" rows="3" style="width: 70%"></textarea></td>
-            </tr>
-            <tr>
-                <td style="text-align: center;">
-                    <p style="font-size:20px" type="text">
-                        Choose Assignee</p>
-                </td>
-            </tr>
-            <tr>
-                <td style="height: 150px; text-align: center;">
-                    <select name="userId" required size="8" style="width:25%;font-size:18px">
-                        <c:forEach items="${users}" var="user">
-                        <option value="${user.getId()}">${user.getName()}</option>
-                        </c:forEach>
-                    </select></td>
-            </tr>
-            <tr>
-                <td tyle="text-align: center;">
-                    <input style="width:25%; position:relative; white-space:normal" type="submit" value="SUBMIT" /></td>
-            </tr>
+                <tr>
+                    <td style="text-align: center; font-size:24px">Project: ${project.getStory()}</td>
+                        <input type="hidden" name="projectId" value="${project.getId()}">
+                </tr>
+                <tr>
+                    <td style="text-align: center; font-size:24px">Task Story:</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                        <textarea name="task_story" required="required" rows="1" style="width:70%; font-size:24px; resize: none"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; font-size:24px">Task Description:</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                        <textarea name="task_description" required="required" rows="3" style="width: 70%; resize: none"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; font-size:20px">Choose Assignee</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">
+                        <select name="userId" required="required" size="6" style="width:25%;font-size:18px">
+                            <c:forEach items="${users}" var="user">
+                            <option value="${user.getId()}">${user.getName()}</option>
+                            </c:forEach>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                        <input style="width:25%; font-size:24px position:relative; white-space:normal" type="submit" value="SUBMIT" /></td>
+                </tr>
             </tbody>
         </table>
-    </form:form></div>
+    </form>
 </body>
 </html>
 

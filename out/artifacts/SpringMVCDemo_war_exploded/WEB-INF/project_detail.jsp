@@ -19,11 +19,9 @@
             overflow: hidden;
             background-color: #333;
         }
-
         li {
             float: left;
         }
-
         li a {
             display: block;
             color: white;
@@ -40,8 +38,7 @@
             background-color:#4CAF50;
         }		</style>
 </head>
-<body>
-
+<body style="background-color: rgb(235, 248, 252)">
 <!--Received data-->
 
 <!--Root paths-->
@@ -62,66 +59,59 @@
 <c:set var="task_detail_resource" value="${task_detail_resource}"/>
 <c:set var="create_task_resource" value="${create_task_resource}"/>
 
-
-
-<!--Passes taskId  to instantiate redirected page with data.
-If modified  string project_story, project_description and projectId-->
-
 <ul>
     <li>
-        <a href="#home_tab">Home</a></li>
+        <a href="${root}/${home}">Home</a></li>
     <li>
-        <a href="#projects_tab">Tasks</a></li>
-    <li>
-        <a class="active" href="#project_tab">Create Task</a></li>
+        <a class="active">Project detail</a></li>
 </ul>
     <form action="${root}/${home}/${modify}" method="post">
+        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
         <input type="hidden" name="home" value="${home}"/>
         <input type="hidden" name="projectId" value="${project.getId()}"/>
         <input type="hidden" name="redirect_modify_task_to" value="${redirect_modify_task_to}"/>
-        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
 
         <table align="center" style="width: 100%; height: 95%; background-color: rgb(235, 248, 252)">
             <tbody>
-            <tr>
-                <td style="text-align: center; font-size:24px; width: 40%">
-                    <span>Project Story:</span><br />
-                    <textarea style="font-size: 22px; width: 90%" name="project_story" required="" rows="4">${project.getStory()}</textarea>
-                </td>
-                <td colspan="2" style="text-align: center; font-size:24px; width: 40%">
-                    Project Tasks
-                </td>
+                <tr>
+                    <td style="text-align: center; font-size:24px; width: 40%">
+                        <span>Project Story:</span><br />
+                        <textarea style="font-size: 22px; width: 90%; resize: none" name="project_story" required="required" rows="4">${project.getStory()}</textarea>
+                    </td>
+                    <td colspan="2" style="text-align: center; font-size:24px; width: 40%">
+                        Project Tasks
+                    </td>
 
-            </tr>
-            <tr>
-                <td style="text-align: center; width: 40%;">
-                        <span style="font-size: 24px;">Project Description:</span><br />
-                        <textarea style="font-size: 22px; width: 90%"  name="project_description" rows="8">${project.getDescription()}</textarea>
-                </td>
-                <td style="height: 100px; text-align: center; width: 60%;">
-                    <ul style="text-align: left; background-color: #dcfcc4">
-                        <c:forEach items="${project_tasks}" var="project_task" >
-                            <li onclick="location.href='${root}/${home}/${task_detail_resource}?taskId=${project_task.getId()}&projectId=${project.getId()}&home=${home}&redirect_modify_task_to=${redirect_modify_task_to}'"
-                                style="text-align: left; font-size:24px; background-color: #dcfcc4">
-                                <span style="font-size:24px" >${project_task.getStory()}</span><wbr>
-                                <span style="font-size:16px" >Assignee</span><wbr>
-                                <span style="font-size:24px" >${project_task.getUserDTO().getName()}</span>
+                </tr>
+                <tr>
+                    <td style="text-align: center; width: 40%;">
+                            <span style="font-size: 24px;">Project Description:</span><br />
+                            <textarea style="font-size: 22px; width: 90%; resize: none"  name="project_description" rows="8" required="required">${project.getDescription()}</textarea>
+                    </td>
+                    <td style="height: 100px; text-align: center; width: 60%;">
+                        <ul style="text-align: left; background-color: #dcfcc4">
+                            <c:forEach items="${project_tasks}" var="project_task" >
+                                <li onclick="location.href='${root}/${home}/${task_detail_resource}?taskId=${project_task.getId()}&projectId=${project.getId()}&home=${home}&redirect_modify_task_to=${redirect_modify_task_to}'"
+                                    style="text-align: left; font-size:24px; background-color: #dcfcc4">
+                                    <span style="font-size:24px" >${project_task.getStory()}</span><wbr>
+                                    <span style="font-size:16px" >Assignee</span><wbr>
+                                    <span style="font-size:24px" >${project_task.getUserDTO().getName()}</span>
 
-                            </li>
-                            <p>
-                                &nbsp;</p>
-                        </c:forEach>
-                    </ul>
-                    <p>
-                        &nbsp;</p>
-                    <input style="width:20%; height:40px; position:relative; white-space:normal" type="button" value="Add Task"
-                           onclick="location.href='${root}/${home}/${create_task_resource}?&projectId=${project.getId()}&home=${home}&redirect_modify_task_to=${redirect_modify_task_to}'"/>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3" style="text-align: center;">
-                    <input style="width:20%; height:40px; position:relative; white-space:normal" type="submit" value="SUBMIT" /></td>
-            </tr>
+                                </li>
+                                <p>
+                                    &nbsp;</p>
+                            </c:forEach>
+                        </ul>
+                        <p>
+                            &nbsp;</p>
+                        <input style="width:20%; resize: none; font-size:24px; position:relative; white-space:normal" type="button" value="Add Task"
+                               onclick="location.href='${root}/${home}/${create_task_resource}?&projectId=${project.getId()}&home=${home}&redirect_modify_task_to=${redirect_modify_task_to}'"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: center;">
+                        <input style="width:20%; resize: none; font-size:24px; position:relative; white-space:normal" type="submit" value="SUBMIT" /></td>
+                </tr>
             </tbody>
         </table>
     </form>

@@ -46,7 +46,7 @@ public class CommonController {
     public static final String MODIFY = "modify";
 
     // JSP's names
-    public static final String USER_DETAIL = "user_detail";
+    public static final String USER_DETAIL = "common_user_detail";
     public static final String TASK_DETAIL = "task_detail";
 
     // Keys for passing objects
@@ -54,6 +54,7 @@ public class CommonController {
 
     public static final String USER = "user";
     public static final String USERID = "userId";
+    public static final String USERIDFORUSERDT = "userIdForUserTD";
 
     public static final String PROJECTID = "projectId";
 
@@ -108,13 +109,13 @@ public class CommonController {
         String authName = auth.getName(); //get logged in username
 
         UserDTO user = userManager.getUserByUsername(authName);
-        HashMap<String, ArrayList<TaskDTO>>  map = taskManager.userTasks(user);
+        HashMap<String, ArrayList<TaskDTO>>  map = taskManager.userTasksMap(user.getId().toString());
 
         modelAndView.addObject(USER, user);
         modelAndView.addObject(MAP, map);
         modelAndView.addObject(TASK_DETAIL_RESOURCE, "task_detail");
         modelAndView.addObject(BUTTON_LABEL, "LOGOUT");
-        modelAndView.addObject(BUTTON_REDIRECTION_PAGE, "/logout");
+        modelAndView.addObject(BUTTON_REDIRECTION_PAGE, "logout");
 
         modelAndView.addObject(REDIRECT_MODIFY_TASK_TO, "");
         modelAndView.addObject(HOME, "common");
@@ -184,6 +185,7 @@ public class CommonController {
                                    @ModelAttribute(PROJECTID) String projectId,
                                    @ModelAttribute(USERID) String userId,
                                    @ModelAttribute(REDIRECT_MODIFY_TO) String redirect_modify_to,
+                                   @ModelAttribute(USERIDFORUSERDT) String previousUserId,
                                    @ModelAttribute(HOME) String home){
         if (home.isEmpty()) throw new EmptyRequiredValueException();
         TaskDTO task = taskManager.addOrModifyTask(taskId, taskStory, taskDescription, projectId, userId);
@@ -192,7 +194,8 @@ public class CommonController {
 
         ModelAndView modelAndView = new ModelAndView();
 
-        modelAndView.setViewName("redirect:/" + home + redirect_modify_to + "?success=true&projectId=" + taskProjectId + "&userId=" + taskUserId + "&home=" + home);
+        modelAndView.setViewName("redirect:/" + home + redirect_modify_to + "?success=true&projectId=" + taskProjectId
+                + "&userId=" + taskUserId + "&home=" + home + "&userIdForUserTD=" + previousUserId);
         return modelAndView;
     }
     // endregion

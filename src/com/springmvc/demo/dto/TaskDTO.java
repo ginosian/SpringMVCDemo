@@ -29,10 +29,9 @@ public class TaskDTO {
     public TaskDTO() {
     }
 
-    public TaskDTO(String story, String description, boolean complete, ProjectDTO projectDTO, UserDTO userDTO) {
+    public TaskDTO(String story, String description, ProjectDTO projectDTO, UserDTO userDTO) {
         this.story = story;
         this.description = description;
-        this.complete = complete;
         this.projectDTO = projectDTO;
         this.userDTO = userDTO;
     }

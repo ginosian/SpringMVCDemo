@@ -185,7 +185,7 @@ public class AdminControllerTest {
 
 
 
-        when(taskManager.allTasks(any(Boolean.class))).thenAnswer(new Answer<ArrayList<TaskDTO>>() {
+        when(taskManager.allTasks()).thenAnswer(new Answer<ArrayList<TaskDTO>>() {
             @Override
             public ArrayList<TaskDTO> answer(InvocationOnMock invocation) throws Throwable {
                 return DTOMockUtils.generateTasksList(TASK_QUANTITY);
@@ -214,15 +214,17 @@ public class AdminControllerTest {
                 return taskDTO;
             }
         });
-        when(taskManager.userTasks(any())).thenAnswer(new Answer<HashMap<String, ArrayList<TaskDTO>>>() {
+        when(taskManager.userTasksMap(any())).thenAnswer(new Answer<HashMap<String, ArrayList<TaskDTO>>>() {
             @Override
             public HashMap<String, ArrayList<TaskDTO>> answer(InvocationOnMock invocation) throws Throwable {
-                UserDTO userDTO = (UserDTO)invocation.getArguments()[0];
-                if (userDTO == null) throw new EmptyRequiredValueException();
+                String userId = (String)invocation.getArguments()[0];
+                if (userId == null || userId.isEmpty()) throw new EmptyRequiredValueException();
                 ArrayList<TaskDTO> taskList = DTOMockUtils.generateTasksList(TASK_QUANTITY);
+                UserDTO user = DTOMockUtils.generateUser();
+                user.setId(Long.parseLong(userId));
                 if (TASK_QUANTITY < 1) return null;
                 for (TaskDTO task : taskList) {
-                    task.setUserDTO(userDTO);
+                    task.setUserDTO(user);
                 }
                 String projectName = taskList.get(0).getProjectDTO().getStory();
                 HashMap<String, ArrayList<TaskDTO>> result = new HashMap<String, ArrayList<TaskDTO>>();

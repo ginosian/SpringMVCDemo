@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   UserDTO: Martha
@@ -13,37 +12,36 @@
     <title></title>
 </head>
 <form method="post">
-    <c:if test="${param.error != null}">
-    <div class="alert alert-danger">
-        <p>Invalid username and password.</p>
-    </div>
-    </c:if>
-<table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 100%; height: 100%">
+
+<table align="center"style="width: 100%; height: 100%">
+    <input type="hidden" name="${_csrf.parameterName}"   value="${_csrf.token}" />
     <tbody>
-    <tr>
-        <td colspan="3" style="text-align: center">
-            <img src="<c:url value="/image/auth_banner.jpeg"/>" style="width: 100%; height: 100%;" /></td>
-    </tr>
-    <tr>
-        <td colspan="3" style="text-align: center;">
-            <form action="">
-                <p>
-                    Username:<br />
-                    <input type="email" id="username" name="username" style="height:12%;width:25%"  required/><br />
-                    Password:<br />
-                    <input type="password" id="password" name="password" style="height:12%;width:25%"  required/></p>
-                    <input type="hidden" name="${_csrf.parameterName}"   value="${_csrf.token}" />
-            </form>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="3" style="width: 49%; height: 35px; text-align: center;">
-            <input style="width:25%; position:relative; white-space:normal" type="submit" value="LOGIN" /></td>
-    </tr>
-    <tr>
-        <td colspan="3" style="text-align: center; height: 100px;">
-            &nbsp;</td>
-    </tr>
+        <tr>
+            <td colspan="3" style="text-align: center">
+                <img src="<c:url value="/image/auth_banner.png"/>" style="width: 100%; height: 100%" /></td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align:center; font-size:20px">
+                <br>Username:<br/>
+                <input type="email" id="username" name="username" style="font-size:20px; width:25%; resize: none; background-color: #feffbb" required="required"/><br />
+                <br>Password:<br />
+                <input type="password" id="password" name="password" style="font-size:20px; width:25%; resize: none; background-color: #feffbb"  required="required"/></p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align: center">
+                <input style="width:25%; font-size:20px; position:relative; white-space:normal" type="submit" value="LOGIN"/></td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align: center">
+                <c:if test="${param.error != null}">
+                    <div class="alert alert-danger">
+                        <p style="color: #c51202">Invalid username or password.</p>
+                    </div>
+                </c:if>
+            </td>
+        </tr>
+
     </tbody>
 </table>
 </form>

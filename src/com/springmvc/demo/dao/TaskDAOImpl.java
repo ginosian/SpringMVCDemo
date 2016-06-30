@@ -3,6 +3,7 @@ package com.springmvc.demo.dao;
 import com.springmvc.demo.dto.ProjectDTO;
 import com.springmvc.demo.dto.TaskDTO;
 import com.springmvc.demo.dto.UserDTO;
+import com.springmvc.demo.exceptions.NoSuchTaskException;
 import javassist.bytecode.Descriptor;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +27,17 @@ public class TaskDAOImpl implements TaskDAO {
     }
 
     @Override
-    public TaskDTO getTaskById(long id) {
+    public TaskDTO getTaskById(Long taskId) {
         Session session = openSession();
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
             Query query = openSession().createQuery("from TaskDTO task where task.id = :id");
-            query.setParameter("id", id);
-            List<TaskDTO> taskDTOLIST = query.list(); // TODO check if return type match , ask Lyov if why not to close session
-            Hibernate.initialize(taskDTOLIST);
+            query.setParameter("id", taskId);
+            List<TaskDTO> taskDTOLIST = query.list();
+//            Hibernate.initialize(taskDTOLIST);  // If fetch type changes to LAZY this should be uncommented
             transaction.commit();
-            if (taskDTOLIST.size() == 0)return null;
+            if (taskDTOLIST.size() == 0)throw new NoSuchTaskException();
             return taskDTOLIST.get(0);
         }catch (HibernateException e) {
             if (transaction!=null) transaction.rollback();
@@ -48,25 +49,51 @@ public class TaskDAOImpl implements TaskDAO {
     }
 
     @Override
-    public TaskDTO reassignTask(TaskDTO taskDTO, UserDTO newAssignee) {
+    public TaskDTO addTask(TaskDTO taskDTO) {
+        Session session = openSession();
+        Transaction transaction = null;
+        try{
+            transaction = session.beginTransaction();
+            session.save(taskDTO);
+            transaction.commit();
+            return taskDTO;
+        }catch (HibernateException e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
         return null;
     }
 
     @Override
-    public TaskDTO markTaskAsComplete() {
+    public TaskDTO modifyTask(TaskDTO taskDTO) {
+        Session session = openSession();
+        Transaction transaction = null;
+        try{
+            transaction = session.beginTransaction();
+            session.update(taskDTO);
+            transaction.commit();
+            return taskDTO;
+        }catch (HibernateException e) {
+            if (transaction!=null) transaction.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
         return null;
     }
 
     @Override
-    public Collection<TaskDTO> allTasks(boolean complete) {
+    public Collection<TaskDTO> allTasks() {
         Session session = openSession();
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
             List<TaskDTO> tasks = session.createQuery("from TaskDTO").list();
-            Hibernate.initialize(tasks);
+//            Hibernate.initialize(tasks);  // If fetch type changes to LAZY this should be uncommented
             transaction.commit();
-            if(tasks.size() == 0)return null;
+            if(tasks.size() == 0) return null;
             return tasks;
         }catch (HibernateException e){
             if(transaction != null)transaction.rollback();
@@ -78,17 +105,16 @@ public class TaskDAOImpl implements TaskDAO {
     }
 
     @Override
-    public Collection<TaskDTO> getTasksWithinProjects(Long id) {
+    public Collection<TaskDTO> getTasksWithinProjects(Long projectId) {
         Session session = openSession();
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
             Query query = openSession().createQuery("select task from TaskDTO task join task.projectDTO project where project.id = :id");
-            query.setParameter("id", id);
+            query.setParameter("id", projectId);
             List<TaskDTO> taskDTOList = query.list();
-            Hibernate.initialize(taskDTOList);
+//            Hibernate.initialize(taskDTOList);  // If fetch type changes to LAZY this should be uncommented
             transaction.commit();
-            if (taskDTOList.size() == 0)return null;
             return taskDTOList;
         }catch (HibernateException e) {
             if (transaction!=null) transaction.rollback();
@@ -100,18 +126,16 @@ public class TaskDAOImpl implements TaskDAO {
     }
 
     @Override
-    public Collection<TaskDTO> getTaskByUser(UserDTO userDTO) {
-        String user = userDTO.getName();
+    public Collection<TaskDTO> getTasksByUser(Long userId) {
         Session session = openSession();
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
-            Query query = openSession().createQuery("select task from TaskDTO task join task.userDTO assignee where assignee.name = :name");
-            query.setParameter("name", user);
+            Query query = openSession().createQuery("select task from TaskDTO task join task.userDTO assignee where assignee.id = :id");
+            query.setParameter("id", userId);
             List<TaskDTO> taskDTOList = query.list();
-            Hibernate.initialize(taskDTOList);
+//            Hibernate.initialize(taskDTOList);  // If fetch type changes to LAZY this should be uncommented
             transaction.commit();
-            if (taskDTOList.size() == 0)return null;
             return taskDTOList;
         }catch (HibernateException e) {
             if (transaction!=null) transaction.rollback();
@@ -122,96 +146,4 @@ public class TaskDAOImpl implements TaskDAO {
         return null;
     }
 
-    @Override
-    public TaskDTO getTaskByStory(String story) {
-        Session session = openSession();
-        Transaction transaction = null;
-        try{
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("from TaskDTO task where task.story = :story");
-            query.setParameter("story", story);
-            List<TaskDTO> task = query.list();
-            Hibernate.initialize(task);
-            if(task.size() == 0) return null;
-            return task.get(0);
-        }catch (HibernateException e){
-            if(transaction != null)transaction.rollback();
-            e.printStackTrace();
-        }finally {
-            session.close();
-        }
-        return null;
-    }
-
-    @Override
-    public void addTask(TaskDTO taskDTO) {
-        Session session = openSession();
-        Transaction transaction = null;
-        try{
-            transaction = session.beginTransaction();
-                session.save(taskDTO);
-            transaction.commit();
-        }catch (HibernateException e) {
-            if (transaction!=null) transaction.rollback();
-            e.printStackTrace();
-        }finally {
-            session.close();
-        }
-    }
-
-    @Override
-    public void modifyTask(TaskDTO taskDTO) {
-        Session session = openSession();
-        Transaction transaction = null;
-        try{
-            transaction = session.beginTransaction();
-            session.update(taskDTO);
-            transaction.commit();
-        }catch (HibernateException e) {
-            if (transaction!=null) transaction.rollback();
-            e.printStackTrace();
-        }finally {
-            session.close();
-        }
-    }
-
-    @Override
-    public HashMap<String, ArrayList<TaskDTO>> userTasks(UserDTO userDTO) {
-        Session session = openSession();
-        Transaction transaction = null;
-        try{
-            transaction = session.beginTransaction();
-            String user = userDTO.getName();
-            Query query = openSession().createQuery("select task from TaskDTO task join task.userDTO assignee where assignee.name = :name");
-            query.setParameter("name", user);
-            List<TaskDTO> tasks = query.list();
-            Hibernate.initialize(tasks);
-            Set<String> projectsStory = new HashSet<>();
-            for (TaskDTO task : tasks){
-                projectsStory.add(task.getProjectDTO().getStory());
-            }
-            HashMap<String, ArrayList<TaskDTO>> userTasksByProject = new HashMap<>();
-            Iterator iteratror = projectsStory.iterator();
-            ArrayList<TaskDTO> tempTaskList = new ArrayList<>();
-            while (iteratror.hasNext()){
-                String tempStory = iteratror.next().toString();
-                for (int i = 0; i < tasks.size(); i++) {
-                    if(tasks.get(i).getProjectDTO().getStory().equals(tempStory)){
-                        tempTaskList.add(tasks.get(i));
-                    }
-                }
-                ArrayList<TaskDTO> taskList = new ArrayList<>();
-                taskList.addAll(tempTaskList);
-                userTasksByProject.put(tempStory, taskList);
-                tempTaskList.clear();
-            }
-            return userTasksByProject;
-        }catch (HibernateException e){
-            if(transaction != null)transaction.rollback();
-            e.printStackTrace();
-        }finally {
-            session.close();
-        }
-        return null;
-    }
 }

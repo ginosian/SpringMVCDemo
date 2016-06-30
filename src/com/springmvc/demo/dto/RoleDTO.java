@@ -9,6 +9,8 @@ import javax.persistence.*;
 @Table(name = "role")
 public class RoleDTO {
 
+    @Id
+    @GeneratedValue
     private Long id;
     private String role;
 
@@ -23,8 +25,6 @@ public class RoleDTO {
         this.role = role;
     }
 
-    @Id
-    @GeneratedValue
     public Long getId() {
         return id;
     }
@@ -33,7 +33,6 @@ public class RoleDTO {
         this.id = id;
     }
 
-    @Column(name = "role")
     public String getRole() {
         return role;
     }

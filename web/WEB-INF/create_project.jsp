@@ -41,49 +41,45 @@
         }  </style>
 </head>
 <body>
-<p>
-    &nbsp;</p>
+        <c:set var="root" value="${pageContext.request.contextPath}"/>
+        <c:set var="home" value="${home}"/>
+        <c:set var="modify" value="${modify}"/>
+        <c:set var="redirect_modify_to" value="${redirect_modify_to}"/>
 <ul>
     <li>
-        <a href="#home_tab">Home</a></li>
+        <a href="${root}/${home}">Home</a></li>
     <li>
-        <a href="#projects_tab">Projects</a></li>
-    <li>
-        <a class="active" href="#project_tab">Project Name</a></li>
+        <a class="active">Create project</a></li>
 </ul>
 
 <div style="color: black; text-align: center; background-color: rgb(235, 248, 252);">
-    <form:form action="${root}/${home}/${modify}" method="post">
+    <form action="${root}/${home}/${modify}" method="post">
         <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
-        <c:set var="root" value="${pageContext.request.contextPath}"/>
-        <c:set var="home" value="${home}"/>
         <input type="hidden" name="home" value="${home}"/>
-        <c:set var="modify" value="${modify}"/>
-
-        <c:set var="redirect_modify_to" value="${redirect_modify_to}"/>
         <input type="hidden" name="redirect_modify_to" value="${redirect_modify_to}"/>
-
-<div style="background-color: rgb(235, 248, 252); color:black;">
-        <table align="center" border="0" cellpadding="0" cellspacing="0" style="width: 100%; height: 70%">
+        <table align="center" style="width: 100%; height: 70%; background-color: rgb(235, 248, 252)">
             <tbody>
-            <tr>
-                <td colspan="2" style="text-align: center;">
-                    <span>Project Story:</span><br />
-                    <textarea name="project_story" rows="5" style="width: 70%" required></textarea></td>
-            </tr>
-
-            <tr>
-                <td colspan="2" style="text-align: center;">
-                    <span>Project Description:</span><br />
-                    <textarea name="project_description" rows="5" style="width: 70%"></textarea></td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align: center;">
-                    <input style="width:25%; position:relative; white-space:normal" type="submit" value="SUBMIT" /></td>
-            </tr>
+                <tr>
+                    <td style="text-align: center; font-size:24px">Project Story:</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                    <textarea name="project_story" rows="3" style="width:70%; font-size:24px; resize: none" required="required"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; font-size:24px">Project Description:</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                    <textarea name="project_description" rows="5" style="width:70%; font-size:24px; resize: none" required="required"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">
+                        <input style="width:25%; font-size:24px; position:relative; white-space:normal" type="submit" value="SUBMIT" /></td>
+                </tr>
             </tbody>
         </table>
-    </form:form></div>
+    </form>
 </body>
 </html>
 

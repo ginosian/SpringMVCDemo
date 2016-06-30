@@ -23,8 +23,7 @@ public class Initializer implements WebApplicationInitializer { //AbstractAnnota
 
         ctx.setServletContext(servletContext);
 
-        ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher",
-                new DispatcherServlet(ctx));
+        ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));
         servlet.addMapping("/");
         servlet.setLoadOnStartup(1);
 
@@ -33,6 +32,4 @@ public class Initializer implements WebApplicationInitializer { //AbstractAnnota
         FilterRegistration.Dynamic security = servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy());
         security.addMappingForUrlPatterns(dispatcherTypes, true, "/*");
     }
-
-
 }

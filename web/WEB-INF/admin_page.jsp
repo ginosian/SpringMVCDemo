@@ -37,68 +37,56 @@
 
 <c:set var="redirect_modify_task_to" value="${redirect_modify_task_to}"/>
 
-<!--Passes either userId; taskId; projectId to instantiate redirected page with data.-->
-
-<table align="center" cellpadding="1" cellspacing="1" id="admin_home" style="width: 100%; height: 100%">
-  <tbody>
-  <tr>
-    <th style="vertical-align: middle; height: 50px; text-align: left; width: 30%; background-color: #B0BEC5;">
-      <span style="font-size: 36px;">Projects</span></th>
-    <td style="vertical-align: middle; width: 40%; background-color: #C5E1A5;">
-      <strong><span style="font-size:36px;">Tasks</span></strong></td>
-    <td style="vertical-align: middle; background-color: #BCAAA4;">
-      <strong><span style="font-size:36px;">Users</span></strong></td>
-  </tr>
-  <tr>
-    <td style="text-align: left; vertical-align: top; background-color: #ECEFF1" style="width: 33%; height: 100%">
-      <ul>
-        <c:forEach items="${projects}" var="project">
-          <li style="text-align: left; font-size:24px" value="${project.getId()}"
-              onclick="location.href='${root}/${home}/${project_detail_resource}?projectId=${project.getId()}&home=${home}'">${project.getStory()}</li>
-        </c:forEach>
-      </ul>
-
-    </td>
-    <td style="text-align: left; vertical-align: top; background-color: #DCEDC8" style="width: 33%; height: 100%">
-      <ul id="task_list_admin" >
-        <c:forEach items="${tasks}" var="task">
-          <li style="text-align: left; font-size:24px;"
-              onclick="location.href='${root}/${home}/${task_detail_resource}?taskId=${task.getId()}&home=${home}'">${task.getStory()}</li>
-        </c:forEach>
-      </ul>
-
-    </td>
-    <td style="text-align: left; vertical-align: top; background-color: #D7CCC8; width: 33%; height: 100%">
-      <ul id="user_list_admin" >
-        <c:forEach items="${users}" var="user">
-          <li style="text-align: left; font-size:24px"
-              onclick="location.href='${root}/${home}/${user_detail_resource}?userId=${user.getId()}&home=${home}'">${user.getName()}</li>
-        </c:forEach>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td style="text-align: center; vertical-align: middle; height: 50px">
-      <input onclick="location.href='${root}/${home}/${create_project_resource}?home=${home}'" style="width:60%;
-      position:relative; white-space:normal; background-color: #B0BEC5; font-size:24px" type="button" value="Create project" /></td>
-    <td style="text-align: center; vertical-align: middle;">
-      <input onclick="location.href='${root}/${home}/${create_task_resource}?redirect_modify_task_to=${redirect_modify_task_to}&home=${home}'" style="width:60%;
-      position:relative; white-space:normal; background-color: #C5E1A5; font-size:24px" type="button" value="Create task" /></td>
-    <td style="text-align: center; vertical-align: middle;">
-      <input onclick="location.href='${root}/${home}/${create_user_resource}?home=${home}'" style="width:60%;
-      position:relative; white-space:normal; background-color: #BCAAA4; font-size:24px" type="button" value="Create user" /></td>
-  </tr>
-
-  <tr>
-      <td colspan="3" style="text-align: right; vertical-align: middle; height: 50px">
-          <input name="create_project"
-                 onclick="location.href='${root}/logout'" style="width:20%;
-      position:relative; white-space:normal; background-color: #B0BEC5; font-size:24px" type="button" value="LOGOUT" /></td>
-  </tr>
-
-
-
-  </tbody>
-</table>
+  <table align="center" style="width: 100%; height: 100%">
+    <tbody>
+      <tr>
+        <td style="vertical-align: middle; font-size: 36px; text-align: left; width: 33%; background-color: #B0BEC5;">Projects</td>
+        <td style="vertical-align: middle; font-size:36px; width: 33%; background-color: #C5E1A5;">Tasks</td>
+        <td style="vertical-align: middle; width: 34%; font-size:36px; background-color: #BCAAA4;">Users</td>
+      </tr>
+      <tr>
+        <td style="text-align: left; width: 33%; height: 100%; vertical-align: top; background-color: #ECEFF1">
+          <ul>
+            <c:forEach items="${projects}" var="project">
+              <li style="text-align: left; font-size:24px" value="${project.getId()}"
+                  onclick="location.href='${root}/${home}/${project_detail_resource}?projectId=${project.getId()}&home=${home}'">${project.getStory()}</li>
+            </c:forEach>
+          </ul>
+        </td>
+        <td style="text-align: left; width: 33%; height: 100%; vertical-align: top; background-color: #DCEDC8">
+          <ul>
+            <c:forEach items="${tasks}" var="task">
+              <li style="text-align: left; font-size:24px;"
+                  onclick="location.href='${root}/${home}/${task_detail_resource}?taskId=${task.getId()}&home=${home}'">${task.getStory()}</li>
+            </c:forEach>
+          </ul>
+        </td>
+        <td style="text-align: left; vertical-align: top; background-color: #D7CCC8; width: 33%; height: 100%">
+          <ul>
+            <c:forEach items="${users}" var="user">
+              <li style="text-align: left; font-size:24px"
+                  onclick="location.href='${root}/${home}/${user_detail_resource}?userIdForUserTD=${user.getId()}&home=${home}'">${user.getName()}</li>
+            </c:forEach>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center; vertical-align: middle; height: 50px">
+          <input onclick="location.href='${root}/${home}/${create_project_resource}?home=${home}'" style="width:60%;
+          position:relative; white-space:normal; background-color: #B0BEC5; font-size:24px" type="button" value="Create project"/></td>
+        <td style="text-align: center; vertical-align: middle;">
+          <input onclick="location.href='${root}/${home}/${create_task_resource}?redirect_modify_task_to=${redirect_modify_task_to}&home=${home}'" style="width:60%;
+          position:relative; white-space:normal; background-color: #C5E1A5; font-size:24px" type="button" value="Create task"/></td>
+        <td style="text-align: center; vertical-align: middle;">
+          <input onclick="location.href='${root}/${home}/${create_user_resource}?home=${home}'" style="width:60%;
+          position:relative; white-space:normal; background-color: #BCAAA4; font-size:24px" type="button" value="Create user"/></td>
+      </tr>
+      <tr>
+          <td colspan="3" style="text-align: right; vertical-align: middle">
+              <input onclick="location.href='${root}/logout'" style="width:20%;
+          position:relative; white-space:normal; background-color: #B0BEC5; font-size:24px" type="button" value="LOGOUT" /></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>
