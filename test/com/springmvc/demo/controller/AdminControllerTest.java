@@ -31,7 +31,7 @@ import java.util.Set;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -76,7 +76,7 @@ public class AdminControllerTest {
         viewResolver.setSuffix(".jsp");
         mockMvc = MockMvcBuilders.standaloneSetup(adminController).setViewResolvers(viewResolver).build();
 
-        when(environment.getProperty(any())).thenAnswer(new Answer<String>() {
+        when(environment.getProperty(anyString())).thenAnswer(new Answer<String>() {
             @Override
             public String answer(InvocationOnMock invocation) throws Throwable {
                 String arg = (String)invocation.getArguments()[0];
@@ -91,7 +91,7 @@ public class AdminControllerTest {
                 return DTOMockUtils.generateRoleList(ROLE_QUANTITY);
             }
         });
-        when(userManager.allUsersByRole(any())).thenAnswer(new Answer<ArrayList<UserDTO>>() {
+        when(userManager.allUsersByRole(anyString())).thenAnswer(new Answer<ArrayList<UserDTO>>() {
             @Override
             public ArrayList<UserDTO> answer(InvocationOnMock invocation) throws Throwable {
                 if (invocation.getArguments()[0] == null) throw new EmptyRequiredValueException();
@@ -106,7 +106,7 @@ public class AdminControllerTest {
                 return userList;
             }
         });
-        when(userManager.getUserByUsername(any())).thenAnswer(new Answer<UserDTO>() {
+        when(userManager.getUserByUsername(anyString())).thenAnswer(new Answer<UserDTO>() {
             @Override
             public UserDTO answer(InvocationOnMock invocation) throws Throwable {
                 String argument = (String) invocation.getArguments()[0];
@@ -121,7 +121,7 @@ public class AdminControllerTest {
                 }
             }
         });
-        when(userManager.addUser(any(), any(), any(), anyBoolean(), any())).thenAnswer(new Answer<UserDTO>() {
+        when(userManager.addUser(anyString(), anyString(), anyString(), anyBoolean(), anyString())).thenAnswer(new Answer<UserDTO>() {
             @Override
             public UserDTO answer(InvocationOnMock invocation) throws Throwable {
                 String name = (String) invocation.getArguments()[0];
@@ -142,7 +142,7 @@ public class AdminControllerTest {
                 return user;
             }
         });
-        when(userManager.getUserById(any())).thenAnswer(new Answer<UserDTO>() {
+        when(userManager.getUserById(anyString())).thenAnswer(new Answer<UserDTO>() {
             @Override
             public UserDTO answer(InvocationOnMock invocation) throws Throwable {
                 String id = (String)invocation.getArguments()[0];
@@ -160,7 +160,7 @@ public class AdminControllerTest {
                 return DTOMockUtils.generateProjectList(PROJECT_QUANTITY);
             }
         });
-        when(projectManager.getProjectById(any())).thenAnswer(new Answer<ProjectDTO>() {
+        when(projectManager.getProjectById(anyString())).thenAnswer(new Answer<ProjectDTO>() {
             @Override
             public ProjectDTO answer(InvocationOnMock invocation) throws Throwable {
                 String id = (String)invocation.getArguments()[0];
@@ -170,7 +170,7 @@ public class AdminControllerTest {
                 return projectDTO;
             }
         });
-        when(projectManager.addOrUpdateProject(any(), any(), any())).thenAnswer(new Answer<ProjectDTO>() {
+        when(projectManager.addOrUpdateProject(anyString(), anyString(), anyString())).thenAnswer(new Answer<ProjectDTO>() {
             @Override
             public ProjectDTO answer(InvocationOnMock invocation) throws Throwable {
                 ProjectDTO project = DTOMockUtils.generateProject();
@@ -191,7 +191,7 @@ public class AdminControllerTest {
                 return DTOMockUtils.generateTasksList(TASK_QUANTITY);
             }
         });
-        when(taskManager.getTasksWithinProject(any())).thenAnswer(new Answer<ArrayList<TaskDTO>>() {
+        when(taskManager.getTasksWithinProject(anyString())).thenAnswer(new Answer<ArrayList<TaskDTO>>() {
             @Override
             public ArrayList<TaskDTO> answer(InvocationOnMock invocation) throws Throwable {
                 String id = (String) invocation.getArguments()[0];
@@ -204,7 +204,7 @@ public class AdminControllerTest {
                 return taskList;
             }
         });
-        when(taskManager.getTaskById(any())).thenAnswer(new Answer<TaskDTO>() {
+        when(taskManager.getTaskById(anyString())).thenAnswer(new Answer<TaskDTO>() {
             @Override
             public TaskDTO answer(InvocationOnMock invocation) throws Throwable {
                 String id = (String)invocation.getArguments()[0];
@@ -214,7 +214,7 @@ public class AdminControllerTest {
                 return taskDTO;
             }
         });
-        when(taskManager.userTasksMap(any())).thenAnswer(new Answer<HashMap<String, ArrayList<TaskDTO>>>() {
+        when(taskManager.userTasksMap(anyString())).thenAnswer(new Answer<HashMap<String, ArrayList<TaskDTO>>>() {
             @Override
             public HashMap<String, ArrayList<TaskDTO>> answer(InvocationOnMock invocation) throws Throwable {
                 String userId = (String)invocation.getArguments()[0];
