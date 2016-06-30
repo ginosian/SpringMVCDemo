@@ -26,6 +26,7 @@
                 <input type="email" id="username" name="username" style="font-size:20px; width:25%; resize: none; background-color: #feffbb" required="required"/><br />
                 <br>Password:<br />
                 <input type="password" id="password" name="password" style="font-size:20px; width:25%; resize: none; background-color: #feffbb"  required="required"/></p>
+                <label><input type="checkbox" name="remember-me"> Remember Me</label>
             </td>
         </tr>
         <tr>

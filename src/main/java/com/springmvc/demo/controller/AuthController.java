@@ -2,11 +2,13 @@ package com.springmvc.demo.controller;
 
 import com.springmvc.demo.services.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.core.env.Environment;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -19,9 +21,17 @@ public class AuthController {
     @Autowired
     UserManager userManager;
 
+    @Autowired
+    Environment environment;
+
     @RequestMapping(value = "")
-    public ModelAndView root(){
+    public ModelAndView root(Authentication authentication){
        userManager.initDefaults();
+        if (authentication != null) {
+            if (authentication.getAuthorities().iterator().next().toString().equals("ROLE_" + environment.getProperty("role_admin")))
+                return new ModelAndView("redirect:/admin");
+            else return new ModelAndView("redirect:/common");
+        }
        return new ModelAndView("redirect:/login");
     }
 
@@ -31,8 +41,8 @@ public class AuthController {
     }
 
     @RequestMapping(value = "/logout")
-    public ModelAndView logout(HttpServletRequest request){
-        new SecurityContextLogoutHandler().logout(request, null, null);
+    public ModelAndView logout(HttpServletRequest request) throws ServletException {
+        request.logout();
         return new ModelAndView("redirect:/login");
     }
 

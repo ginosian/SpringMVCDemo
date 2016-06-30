@@ -181,13 +181,15 @@ public class AdminController {
      * <p>Model object under {@link #REDIRECT_MODIFY_TO} key - URL path for the page from where {@link #createUser} resource was called</p>
      */
     @RequestMapping(value = "/create_user", method = RequestMethod.GET)
-    public ModelAndView createUser(@ModelAttribute(HOME) String home){
+    public ModelAndView createUser(@ModelAttribute(HOME) String home,
+                                   @ModelAttribute ("error") String error){
         if (home.isEmpty()) throw new EmptyRequiredValueException();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject(ROLES, userManager.allRoles());
         modelAndView.addObject(HOME, home);
         modelAndView.addObject(MODIFY, "register");
         modelAndView.addObject(REDIRECT_MODIFY_TO, "");
+        modelAndView.addObject("error", error);
         modelAndView.setViewName(CREATE_USER);
         return modelAndView;
     }
@@ -214,6 +216,7 @@ public class AdminController {
         if (home.isEmpty()) throw new EmptyRequiredValueException();
         ModelAndView modelAndView = new ModelAndView();
         if(userManager.getUserByUsername(username) != null){
+            modelAndView.addObject("error", "User already exists!");
             modelAndView.setViewName("redirect:/" + home + "/create_user");
             return modelAndView;
         }

@@ -20,6 +20,7 @@ public class Initializer implements WebApplicationInitializer { //AbstractAnnota
         ctx.register(WebContextConfiguration.class);
 
         servletContext.addListener(new ContextLoaderListener(ctx));
+        servletContext.addListener(new SessionListener());
 
         ctx.setServletContext(servletContext);
 

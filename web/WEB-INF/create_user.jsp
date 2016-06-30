@@ -79,6 +79,13 @@
         <br><input style="width:25%; font-size:24px; position:relative; white-space:normal" type="submit" value="Create" /></br>
       </td>
     </tr>
+    <tr>
+      <td>
+        <div>
+          <p style="color: #c51202">${error}</p>
+        </div>
+      </td>
+    </tr>
     </tbody>
   </table>
 
