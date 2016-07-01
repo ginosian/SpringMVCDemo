@@ -25,18 +25,18 @@ public class AuthController {
     Environment environment;
 
     @RequestMapping(value = "")
-    public ModelAndView root(Authentication authentication){
+    public ModelAndView root(){
        userManager.initDefaults();
+       return new ModelAndView("redirect:/login");
+    }
+
+    @RequestMapping(value = "/login")
+    public ModelAndView login(Authentication authentication){
         if (authentication != null) {
             if (authentication.getAuthorities().iterator().next().toString().equals("ROLE_" + environment.getProperty("role_admin")))
                 return new ModelAndView("redirect:/admin");
             else return new ModelAndView("redirect:/common");
         }
-       return new ModelAndView("redirect:/login");
-    }
-
-    @RequestMapping(value = "/login")
-    public ModelAndView login(){
         return new ModelAndView("login_page");
     }
 

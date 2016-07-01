@@ -9,6 +9,7 @@ import java.util.Collection;
  * Created by Martha on 6/14/2016.
  */
 public interface UserDAO {
+    void createRememberMeTable();
     UserDTO getUserById(Long id);
     UserDTO addUser(UserDTO userDTO);
     UserDTO getUserByUsername(String login);

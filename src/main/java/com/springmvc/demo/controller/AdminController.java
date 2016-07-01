@@ -30,7 +30,7 @@ import java.util.HashMap;
  * resource. This controller provides all the administrator functionality.</p>
  * <p>Resources</p>
  * <p>{@link #adminHome()}</p>
- * <p>{@link #createUser(String)}</p>
+ * <p>{@link #createUser(String, String)}</p>
  * <p>{@link #register(String, String, String, String, String)}</p>
  * <p>{@link #userDetail(String, String)}</p>
  * <p>{@link #createProject(String)}</p>
@@ -213,8 +213,13 @@ public class AdminController {
                                  @ModelAttribute(PASSWORD) String password,
                                  @ModelAttribute(ROLE) String role,
                                  @ModelAttribute(HOME) String home){
-        if (home.isEmpty()) throw new EmptyRequiredValueException();
         ModelAndView modelAndView = new ModelAndView();
+        if(username.isEmpty() || name.isEmpty() || password.isEmpty() || role.isEmpty()){
+            modelAndView.addObject("error", "Please fill all fields!");
+            modelAndView.setViewName("redirect:/" + home + "/create_user");
+            return modelAndView;
+        }
+        if (home.isEmpty()) throw new EmptyRequiredValueException();
         if(userManager.getUserByUsername(username) != null){
             modelAndView.addObject("error", "User already exists!");
             modelAndView.setViewName("redirect:/" + home + "/create_user");

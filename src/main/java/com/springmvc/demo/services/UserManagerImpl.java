@@ -32,9 +32,15 @@ public class UserManagerImpl implements UserManager {
     @Autowired
     Environment environment;
 
+    private static boolean defaultAreSet = false;
 
     @Override
     public void initDefaults() {
+        // This flag avoids multiple redundant db queries.
+        if(defaultAreSet) return;
+
+        userDAO.createRememberMeTable();
+
         //Get all parameters from .property file
         String admin_username = environment.getProperty("admin_username");
         String admin_pass = environment.getProperty("admin_pass");
@@ -66,6 +72,7 @@ public class UserManagerImpl implements UserManager {
             admin = new UserDTO(admin_username, admin_pass, admin_name, true, roles);
             userDAO.addUser(admin);
         }
+        defaultAreSet = true;
     }
 
     @Override

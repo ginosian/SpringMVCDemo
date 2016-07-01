@@ -4,53 +4,20 @@
     <bookmark url="jar://$USER_HOME$/.ideaLibSources/spring-web-4.2.6.RELEASE-sources.jar!/org/springframework/web/method/support/InvocableHandlerMethod.java" description="return getBridgedMethod().invoke(getBean(), args);" line="220" />
     <bookmark url="jar://$USER_HOME$/.ideaLibSources/spring-web-4.2.6.RELEASE-sources.jar!/org/springframework/web/method/support/InvocableHandlerMethod.java" description="Object returnValue = doInvoke(args);" line="135" />
     <bookmark url="jar://$USER_HOME$/.ideaLibSources/spring-web-4.2.6.RELEASE-sources.jar!/org/springframework/web/method/support/InvocableHandlerMethod.java" description="return returnValue;" line="139" />
-    <bookmark url="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(value = &quot;/task_detail&quot;, method = R..." line="437" />
-    <bookmark url="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(value = &quot;/project_detail&quot;, method ..." line="317" />
-    <bookmark url="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(value = &quot;/modify_project&quot;, method ..." line="353" />
-    <bookmark url="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(value = &quot;/modify_task&quot;, method = R..." line="472" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(value = &quot;/task_detail&quot;, method = R..." line="442" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(value = &quot;/project_detail&quot;, method ..." line="322" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(value = &quot;/modify_project&quot;, method ..." line="358" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AdminController.java" description="@RequestMapping(value = &quot;/modify_task&quot;, method = R..." line="477" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1bc91d41-583c-4e30-bc4d-ed1ee259611f" name="Default" comment="Corre">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/com/springmvc/demo/manager/ConnectionTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/com/springmvc/demo/manager/TestPoolableConnection.java" />
-      <change type="DELETED" beforePath="E:\SFL\SpringMVCDemo\.idea\libraries\Maven__org_apache_commons_commons_dbcp2_2_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\SFL\SpringMVCDemo\.idea\libraries\Maven__org_apache_commons_commons_pool2_2_4_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\SFL\SpringMVCDemo\src\main\resources\login_page.jsp" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMvcDemo/WEB-INF/classes/com/springmvc/demo/dao/ProjectDAOImpl.class" afterPath="$PROJECT_DIR$/target/SpringMvcDemo/WEB-INF/classes/com/springmvc/demo/dao/ProjectDAOImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/springmvc/demo/dao/ProjectDAOImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/springmvc/demo/dao/ProjectDAOImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMvcDemo/WEB-INF/classes/com/springmvc/demo/dao/RoleDAOImpl.class" afterPath="$PROJECT_DIR$/target/SpringMvcDemo/WEB-INF/classes/com/springmvc/demo/dao/RoleDAOImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/springmvc/demo/dao/RoleDAOImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/springmvc/demo/dao/RoleDAOImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMvcDemo/WEB-INF/classes/com/springmvc/demo/dao/TaskDAOImpl.class" afterPath="$PROJECT_DIR$/target/SpringMvcDemo/WEB-INF/classes/com/springmvc/demo/dao/TaskDAOImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/springmvc/demo/dao/TaskDAOImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/springmvc/demo/dao/TaskDAOImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMvcDemo/WEB-INF/classes/com/springmvc/demo/dao/UserDAOImpl.class" afterPath="$PROJECT_DIR$/target/SpringMvcDemo/WEB-INF/classes/com/springmvc/demo/dao/UserDAOImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/springmvc/demo/dao/UserDAOImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/springmvc/demo/dao/UserDAOImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMvcDemo/WEB-INF/classes/com/springmvc/demo/configuration/WebContextConfiguration.class" afterPath="$PROJECT_DIR$/target/SpringMvcDemo/WEB-INF/classes/com/springmvc/demo/configuration/WebContextConfiguration.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/springmvc/demo/configuration/WebContextConfiguration.class" afterPath="$PROJECT_DIR$/target/classes/com/springmvc/demo/configuration/WebContextConfiguration.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/ProjectDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/ProjectDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/RoleDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/RoleDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SpringMVCDemo.iml" afterPath="$PROJECT_DIR$/SpringMVCDemo.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/SpringMVCDemo_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/SpringMVCDemo_war_exploded.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/TaskDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/TaskDAOImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AdminController.java" afterPath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AdminController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AuthController.java" afterPath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AuthController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/CommonController.java" afterPath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/CommonController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/UserDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/UserDAO.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/UserDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/UserDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/configuration/WebContextConfiguration.java" afterPath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/configuration/WebContextConfiguration.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/config.properties" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/SpringMvcDemo/WEB-INF/classes/config.properties" afterPath="$PROJECT_DIR$/target/SpringMvcDemo/WEB-INF/classes/config.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/config.properties" afterPath="$PROJECT_DIR$/target/classes/config.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="E:\SFL\SpringMVCDemo\web\WEB-INF\admin_page.jsp" afterPath="$PROJECT_DIR$/webapp/WEB-INF/admin_page.jsp" />
-      <change type="MOVED" beforePath="E:\SFL\SpringMVCDemo\web\WEB-INF\common_user_detail.jsp" afterPath="$PROJECT_DIR$/webapp/WEB-INF/common_user_detail.jsp" />
-      <change type="MOVED" beforePath="E:\SFL\SpringMVCDemo\web\WEB-INF\create_project.jsp" afterPath="$PROJECT_DIR$/webapp/WEB-INF/create_project.jsp" />
-      <change type="MOVED" beforePath="E:\SFL\SpringMVCDemo\web\WEB-INF\create_task.jsp" afterPath="$PROJECT_DIR$/webapp/WEB-INF/create_task.jsp" />
-      <change type="MOVED" beforePath="E:\SFL\SpringMVCDemo\web\WEB-INF\create_task_from_project.jsp" afterPath="$PROJECT_DIR$/webapp/WEB-INF/create_task_from_project.jsp" />
-      <change type="MOVED" beforePath="E:\SFL\SpringMVCDemo\web\WEB-INF\create_user.jsp" afterPath="$PROJECT_DIR$/webapp/WEB-INF/create_user.jsp" />
-      <change type="MOVED" beforePath="E:\SFL\SpringMVCDemo\web\WEB-INF\index.jsp" afterPath="$PROJECT_DIR$/webapp/WEB-INF/index.jsp" />
-      <change type="MOVED" beforePath="E:\SFL\SpringMVCDemo\web\WEB-INF\login_page.jsp" afterPath="$PROJECT_DIR$/webapp/WEB-INF/login_page.jsp" />
-      <change type="MOVED" beforePath="E:\SFL\SpringMVCDemo\web\WEB-INF\project_detail.jsp" afterPath="$PROJECT_DIR$/webapp/WEB-INF/project_detail.jsp" />
-      <change type="MOVED" beforePath="E:\SFL\SpringMVCDemo\web\WEB-INF\task_detail.jsp" afterPath="$PROJECT_DIR$/webapp/WEB-INF/task_detail.jsp" />
-      <change type="MOVED" beforePath="E:\SFL\SpringMVCDemo\web\WEB-INF\user_detail.jsp" afterPath="$PROJECT_DIR$/webapp/WEB-INF/user_detail.jsp" />
-      <change type="MOVED" beforePath="E:\SFL\SpringMVCDemo\web\resources\image\auth_banner.png" afterPath="$PROJECT_DIR$/webapp/resources/image/auth_banner.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/services/UserManagerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/springmvc/demo/services/UserManagerImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp/WEB-INF/create_project.jsp" afterPath="$PROJECT_DIR$/webapp/WEB-INF/create_project.jsp" />
     </list>
     <ignored path="SpringMVCDemo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -90,36 +57,9 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AdminController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="191" column="47" selection-start-line="191" selection-start-column="47" selection-end-line="191" selection-end-column="47" />
+              <caret line="211" column="67" selection-start-line="211" selection-start-column="67" selection-end-line="211" selection-end-column="67" />
               <folding>
                 <element signature="n#!!doc;n#projectManager#0;n#AdminController#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WebContextConfiguration.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/configuration/WebContextConfiguration.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6016529">
-              <caret line="76" column="26" selection-start-line="76" selection-start-column="26" selection-end-line="76" selection-end-column="26" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#5981#5982#0" expanded="true" />
-                <element signature="e#6016#6017#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestPoolableConnection.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/com/springmvc/demo/manager/TestPoolableConnection.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-              <folding>
-                <element signature="e#718#719#0" expanded="true" />
-                <element signature="e#784#785#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -129,50 +69,80 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AuthController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="34" column="50" selection-start-line="34" selection-start-column="50" selection-end-line="34" selection-end-column="50" />
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+      <file leaf-file-name="UserDAO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/UserDAO.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="146" column="0" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
+              <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/target/classes/config.properties">
+      <file leaf-file-name="UserDAOImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/UserDAOImpl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="24" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/config.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConnectionTest2.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/com/springmvc/demo/manager/ConnectionTest2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+              <caret line="41" column="5" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <marker date="1467375579838" expanded="true" signature="819:1110" placeholder="CREATE TABLE..persistent_logins..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/services/UserManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserManagerImpl.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/services/UserManagerImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.9558011">
+              <caret line="42" column="8" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="create_user.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/create_user.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.9">
+              <caret line="65" column="107" selection-start-line="65" selection-start-column="88" selection-end-line="65" selection-end-column="107" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="create_project.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/create_project.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.633333">
+              <caret line="77" column="38" selection-start-line="77" selection-start-column="38" selection-end-line="77" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login_page.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/login_page.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.266667">
+              <caret line="38" column="52" selection-start-line="38" selection-start-column="52" selection-end-line="38" selection-end-column="52" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -214,11 +184,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/springmvc/demo/services/ProjectManagerImpl.java" />
-        <option value="$PROJECT_DIR$/test/com/springmvc/demo/utils/DTOMockUtils.java" />
-        <option value="$PROJECT_DIR$/src/com/springmvc/demo/dto/TaskDTO.java" />
-        <option value="$PROJECT_DIR$/src/com/springmvc/demo/dao/TaskDAO.java" />
-        <option value="$PROJECT_DIR$/src/com/springmvc/demo/services/TaskManager.java" />
         <option value="$PROJECT_DIR$/src/com/springmvc/demo/dao/RoleDAO.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/create_task.jsp" />
         <option value="$PROJECT_DIR$/web/WEB-INF/create_project.jsp" />
@@ -249,22 +214,27 @@
         <option value="$PROJECT_DIR$/src/main/java/com/springmvc/demo/configuration/Initializer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/springmvc/demo/configuration/SecurityConfiguration.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/login_page.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AuthController.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/create_user.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AdminController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/springmvc/demo/configuration/SessionListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/springmvc/demo/configuration/DBCPConnectionProvider.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/springmvc/demo/configuration/DataSource.java" />
         <option value="$PROJECT_DIR$/src/main/resources/config.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/ProjectDAOImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/RoleDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/UserDAOImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/TaskDAOImpl.java" />
         <option value="$PROJECT_DIR$/test/com/springmvc/demo/manager/ConnectionTest2.java" />
         <option value="$PROJECT_DIR$/test/com/springmvc/demo/manager/ConnectionTest.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/test/com/springmvc/demo/manager/TestPoolableConnection.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/springmvc/demo/configuration/WebContextConfiguration.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/CommonController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AdminController.java" />
+        <option value="$PROJECT_DIR$/webapp/WEB-INF/create_project.jsp" />
+        <option value="$PROJECT_DIR$/webapp/WEB-INF/create_user.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AuthController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/UserDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/UserDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/springmvc/demo/services/UserManagerImpl.java" />
       </list>
     </option>
   </component>
@@ -360,6 +330,32 @@
               <option name="myItemId" value="webapp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SpringMVCDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SpringMVCDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="image" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -452,6 +448,134 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SpringMVCDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SpringMVCDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SpringMVCDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SpringMVCDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dao" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SpringMVCDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SpringMVCDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SpringMVCDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SpringMVCDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="configuration" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1019,7 +1143,7 @@
       <workItem from="1467024720247" duration="72926000" />
       <workItem from="1467186317482" duration="50388000" />
       <workItem from="1467271226113" duration="12775000" />
-      <workItem from="1467303843825" duration="25657000" />
+      <workItem from="1467303843825" duration="30467000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit.&#10;Configures project.&#10;Some functionality pre-test implementation.">
       <created>1466173998226</created>
@@ -1079,7 +1203,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="560310000" />
+    <option name="totallyTimeSpent" value="565120000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1091,7 +1215,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1103,12 +1227,12 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328594" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6698262" sideWeight="0.4969743" order="2" side_tool="false" content_ui="tabs" x="22" y="152" width="1322" height="424" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6698262" sideWeight="0.4969743" order="2" side_tool="false" content_ui="tabs" x="22" y="152" width="1322" height="424" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328594" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328594" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22671756" sideWeight="0.51026857" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15658094" sideWeight="0.48973143" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27836612" sideWeight="0.48973143" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18381241" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1205,13 +1329,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AdminController.java</url>
-          <line>489</line>
+          <line>494</line>
           <properties />
           <option name="timeStamp" value="218" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AdminController.java</url>
-          <line>250</line>
+          <line>255</line>
           <properties />
           <option name="timeStamp" value="219" />
         </line-breakpoint>
@@ -1248,13 +1372,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/services/CustomUserDetailService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="9" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/configuration/SecuritySuccessHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1277,13 +1394,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/services/UserManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
         </state>
       </provider>
     </entry>
@@ -1322,24 +1432,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="4.4666667">
           <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/CommonController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="185" column="73" selection-start-line="185" selection-start-column="73" selection-end-line="185" selection-end-column="73" />
-          <folding>
-            <element signature="n#!!doc;n#projectManager#0;n#CommonController#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/services/UserManagerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="43" selection-start-line="47" selection-start-column="43" selection-end-line="47" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -1427,22 +1519,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/login_page.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="12" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/create_user.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-37.1">
-          <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/configuration/SecurityConfiguration.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1463,22 +1539,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="81" column="5" selection-start-line="80" selection-start-column="20" selection-end-line="81" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/UserDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="103" column="39" selection-start-line="103" selection-start-column="39" selection-end-line="103" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/UserDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1546,14 +1606,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AuthController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="50" selection-start-line="34" selection-start-column="50" selection-end-line="34" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/commons-pool/commons-pool/1.4/commons-pool-1.4.jar!/org/apache/commons/pool/ObjectPool.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.6666665">
@@ -1591,16 +1643,6 @@
         <state vertical-scroll-proportion="0.34775087">
           <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AdminController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="191" column="47" selection-start-line="191" selection-start-column="47" selection-end-line="191" selection-end-column="47" />
-          <folding>
-            <element signature="n#!!doc;n#projectManager#0;n#AdminController#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1659,13 +1701,99 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/configuration/WebContextConfiguration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6016529">
-          <caret line="76" column="26" selection-start-line="76" selection-start-column="26" selection-end-line="76" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="81" column="72" selection-start-line="81" selection-start-column="72" selection-end-line="81" selection-end-column="72" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#5981#5982#0" expanded="true" />
             <element signature="e#6016#6017#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/CommonController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="50" selection-start-line="27" selection-start-column="50" selection-end-line="27" selection-end-column="50" />
+          <folding>
+            <element signature="n#!!doc;n#projectManager#0;n#CommonController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/login_page.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.266667">
+          <caret line="38" column="52" selection-start-line="38" selection-start-column="52" selection-end-line="38" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/create_project.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.633333">
+          <caret line="77" column="38" selection-start-line="77" selection-start-column="38" selection-end-line="77" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/WEB-INF/create_user.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.9">
+          <caret line="65" column="107" selection-start-line="65" selection-start-column="88" selection-end-line="65" selection-end-column="107" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AdminController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="211" column="67" selection-start-line="211" selection-start-column="67" selection-end-line="211" selection-end-column="67" />
+          <folding>
+            <element signature="n#!!doc;n#projectManager#0;n#AdminController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/controller/AuthController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/UserDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/dao/UserDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="5" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
+          <folding>
+            <marker date="1467375579838" expanded="true" signature="819:1110" placeholder="CREATE TABLE..persistent_logins..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/services/UserManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/springmvc/demo/services/UserManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9558011">
+          <caret line="42" column="8" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>

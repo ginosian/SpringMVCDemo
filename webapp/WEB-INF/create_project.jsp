@@ -74,6 +74,11 @@
                     <textarea name="project_description" rows="5" style="width:70%; font-size:24px; resize: none" required="required"></textarea></td>
                 </tr>
                 <tr>
+                    <td>
+                        <p style="color: #c51202">${error}</p>
+                    </td>
+                </tr>
+                <tr>
                     <td style="text-align: center;">
                         <input style="width:25%; font-size:24px; position:relative; white-space:normal" type="submit" value="SUBMIT" /></td>
                 </tr>

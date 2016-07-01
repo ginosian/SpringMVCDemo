@@ -26,6 +26,22 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public void createRememberMeTable() {
+        String remTableQuery = "CREATE TABLE IF NOT EXISTS persistent_logins ( " +
+                "username VARCHAR(64) NOT NULL, " +
+                "series VARCHAR(64) NOT NULL, " +
+                "token VARCHAR(64) NOT NULL, " +
+                "last_used TIMESTAMP NOT NULL, " +
+                "PRIMARY KEY (series))";
+        Session session =openSession();
+        try {
+            session.createSQLQuery(remTableQuery).executeUpdate();
+        } catch (HibernateException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public UserDTO getUserById(Long id) {
         Session session = openSession();
 //        Transaction transaction = null;
