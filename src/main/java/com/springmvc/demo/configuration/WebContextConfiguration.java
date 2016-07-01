@@ -1,6 +1,7 @@
 package com.springmvc.demo.configuration;
 
-import org.apache.commons.dbcp2.BasicDataSource;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.mysql.jdbc.Connection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
 import java.util.Properties;
 
 /**
@@ -43,12 +45,35 @@ public class WebContextConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean
     public DataSource dataSource() {
-        BasicDataSource dataSource = new BasicDataSource();
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(env.getProperty("database_driver"));
-        dataSource.setUrl(env.getProperty("database_url"));
-        dataSource.setUsername(env.getProperty("database_username"));
+        /**  Apache's DBCP's BasicDataSource connection pool bean */
+//        BasicDataSource dataSource = new BasicDataSource();
+////        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName(env.getProperty("database_driver"));
+//        dataSource.setUrl(env.getProperty("database_url"));
+//        dataSource.setUsername(env.getProperty("database_username"));
+//        dataSource.setPassword(env.getProperty("database_password"));
+//        return dataSource;
+//
+//        GenericObjectPool connectionPool = new GenericObjectPool(null);
+//        ConnectionFactory connectionFactory = new DriverManagerConnectionFactory(env.getProperty("database_url"), env.getProperty("database_username"), env.getProperty("database_password"));
+//        PoolableConnectionFactory poolableConnectionFactory = new PoolableConnectionFactory(connectionFactory,connectionPool,null,null,false,true);
+////        connectionPool.setFactory(poolableConnectionFactory);
+//        PoolingDataSource dataSource = new PoolingDataSource(connectionPool);
+//        return dataSource;
+
+
+        /** C3P0's ComboPooledDataSource connection pool bean */
+        ComboPooledDataSource dataSource = new ComboPooledDataSource();
+        try {
+            dataSource.setDriverClass(env.getProperty("database_driver")); //loads the jdbc driver
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        }
+        dataSource.setJdbcUrl(env.getProperty("database_url"));
+        dataSource.setUser(env.getProperty("database_username"));
         dataSource.setPassword(env.getProperty("database_password"));
+//        dataSource.setTestConnectionOnCheckin(true);
+//        dataSource.setTestConnectionOnCheckout(true);
         return dataSource;
     }
 
@@ -64,8 +89,22 @@ public class WebContextConfiguration extends WebMvcConfigurerAdapter {
     private Properties hibProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-        properties.put("hibernate.show_sql", "true");
+        //log settings
         properties.put("hibernate.hbm2ddl.auto", "update");
+        properties.put("hibernate.show_sql", "true");
+
+//        //driver settings
+//        properties.put("hibernate.connection.driver_class", env.getProperty("database_driver"));
+//        properties.put("hibernate.connection.url", env.getProperty("database_url"));
+//        properties.put("hibernate.connection.username", env.getProperty("database_username"));
+//        properties.put("hibernate.connection.password", env.getProperty("database_password"));
+
+        //c3p0 settings
+        properties.put("hibernate.c3p0.min_size", 1);
+        properties.put("hibernate.c3p0.max_size", 5);
+        properties.put("hibernate.c3p0.acquire_increment", 3); // will try to acquire when the pool is exhausted
+//        //isolation level
+        properties.setProperty("hibernate.connection.isolation", String.valueOf(Connection.TRANSACTION_SERIALIZABLE));
         return properties;
     }
 

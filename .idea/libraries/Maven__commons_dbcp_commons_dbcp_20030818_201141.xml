@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: commons-dbcp:commons-dbcp:20030818.201141">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/commons-dbcp/commons-dbcp/20030818.201141/commons-dbcp-20030818.201141.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/commons-dbcp/commons-dbcp/20030818.201141/commons-dbcp-20030818.201141-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/commons-dbcp/commons-dbcp/20030818.201141/commons-dbcp-20030818.201141-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

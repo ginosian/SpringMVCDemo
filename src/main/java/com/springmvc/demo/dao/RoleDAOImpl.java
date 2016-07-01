@@ -20,23 +20,24 @@ public class RoleDAOImpl implements RoleDAO {
     SessionFactory sessionFactory;
 
     private Session openSession() {
-        return sessionFactory.openSession();
+//        return sessionFactory.openSession();
+        return sessionFactory.getCurrentSession();
     }
 
     @Override
     public Collection<RoleDTO> allRoles() {
         Session session = openSession();
-        Transaction transaction = null;
+//        Transaction transaction = null;
         try{
-            transaction = session.beginTransaction();
+//            transaction = session.beginTransaction();
             List<RoleDTO> roleDTOs = session.createQuery("from RoleDTO").list();
-            transaction.commit();
+//            transaction.commit();
             return roleDTOs;
         }catch (HibernateException e) {
-            if (transaction!=null) transaction.rollback();
+//            if (transaction!=null) transaction.rollback();
             e.printStackTrace();
         }finally {
-            session.close();
+//            session.close();
         }
         return null;
     }
@@ -44,38 +45,38 @@ public class RoleDAOImpl implements RoleDAO {
     @Override
     public RoleDTO addRole(RoleDTO roleDTO) {
         Session session = openSession();
-        Transaction transaction = null;
+//        Transaction transaction = null;
         try {
-            transaction = session.beginTransaction();
+//            transaction = session.beginTransaction();
                  session.save(roleDTO);
-            transaction.commit();
+//            transaction.commit();
             return roleDTO;
         } catch (HibernateException e){
-            if (transaction != null) transaction.rollback();
+//            if (transaction != null) transaction.rollback();
             e.printStackTrace();
         } finally {
-            session.close();
+//            session.close();
         }
         return null;
     }
     @Override
     public RoleDTO getRole(RoleDTO roleDTO) {
         Session session = openSession();
-        Transaction transaction = null;
+//        Transaction transaction = null;
         try{
-            transaction = session.beginTransaction();
+//            transaction = session.beginTransaction();
             Query query = openSession().createQuery("from RoleDTO role where role.role = :role");
             String role = roleDTO.getRole();
             query.setParameter("role", role);
             List<RoleDTO> roleDTOs = query.list();
-            transaction.commit();
+//            transaction.commit();
             if(roleDTOs.size() == 0) return null;
             return roleDTOs.get(0);
         }catch (HibernateException e) {
-            if (transaction!=null) transaction.rollback();
+//            if (transaction!=null) transaction.rollback();
             e.printStackTrace();
         }finally {
-            session.close();
+//            session.close();
         }
         return null;
     }

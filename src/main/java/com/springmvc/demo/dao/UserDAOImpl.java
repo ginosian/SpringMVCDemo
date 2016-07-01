@@ -21,27 +21,28 @@ public class UserDAOImpl implements UserDAO {
    SessionFactory sessionFactory;
 
     private Session openSession() {
-        return sessionFactory.openSession();
+//        return sessionFactory.openSession();
+        return sessionFactory.getCurrentSession();
     }
 
     @Override
     public UserDTO getUserById(Long id) {
         Session session = openSession();
-        Transaction transaction = null;
+//        Transaction transaction = null;
         try{
-            transaction = session.beginTransaction();
+//            transaction = session.beginTransaction();
             Query query = session.createQuery("from UserDTO user where user.id = :id");
             query.setParameter("id", id);
             List<UserDTO> userDTOList = query.list();
 //            Hibernate.initialize(userDTOList);              // If fetch type changes to LAZY this should be uncommented
-            transaction.commit();
+//            transaction.commit();
             if (userDTOList.size() == 0)throw new NoSuchUserException();
             return userDTOList.get(0);
         }catch (HibernateException e) {
-            if (transaction!=null) transaction.rollback();
+//            if (transaction!=null) transaction.rollback();
             e.printStackTrace();
         }finally {
-            session.close();
+//            session.close();
         }
         return null;
     }
@@ -49,17 +50,17 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public UserDTO addUser(UserDTO userDTO) {
         Session session = openSession();
-        Transaction transaction = null;
+//        Transaction transaction = null;
         try{
-            transaction = session.beginTransaction();
+//            transaction = session.beginTransaction();
             session.save(userDTO);
-            transaction.commit();
+//            transaction.commit();
             return userDTO;
         }catch (HibernateException e) {
-            if (transaction != null) transaction.rollback();
+//            if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }finally {
-            session.close();
+//            session.close();
         }
         return null;
     }
@@ -67,21 +68,21 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public UserDTO getUserByUsername(String username) {
         Session session = openSession();
-        Transaction transaction = null;
+//        Transaction transaction = null;
         try{
-            transaction = session.beginTransaction();
-            Query query = openSession().createQuery("from UserDTO user where user.username = :username");
+//            transaction = session.beginTransaction();
+            Query query = session.createQuery("from UserDTO user where user.username = :username");
             query.setParameter("username", username);
             List<UserDTO> userDTOList = query.list();
 //            Hibernate.initialize(userDTOList);          // If fetch type changes to LAZY this should be uncommented
-            transaction.commit();
+//            transaction.commit();
             if (userDTOList.size() == 0) return null;
             return userDTOList.get(0);
         }catch (HibernateException e) {
-            if (transaction != null) transaction.rollback();
+//            if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }finally {
-            session.close();
+//            session.close();
         }
         return null;
     }
@@ -90,21 +91,21 @@ public class UserDAOImpl implements UserDAO {
     public Collection<UserDTO> getAllUsersByRole(RoleDTO roleDTO) {
         String role = roleDTO.getRole();
         Session session = openSession();
-        Transaction transaction = null;
+//        Transaction transaction = null;
         try{
-            transaction = session.beginTransaction();
-            Query query = openSession().createQuery("select user from UserDTO user join user.userRoles user_role where user_role.role = :role");
+//            transaction = session.beginTransaction();
+            Query query = session.createQuery("select user from UserDTO user join user.userRoles user_role where user_role.role = :role");
             query.setParameter("role", role);
             List<UserDTO> userDTOList = query.list();
 //            Hibernate.initialize(userDTOList);               // If fetch type changes to LAZY this should be uncommented
-            transaction.commit();
+//            transaction.commit();
             if (userDTOList.size() == 0) return null;
             return userDTOList;
         }catch (HibernateException e) {
-            if (transaction!=null) transaction.rollback();
+//            if (transaction!=null) transaction.rollback();
             e.printStackTrace();
         }finally {
-            session.close();
+//            session.close();
         }
         return null;
     }
