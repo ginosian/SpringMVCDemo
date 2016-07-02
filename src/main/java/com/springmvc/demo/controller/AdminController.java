@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -54,6 +55,7 @@ public class AdminController {
     public static final String TASK_DETAIL_RESOURCE = "task_detail_resource";
     public static final String CREATE_TASK_RESOURCE = "create_task_resource";
     public static final String HOME = "home";
+    public static final String HOME_VALUE = "admin";
     public static final String REDIRECT_MODIFY_TO = "redirect_modify_to";
     public static final String REDIRECT_MODIFY_TASK_TO = "redirect_modify_task_to";
     public static final String BUTTON_REDIRECTION_PAGE = "button_redirection_page";
@@ -95,6 +97,9 @@ public class AdminController {
     public static final String TASK_DESCRIPTION = "task_description";
 
     public static final String MAP = "map";
+
+    // Error handling
+    public static final String ERROR = "error";
 
     // Labels
     public static final String BUTTON_LABEL = "button_label";
@@ -159,7 +164,7 @@ public class AdminController {
         modelAndView.addObject(CREATE_USER_RESOURCE, CREATE_USER);
 
         // Set home resource name.
-        modelAndView.addObject(HOME, "admin");
+        modelAndView.addObject(HOME, HOME_VALUE);
 
         // Set current view name.
         modelAndView.setViewName(ADMIN_PAGE);
@@ -171,7 +176,8 @@ public class AdminController {
     // region User
     /**
      * Provides a JSP form view for user creation.
-     * @param home Home redirection URL.
+     * @param requestBody where
+     * <p>home Home redirection URL.</p>
      * @return
      * <p>ModelAndView object with JSP view named "create_user" under {@link #CREATE_USER} key.</p>
      * <p>Model object under {@link #ROLES} key - List of existing role types in DB.</p>
@@ -181,15 +187,14 @@ public class AdminController {
      * <p>Model object under {@link #REDIRECT_MODIFY_TO} key - URL path for the page from where {@link #createUser} resource was called</p>
      */
     @RequestMapping(value = "/create_user", method = RequestMethod.GET)
-    public ModelAndView createUser(@ModelAttribute(HOME) String home,
-                                   @ModelAttribute ("error") String error){
-        if (home.isEmpty()) throw new EmptyRequiredValueException();
+    public ModelAndView createUser(HttpServletRequest requestBody){
+        String recievedError = requestBody.getParameter(ERROR);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject(ROLES, userManager.allRoles());
-        modelAndView.addObject(HOME, home);
+        modelAndView.addObject(HOME,HOME_VALUE);
         modelAndView.addObject(MODIFY, "register");
         modelAndView.addObject(REDIRECT_MODIFY_TO, "");
-        modelAndView.addObject("error", error);
+        modelAndView.addObject(ERROR, recievedError);
         modelAndView.setViewName(CREATE_USER);
         return modelAndView;
     }
@@ -199,34 +204,37 @@ public class AdminController {
      *  a call to a mid resource {@link #register} under {@link #MODIFY} key.</p>
      *  <p>{@link #register} doesn't hold view, it is only a mid resource to invoke user creation business logic holder method
      *  and redirect context to resource page under {@link #REDIRECT_MODIFY_TO} key</p>
-     *  @param username username from {@link #createUser} filled form, NotNull and mail type field. Provided by user.
-     *  @param name name of user to be displayed, NotNull field.  Provided by user.
-     *  @param password can have nay length can hold eny character.  Provided by user.
-     *  @param role to be choose from drop down list, NotNull field.  Provided by user.
-     *  @param home Home redirection URL.
+     *  @param requestBody where
+     *  <p>recievedUsername -  username from {@link #createUser} filled form, NotNull and mail type field. Provided by user.</p>
+     *  <p>recievedName -  name of user to be displayed, NotNull field.  Provided by user.</p>
+     *  <p>recievedPassword -  can have nay length can hold eny character.  Provided by user.</p>
+     *  <p>recievedRole -  to be choose from drop down list, NotNull field.  Provided by user.</p>
+     *  <p>recievedHome -  Home redirection URL.</p>
      *  @return If username exist in DB a redirection will be made back to {@link #createUser} resource else back to {@link #adminHome()} homepage.
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ExceptionHandler(RuntimeErrorMessage.class)
-    public ModelAndView register(@ModelAttribute(USERNAME)String username,
-                                 @ModelAttribute(NAME) String name,
-                                 @ModelAttribute(PASSWORD) String password,
-                                 @ModelAttribute(ROLE) String role,
-                                 @ModelAttribute(HOME) String home){
+    public ModelAndView register(HttpServletRequest requestBody){
+        String recievedUsername = requestBody.getParameter(USERNAME);
+        String recievedName = requestBody.getParameter(NAME);
+        String recievedPassword = requestBody.getParameter(PASSWORD);
+        String recievedRole = requestBody.getParameter(ROLE);
+        String recievedHome = requestBody.getParameter(HOME);
+        if (recievedHome.isEmpty()) throw new EmptyRequiredValueException();
         ModelAndView modelAndView = new ModelAndView();
-        if(username.isEmpty() || name.isEmpty() || password.isEmpty() || role.isEmpty()){
+        if(recievedUsername.isEmpty() || recievedName.isEmpty() || recievedPassword.isEmpty()
+                || recievedRole.isEmpty()){
             modelAndView.addObject("error", "Please fill all fields!");
-            modelAndView.setViewName("redirect:/" + home + "/create_user");
+            modelAndView.setViewName("redirect:/" + recievedHome + "/create_user");
             return modelAndView;
         }
-        if (home.isEmpty()) throw new EmptyRequiredValueException();
-        if(userManager.getUserByUsername(username) != null){
+        if(userManager.getUserByUsername(recievedUsername) != null){
             modelAndView.addObject("error", "User already exists!");
-            modelAndView.setViewName("redirect:/" + home + "/create_user");
+            modelAndView.setViewName("redirect:/" + recievedHome + "/create_user");
             return modelAndView;
         }
-        userManager.addUser(name, username, password, true, role);
-        modelAndView.setViewName("redirect:/" + home + "?success=true");
+        userManager.addUser(recievedName, recievedUsername, recievedPassword, true, recievedRole);
+        modelAndView.setViewName("redirect:/" + recievedHome);
         return modelAndView;
     }
 
@@ -364,6 +372,10 @@ public class AdminController {
                                       @ModelAttribute(HOME) String home){
         if (home.isEmpty()) throw new EmptyRequiredValueException();
         ModelAndView modelAndView = new ModelAndView();
+        if(projectStory.isEmpty() || project_description.isEmpty()){
+            modelAndView.setViewName("redirect:/" + home + redirect_modify_to + "?success=true");
+            modelAndView.addObject("error", "Please fill all fields!");
+        }
         projectManager.addOrUpdateProject(id, projectStory, project_description);
         modelAndView.setViewName("redirect:/" + home + redirect_modify_to + "?success=true");
         return modelAndView;

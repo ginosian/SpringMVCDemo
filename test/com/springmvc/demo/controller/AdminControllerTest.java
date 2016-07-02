@@ -301,7 +301,7 @@ public class AdminControllerTest {
                 .param(AdminController.PASSWORD, "aa")
                 .param(AdminController.ROLE, "USER")
                 .param(AdminController.HOME, "admin"));
-        resultActionsSuccess.andExpect(view().name("redirect:/admin?success=true"));
+        resultActionsSuccess.andExpect(view().name("redirect:/admin"));
 
         try {
             mockMvc.perform(MockMvcRequestBuilders.post("/admin/register"));
@@ -447,7 +447,7 @@ public class AdminControllerTest {
     @Test
     public void userDetail() throws Exception {
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/admin/user_detail")
-                                                .param(AdminController.USERID, "4")
+                                                .param(AdminController.USERIDFORUSERDT, "4")
                                                 .param(AdminController.HOME, "test_home"));
         resultActions.andExpect(view().name(AdminController.USER_DETAIL))
                 .andExpect(forwardedUrl("/WEB-INF/user_detail.jsp"))

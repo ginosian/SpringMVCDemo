@@ -78,7 +78,7 @@
           <input onclick="location.href='${root}/${home}/${create_task_resource}?redirect_modify_task_to=${redirect_modify_task_to}&home=${home}'" style="width:60%;
           position:relative; white-space:normal; background-color: #C5E1A5; font-size:24px" type="button" value="Create task"/></td>
         <td style="text-align: center; vertical-align: middle;">
-          <input onclick="location.href='${root}/${home}/${create_user_resource}?home=${home}'" style="width:60%;
+          <input onclick="location.href='${root}/${home}/${create_user_resource}'" style="width:60%;
           position:relative; white-space:normal; background-color: #BCAAA4; font-size:24px" type="button" value="Create user"/></td>
       </tr>
       <tr>
