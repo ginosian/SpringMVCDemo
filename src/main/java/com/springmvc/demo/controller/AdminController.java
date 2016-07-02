@@ -11,11 +11,11 @@ import com.springmvc.demo.services.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -183,13 +183,14 @@ public class AdminController {
      * <p>Model object under {@link #ROLES} key - List of existing role types in DB.</p>
      * <p>Model object under {@link #HOME} key - base URL path for "admin" module</p>
      * <p>Model object under {@link #MODIFY} key - universal mid- resource which is called when ""Submit" is pressed.
+     * <p>Model object under {@link #ERROR} key - Error message in case of to redirection to the same page..
      * see {@link #register}</p>
      * <p>Model object under {@link #REDIRECT_MODIFY_TO} key - URL path for the page from where {@link #createUser} resource was called</p>
      */
     @RequestMapping(value = "/create_user", method = RequestMethod.GET)
     public ModelAndView createUser(HttpServletRequest requestBody){
-        String recievedError = requestBody.getParameter(ERROR);
         ModelAndView modelAndView = new ModelAndView();
+        String recievedError = requestBody.getParameter(ERROR);
         modelAndView.addObject(ROLES, userManager.allRoles());
         modelAndView.addObject(HOME,HOME_VALUE);
         modelAndView.addObject(MODIFY, "register");
@@ -204,7 +205,7 @@ public class AdminController {
      *  a call to a mid resource {@link #register} under {@link #MODIFY} key.</p>
      *  <p>{@link #register} doesn't hold view, it is only a mid resource to invoke user creation business logic holder method
      *  and redirect context to resource page under {@link #REDIRECT_MODIFY_TO} key</p>
-     *  @param requestBody where
+     *  @param request where
      *  <p>recievedUsername -  username from {@link #createUser} filled form, NotNull and mail type field. Provided by user.</p>
      *  <p>recievedName -  name of user to be displayed, NotNull field.  Provided by user.</p>
      *  <p>recievedPassword -  can have nay length can hold eny character.  Provided by user.</p>
@@ -214,28 +215,25 @@ public class AdminController {
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ExceptionHandler(RuntimeErrorMessage.class)
-    public ModelAndView register(HttpServletRequest requestBody){
-        String recievedUsername = requestBody.getParameter(USERNAME);
-        String recievedName = requestBody.getParameter(NAME);
-        String recievedPassword = requestBody.getParameter(PASSWORD);
-        String recievedRole = requestBody.getParameter(ROLE);
-        String recievedHome = requestBody.getParameter(HOME);
+    public String register(HttpServletRequest request, RedirectAttributes redirectAttributes){
+        String recievedUsername = request.getParameter(USERNAME);
+        String recievedName = request.getParameter(NAME);
+        String recievedPassword = request.getParameter(PASSWORD);
+        String recievedRole = request.getParameter(ROLE);
+        String recievedHome = request.getParameter(HOME);
         if (recievedHome.isEmpty()) throw new EmptyRequiredValueException();
-        ModelAndView modelAndView = new ModelAndView();
         if(recievedUsername.isEmpty() || recievedName.isEmpty() || recievedPassword.isEmpty()
                 || recievedRole.isEmpty()){
-            modelAndView.addObject("error", "Please fill all fields!");
-            modelAndView.setViewName("redirect:/" + recievedHome + "/create_user");
-            return modelAndView;
+
+            redirectAttributes.addAttribute("error", "Please fill all fields!");
+            return "redirect:" + request.getHeader("Referer");
         }
-        if(userManager.getUserByUsername(recievedUsername) != null){
-            modelAndView.addObject("error", "User already exists!");
-            modelAndView.setViewName("redirect:/" + recievedHome + "/create_user");
-            return modelAndView;
+        if(userManager.getUserByUsername(recievedUsername) != null) {
+            redirectAttributes.addAttribute("error", "User already exists!");
+            return "redirect:" + request.getHeader("Referer");
         }
         userManager.addUser(recievedName, recievedUsername, recievedPassword, true, recievedRole);
-        modelAndView.setViewName("redirect:/" + recievedHome);
-        return modelAndView;
+        return "redirect:/" + recievedHome;
     }
 
     /**

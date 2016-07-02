@@ -2,6 +2,7 @@ package com.springmvc.demo.configuration;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.mysql.jdbc.Connection;
+import com.springmvc.demo.SupportingBeans.CreateUserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -122,6 +123,11 @@ public class WebContextConfiguration extends WebMvcConfigurerAdapter {
         resolver.setSuffix(".jsp");
         resolver.setViewClass(JstlView.class);
         return resolver;
+    }
+
+    @Bean
+    public CreateUserForm userFormBean() {
+        return new CreateUserForm();
     }
 
     @Override

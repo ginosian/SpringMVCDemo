@@ -51,8 +51,8 @@
     <a class="active" >Create user</a></li>
 </ul>
 
-<c:set var="root" value="${pageContext.request.contextPath}"/>
 <form:form action="${root}/${home}/${modify}" method="post">
+<c:set var="root" value="${pageContext.request.contextPath}"/>
   <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
   <input type="hidden" name="home" value="${home}"/>
   <c:set var="modify" value="${modify}"/>
@@ -63,27 +63,20 @@
     <tr>
       <td colspan="3" style="text-align: center;">
         <br>User First Name:<br/>
-        <br><input name="name" style="height:40px; width:25%; resize: none" type="text" required="required"/><br/>
+        <br><input name="name" style="height:40px; width:25%; resize: none" type="text" /><br/>
         <br>User Login:<br/>
-        <br><input name="username" style="height:40px; width:25%; resize: none" type="email" required="required"/><br/>
+        <br><input name="username" style="height:40px; width:25%; resize: none" type="email" /><br/>
         <br>Password:<br/>
-        <br><input name="password" style="height:40px; width:25%; resize: none" type="password" required="required"/><br/>
+        <br><input name="password" style="height:40px; width:25%; resize: none" type="password" /><br/>
         <br>Approve with authorization:<br/>
           <select name="role" style="height:40px; width:25%; resize: none" required="required">
             <c:forEach items="${roles}" var="role">
               <option>${role.getRole()}</option>
             </c:forEach>
           </select>
-          <p>
-              &nbsp;</p>
-        <br><input style="width:25%; font-size:24px; position:relative; white-space:normal" type="submit" value="Create" /></br>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <div>
+          <c:set var="error" value="${error}"/>
           <p style="color: #c51202">${error}</p>
-        </div>
+        <br><input style="width:25%; font-size:24px; position:relative; white-space:normal" type="submit" value="Create" /></br>
       </td>
     </tr>
     </tbody>
