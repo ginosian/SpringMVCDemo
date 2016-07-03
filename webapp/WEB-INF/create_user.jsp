@@ -41,48 +41,43 @@
     }		</style>
 </head>
 <body>
-  <c:set var="root" value="${pageContext.request.contextPath}"/>
-  <c:set var="home" value="${home}"/>
+    <ul>
+      <li>
+        <a href="${root}/${home}">Home</a></li>
+      <li>
+        <a class="active" >Create user</a></li>
+    </ul>
 
-<ul>
-  <li>
-    <a href="${root}/${home}">Home</a></li>
-  <li>
-    <a class="active" >Create user</a></li>
-</ul>
-
-<form:form action="${root}/${home}/${modify}" method="post">
-<c:set var="root" value="${pageContext.request.contextPath}"/>
-  <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
-  <input type="hidden" name="home" value="${home}"/>
-  <c:set var="modify" value="${modify}"/>
-  <c:set var="redirect_modify_to" value="${redirect_modify_to}"/>
-  <input type="hidden" name="redirect_modify_to" value="${redirect_modify_to}"/>
-  <table align="center" border="0" cellpadding="1" cellspacing="1" style="width: 100%; background-color: rgb(235, 248, 252); height: 100%">
-    <tbody>
-    <tr>
-      <td colspan="3" style="text-align: center;">
-        <br>User First Name:<br/>
-        <br><input name="name" style="height:40px; width:25%; resize: none" type="text" /><br/>
-        <br>User Login:<br/>
-        <br><input name="username" style="height:40px; width:25%; resize: none" type="email" /><br/>
-        <br>Password:<br/>
-        <br><input name="password" style="height:40px; width:25%; resize: none" type="password" /><br/>
-        <br>Approve with authorization:<br/>
-          <select name="role" style="height:40px; width:25%; resize: none" required="required">
-            <c:forEach items="${roles}" var="role">
-              <option>${role.getRole()}</option>
-            </c:forEach>
-          </select>
-          <c:set var="error" value="${error}"/>
-          <p style="color: #c51202">${error}</p>
-        <br><input style="width:25%; font-size:24px; position:relative; white-space:normal" type="submit" value="Create" /></br>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-
-
-</form:form>
+    <form:form action="${root}/${home}/${modify}" method="post">
+      <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+      <c:set var="root" value="${pageContext.request.contextPath}"/>
+      <c:set var="home" value="${home}"/>
+      <c:set var="modify" value="${modify}"/>
+      <c:set var="redirect_modify_to" value="${redirect_modify_to}"/>
+      <table align="center" style="width: 100%; background-color: rgb(235, 248, 252); height: 100%; font-size:16px;">
+        <tbody>
+        <tr>
+          <td colspan="3" style="text-align: center;">
+            <p>User First Name:</p>
+            <p><input name="name" style="height:40px; width:25%; resize: none" type="text" /></p>
+            <p>User Login:</p>
+            <p><input name="username" style="height:40px; width:25%; resize: none" type="email" /></p>
+            <p>Password:</p>
+            <p><input name="password" style="height:40px; width:25%; resize: none" type="password" /></p>
+            <p>Approve with authorization:</p>
+              <select name="role" style="height:40px; width:25%; resize: none">
+                  <option></option>
+                <c:forEach items="${roles}" var="role">
+                  <option>${role.getRole()}</option>
+                </c:forEach>
+              </select>
+              <c:set var="error" value="${error}"/>
+              <p style="color: #c51202">${error}</p><br/>
+            <p><input style="width:25%; font-size:24px; position:relative; white-space:normal" type="submit" value="Create" /></p>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </form:form>
 </body>
 </html>

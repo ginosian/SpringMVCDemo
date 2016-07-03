@@ -258,12 +258,12 @@ public class AdminControllerTest {
                 .andExpect(model().attribute(AdminController.USERS, hasSize(USER_QUANTITY)))
                 .andExpect(model().attribute(AdminController.PROJECTS, hasSize(PROJECT_QUANTITY)))
                 .andExpect(model().attribute(AdminController.TASKS, hasSize(TASK_QUANTITY)))
-                .andExpect(model().attribute(AdminController.USER_DETAIL_RESOURCE, AdminController.USER_DETAIL))
-                .andExpect(model().attribute(AdminController.CREATE_USER_RESOURCE, AdminController.CREATE_USER))
-                .andExpect(model().attribute(AdminController.PROJECT_DETAIL_RESOURCE, AdminController.PROJECT_DETAIL))
-                .andExpect(model().attribute(AdminController.CREATE_PROJECT_RESOURCE, AdminController.CREATE_PROJECT))
-                .andExpect(model().attribute(AdminController.TASK_DETAIL_RESOURCE, AdminController.TASK_DETAIL))
-                .andExpect(model().attribute(AdminController.CREATE_TASK_RESOURCE, AdminController.CREATE_TASK))
+                .andExpect(model().attribute(AdminController.USER_DETAIL_RESOURCE, AdminController.USER_DETAIL_JSP))
+                .andExpect(model().attribute(AdminController.CREATE_USER_RESOURCE, AdminController.CREATE_USER_JSP))
+                .andExpect(model().attribute(AdminController.PROJECT_DETAIL_RESOURCE, AdminController.PROJECT_DETAIL_JSP))
+                .andExpect(model().attribute(AdminController.CREATE_PROJECT_RESOURCE, AdminController.CREATE_PROJECT_JSP))
+                .andExpect(model().attribute(AdminController.TASK_DETAIL_RESOURCE, AdminController.TASK_DETAIL_JSP))
+                .andExpect(model().attribute(AdminController.CREATE_TASK_RESOURCE, AdminController.CREATE_TASK_JSP))
                 .andExpect(model().attribute(AdminController.REDIRECT_MODIFY_TASK_TO, ""))
                 .andExpect(model().attribute(AdminController.HOME, "admin"));
     }
@@ -317,7 +317,7 @@ public class AdminControllerTest {
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/admin/project_detail")
                                         .param(AdminController.PROJECTID, "1")
                                         .param(AdminController.HOME, "admin"));
-        resultActions.andExpect(view().name(AdminController.PROJECT_DETAIL))
+        resultActions.andExpect(view().name(AdminController.PROJECT_DETAIL_JSP))
                         .andExpect(forwardedUrl("/WEB-INF/project_detail.jsp"))
                         .andExpect(model().attributeExists(AdminController.PROJECT))
                         .andExpect(model().attributeExists(AdminController.PROJECT_TASKS))
@@ -330,8 +330,8 @@ public class AdminControllerTest {
                         .andExpect(model().attributeExists(AdminController.REDIRECT_MODIFY_TASK_TO))
                         .andExpect(model().attribute(AdminController.PROJECT, notNullValue()))
                         .andExpect(model().attribute(AdminController.PROJECT, hasProperty("id", is(1L))))
-                        .andExpect(model().attribute(AdminController.TASK_DETAIL_RESOURCE, AdminController.TASK_DETAIL))
-                        .andExpect(model().attribute(AdminController.CREATE_TASK_RESOURCE, AdminController.CREATE_TASK))
+                        .andExpect(model().attribute(AdminController.TASK_DETAIL_RESOURCE, AdminController.TASK_DETAIL_JSP))
+                        .andExpect(model().attribute(AdminController.CREATE_TASK_RESOURCE, AdminController.CREATE_TASK_JSP))
                         .andExpect(model().attribute(AdminController.HOME, "admin"))
                         .andExpect(model().attribute(AdminController.MODIFY, "modify_project"))
                         .andExpect(model().attribute(AdminController.REDIRECT_MODIFY_TASK_TO, "/project_detail"));
@@ -391,7 +391,7 @@ public class AdminControllerTest {
                 .andExpect(model().attributeExists(AdminController.REDIRECT_MODIFY_TASK_TO))
                 .andExpect(model().attributeExists(AdminController.HOME))
                 .andExpect(model().attributeExists(AdminController.MODIFY))
-                .andExpect(view().name(AdminController.TASK_DETAIL))
+                .andExpect(view().name(AdminController.TASK_DETAIL_JSP))
                 .andExpect(forwardedUrl("/WEB-INF/task_detail.jsp"));
 
         try {
@@ -418,7 +418,7 @@ public class AdminControllerTest {
                 .andExpect(model().attributeExists(AdminController.MODIFY))
                 .andExpect(model().attributeExists(AdminController.REDIRECT_MODIFY_TO))
                 .andExpect(model().attribute(AdminController.REDIRECT_MODIFY_TO, is("test_redirect")))
-                .andExpect(view().name(AdminController.CREATE_TASK_FROM_PROJECT))
+                .andExpect(view().name(AdminController.CREATE_TASK_FROM_PROJECT_JSP))
                 .andExpect(forwardedUrl("/WEB-INF/create_task_from_project.jsp"));
 
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/admin/create_task")
@@ -433,7 +433,7 @@ public class AdminControllerTest {
                 .andExpect(model().attributeExists(AdminController.MODIFY))
                 .andExpect(model().attributeExists(AdminController.REDIRECT_MODIFY_TO))
                 .andExpect(model().attribute(AdminController.REDIRECT_MODIFY_TO, is("test_redirect")))
-                .andExpect(view().name(AdminController.CREATE_TASK))
+                .andExpect(view().name(AdminController.CREATE_TASK_JSP))
                 .andExpect(forwardedUrl("/WEB-INF/create_task.jsp"));
 
         try {
@@ -449,7 +449,7 @@ public class AdminControllerTest {
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/admin/user_detail")
                                                 .param(AdminController.USERIDFORUSERDT, "4")
                                                 .param(AdminController.HOME, "test_home"));
-        resultActions.andExpect(view().name(AdminController.USER_DETAIL))
+        resultActions.andExpect(view().name(AdminController.USER_DETAIL_JSP))
                 .andExpect(forwardedUrl("/WEB-INF/user_detail.jsp"))
                 .andExpect(model().attributeExists(AdminController.USER))
                 .andExpect(model().attribute(AdminController.USER, hasProperty("id", is(4L))))

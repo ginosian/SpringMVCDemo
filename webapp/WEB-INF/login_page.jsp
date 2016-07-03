@@ -21,11 +21,11 @@
                 <img src="<c:url value="/image/auth_banner.png"/>" style="width: 100%; height: 100%" /></td>
         </tr>
         <tr>
-            <td colspan="3" style="text-align:center; font-size:20px">
+            <td colspan="3" style="text-align:center; font-size:18px">
                 <br>Username:<br/>
-                <input type="email" id="username" name="username" style="font-size:20px; width:25%; resize: none; background-color: #feffbb" required="required"/><br />
+                <input type="email" id="username" name="username" style="font-size:18px; width:25%; resize: none; background-color: #feffbb"/><br />
                 <br>Password:<br />
-                <input type="password" id="password" name="password" style="font-size:20px; width:25%; resize: none; background-color: #feffbb"  required="required"/></p>
+                <input type="password" id="password" name="password" style="font-size:18px; width:25%; resize: none; background-color: #feffbb"/></p>
                 <label><input type="checkbox" name="remember-me"> Remember Me</label>
             </td>
         </tr>
@@ -42,7 +42,6 @@
                 </c:if>
             </td>
         </tr>
-
     </tbody>
 </table>
 </form>

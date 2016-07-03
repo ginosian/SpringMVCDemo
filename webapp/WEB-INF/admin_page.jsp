@@ -49,7 +49,7 @@
           <ul>
             <c:forEach items="${projects}" var="project">
               <li style="text-align: left; font-size:24px" value="${project.getId()}"
-                  onclick="location.href='${root}/${home}/${project_detail_resource}?projectId=${project.getId()}&home=${home}'">${project.getStory()}</li>
+                  onclick="location.href='${root}/${home}/${project_detail_resource}/${project.getId()}'">${project.getStory()}</li>
             </c:forEach>
           </ul>
         </td>
@@ -65,14 +65,14 @@
           <ul>
             <c:forEach items="${users}" var="user">
               <li style="text-align: left; font-size:24px"
-                  onclick="location.href='${root}/${home}/${user_detail_resource}?userIdForUserTD=${user.getId()}&home=${home}'">${user.getName()}</li>
+                  onclick="location.href='${root}/${home}/${user_detail_resource}/${user.getId()}'">${user.getName()}</li>
             </c:forEach>
           </ul>
         </td>
       </tr>
       <tr>
         <td style="text-align: center; vertical-align: middle; height: 50px">
-          <input onclick="location.href='${root}/${home}/${create_project_resource}?home=${home}'" style="width:60%;
+          <input onclick="location.href='${root}/${home}/${create_project_resource}'" style="width:60%;
           position:relative; white-space:normal; background-color: #B0BEC5; font-size:24px" type="button" value="Create project"/></td>
         <td style="text-align: center; vertical-align: middle;">
           <input onclick="location.href='${root}/${home}/${create_task_resource}?redirect_modify_task_to=${redirect_modify_task_to}&home=${home}'" style="width:60%;

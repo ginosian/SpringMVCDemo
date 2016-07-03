@@ -41,46 +41,29 @@
         }  </style>
 </head>
 <body>
-        <c:set var="root" value="${pageContext.request.contextPath}"/>
-        <c:set var="home" value="${home}"/>
-        <c:set var="modify" value="${modify}"/>
-        <c:set var="redirect_modify_to" value="${redirect_modify_to}"/>
 <ul>
     <li>
         <a href="${root}/${home}">Home</a></li>
     <li>
         <a class="active">Create project</a></li>
 </ul>
-
-<div style="color: black; text-align: center; background-color: rgb(235, 248, 252);">
     <form action="${root}/${home}/${modify}" method="post">
+        <c:set var="root" value="${pageContext.request.contextPath}"/>
+        <c:set var="home" value="${home}"/>
+        <c:set var="modify" value="${modify}"/>
         <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
-        <input type="hidden" name="home" value="${home}"/>
-        <input type="hidden" name="redirect_modify_to" value="${redirect_modify_to}"/>
-        <table align="center" style="width: 100%; height: 70%; background-color: rgb(235, 248, 252)">
+        <table align="center" style="width: 100%; height: 100%; background-color: rgb(235, 248, 252)">
             <tbody>
                 <tr>
-                    <td style="text-align: center; font-size:24px">Project Story:</td>
-                </tr>
-                <tr>
-                    <td style="text-align: center">
-                    <textarea name="project_story" rows="3" style="width:70%; font-size:24px; resize: none" required="required"></textarea></td>
-                </tr>
-                <tr>
-                    <td style="text-align: center; font-size:24px">Project Description:</td>
-                </tr>
-                <tr>
-                    <td style="text-align: center">
-                    <textarea name="project_description" rows="5" style="width:70%; font-size:24px; resize: none" required="required"></textarea></td>
-                </tr>
-                <tr>
-                    <td>
+                    <td style="text-align: center; font-size:24px">
+                        <p>Project Story:<p/>
+                        <p><textarea name="project_story" rows="3" style="width:70%; font-size:24px; resize: none" ></textarea><p/>
+                        <p>Project Description:<p/>
+                        <p><textarea name="project_description" rows="5" style="width:70%; font-size:24px; resize: none" ></textarea><p/>
+                        <c:set var="error" value="${error}"/>
                         <p style="color: #c51202">${error}</p>
+                        <input style="width:25%; font-size:24px; position:relative; white-space:normal" type="submit" value="SUBMIT"/>
                     </td>
-                </tr>
-                <tr>
-                    <td style="text-align: center;">
-                        <input style="width:25%; font-size:24px; position:relative; white-space:normal" type="submit" value="SUBMIT" /></td>
                 </tr>
             </tbody>
         </table>
