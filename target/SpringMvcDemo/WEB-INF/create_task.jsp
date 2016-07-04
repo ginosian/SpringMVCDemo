@@ -45,7 +45,6 @@
         <c:set var="home" value="${home}"/>
         <c:set var="modify" value="${modify}"/>
         <c:set var="redirect_modify_to" value="${redirect_modify_to}"/>
-        <input type="hidden" name="redirect_modify_to" value="${redirect_modify_to}"/>
         <c:set var="users" value="${users}"/>
         <c:set var="projects" value="${projects}"/>
 <ul>
@@ -56,6 +55,7 @@
 </ul>
     <form action="${root}/${home}/${modify}" method="post">
         <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
+        <input type="hidden" name="redirect_modify_to" value="${redirect_modify_to}"/>
         <input type="hidden" name="home" value="${home}"/>
         <input type="hidden" name="taskId" value="${task.getId()}">
 
@@ -66,14 +66,14 @@
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align: center; font-size:24px">
-                        <textarea name="task_story" required="required" rows="2" style="width: 70%; resize: none"></textarea></td>
+                        <textarea name="task_story" rows="2" style="width: 70%; resize: none"></textarea></td>
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align: center; font-size:24px">Task Description:</td>
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align: center; font-size:24px">
-                        <textarea name="task_description" rows="3"  style="width: 70%; resize: none" required="required"></textarea></td>
+                        <textarea name="task_description" rows="3"  style="width: 70%; resize: none"></textarea></td>
                 </tr>
                 <tr>
                     <td style="text-align: center; font-size:24px">Choose Project</td>
@@ -81,13 +81,13 @@
                 </tr>
                 <tr>
                     <td style="height: 30%; text-align: center;">
-                        <select name="projectId" required="required" size="6" style="width:45%; font-size:18px">
+                        <select name="projectId" size="6" style="width:45%; font-size:18px">
                             <c:forEach items="${projects}" var="project">
                                 <option value="${project.getId()}">${project.getStory()}</option>
                             </c:forEach>
                         </select></td>
                     <td style="height: 30%; text-align: center;">
-                        <select name="userId" required="required" size="6" style="width:45%; font-size:18px">
+                        <select name="userId" size="6" style="width:45%; font-size:18px">
                             <c:forEach items="${users}" var="user">
                                 <option value=${user.getId()}>${user.getName()}</option>
                             </c:forEach>
@@ -95,6 +95,8 @@
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align: center;">
+                        <c:set var="error" value="${error}"/>
+                        <p style="color: #c51202">${error}</p>
                         <input style="width:25%;  font-size:24px; position:relative; white-space:normal" type="submit" value="SUBMIT" /></td>
                 </tr>
             </tbody>

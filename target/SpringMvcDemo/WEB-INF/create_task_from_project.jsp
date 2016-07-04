@@ -68,21 +68,21 @@
                 </tr>
                 <tr>
                     <td style="text-align: center">
-                        <textarea name="task_story" required="required" rows="1" style="width:70%; font-size:24px; resize: none"></textarea></td>
+                        <textarea name="task_story" rows="1" style="width:70%; font-size:24px; resize: none"></textarea></td>
                 </tr>
                 <tr>
                     <td style="text-align: center; font-size:24px">Task Description:</td>
                 </tr>
                 <tr>
                     <td style="text-align: center">
-                        <textarea name="task_description" required="required" rows="3" style="width: 70%; resize: none"></textarea></td>
+                        <textarea name="task_description" rows="3" style="width: 70%; font-size:24px; resize: none"></textarea></td>
                 </tr>
                 <tr>
                     <td style="text-align: center; font-size:20px">Choose Assignee</td>
                 </tr>
                 <tr>
                     <td style="text-align: center;">
-                        <select name="userId" required="required" size="6" style="width:25%;font-size:18px">
+                        <select name="userId" size="6" style="width:25%;font-size:18px">
                             <c:forEach items="${users}" var="user">
                             <option value="${user.getId()}">${user.getName()}</option>
                             </c:forEach>
@@ -90,6 +90,8 @@
                 </tr>
                 <tr>
                     <td style="text-align: center">
+                        <c:set var="error" value="${error}"/>
+                        <p style="color: #c51202">${error}</p>
                         <input style="width:25%; font-size:24px position:relative; white-space:normal" type="submit" value="SUBMIT" /></td>
                 </tr>
             </tbody>

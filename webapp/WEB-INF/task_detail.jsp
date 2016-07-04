@@ -41,12 +41,6 @@
         }		</style>
 </head>
 <body>
-        <c:set var="root" value="${pageContext.request.contextPath}"/>
-        <c:set var="home" value="${home}"/>
-        <c:set var="modify" value="${modify}"/>
-        <c:set var="redirect_modify_to" value="${redirect_modify_to}"/>
-        <c:set var="task" value="${task}"/>
-        <c:set var="users" value="${users}"/>
 <ul>
     <li>
         <a href="${root}/${home}">Home</a></li>
@@ -54,8 +48,15 @@
         <a class="active" >Task detail</a></li>
 </ul>
     <form action="${root}/${home}/${modify}" method="post">
+        <c:set var="root" value="${pageContext.request.contextPath}"/>
+        <c:set var="home" value="${home}"/>
+        <c:set var="modify" value="${modify}"/>
+        <c:set var="back" value="${back}"/>
+        <c:set var="task" value="${task}"/>
+        <c:set var="users" value="${users}"/>
         <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
         <input type="hidden" name="home" value="${home}"/>
+        <input type="hidden" name="back" value="${back}"/>
         <input type="hidden" name="redirect_modify_to" value="${redirect_modify_to}"/>
         <input type="hidden" name="projectId" value="${task.getProjectDTO().getId()}"/>
         <input type="hidden" name="taskId" value="${task.getId()}">
@@ -63,21 +64,19 @@
             <tbody>
                 <tr>
                     <td colspan="3"  style="text-align: center; font-size:24px; width: 50%">
-                        <span style="font-size:24px">Project:</span>
-                        <span style="font-size:24px">${task.getProjectDTO().getStory()}</span>
+                        <span style="font-size:24px"><b>Project:</b> ${task.getProjectDTO().getStory()}</span>
                     </td>
                 </tr>
 
                 <tr>
                     <td colspan="3" style="text-align: center; font-size:24px; width: 50%">
                         <input type="hidden" name="userIdForUserTD" value="${task.getUserDTO().getId()}"/>
-                        <p style="text-decoration-color: #2f0407"> Current Assignee <br></p>
-                        <p>${task.getUserDTO().getName()}</p>
+                        <p> <b>Current Assignee:</b> ${task.getUserDTO().getName()}</p></td>
                 </tr>
                 <tr>
                     <td style="text-align: center; font-size:24px; width: 50%">
-                        <span style="text-decoration-color: #2f0407">Task Story:</span><br />
-                        <textarea name="task_story" required="required" rows="4" style="width: 90%; resize: none;">${task.getStory()}</textarea>
+                        <span style="color: #2f0407">Task Story:</span><br />
+                        <textarea name="task_story" rows="4" style="width: 90%; resize: none;">${task.getStory()}</textarea>
                     </td>
                     <td colspan="2" style="text-align: center; font-size:24px; width: 50%">
                         Choose assignee to reassign task
@@ -86,7 +85,7 @@
                 <tr>
                     <td style="text-align: center; width: 50%;">
                             <span style="font-size: 24px;">Task Description:</span><br />
-                            <textarea name="task_description" rows="8" style="width: 90%; resize: none;" required="required">${task.getDescription()}</textarea>
+                            <textarea name="task_description" rows="8" style="width: 90%; resize: none" >${task.getDescription()}</textarea>
                     </td>
                     <td colspan="2" style="height: 100px; text-align: center; width: 50%;">
                         <select name="userId" size="8" style="width: 75%; font-size: 18px;">
@@ -98,6 +97,8 @@
                 </tr>
                 <tr>
                     <td colspan="3" style="text-align: center;">
+                        <c:set var="error" value="${error}"/>
+                        <p style="color: #c51202">${error}</p>
                         <input style="width:20%; font-size:24px; position:relative; white-space:normal" type="submit" value="SUBMIT" /></td>
                 </tr>
             </tbody>

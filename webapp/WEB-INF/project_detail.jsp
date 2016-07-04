@@ -53,47 +53,42 @@
         <c:set var="task_detail_resource" value="${task_detail_resource}"/>
         <c:set var="create_task_resource" value="${create_task_resource}"/>
 
-        <c:set var="redirect_modify_task_to" value="${redirect_modify_task_to}"/>
+        <c:set var="back" value="${back}"/>
+        <input name="back" type="hidden" value="${back}" />
         <c:set var="project" value="${project}"/>
-        <input name="projectId" value="${project.getId()}" hidden/>
         <c:set var="project_tasks" value="${project_tasks}"/>
 
         <table align="center" style="width: 100%; height: 95%; background-color: rgb(235, 248, 252)">
             <tbody>
-                <tr>
-                    <td style="text-align: center; font-size:24px; width: 40%">
-                        <span>Project Story:</span><br />
+                <tr style="text-align: left">
+                    <td style=" text-align:center; font-size:24px; width: 40%" valign="top">
+                        <span style="color: #2f0407">Project Story:</span><br />
                         <textarea style="font-size: 22px; width: 90%; resize: none" name="project_story" rows="4">${project.getStory()}</textarea>
+                        <span style="font-size: 24px; color:#2f0407">Project Description:</span><br />
+                        <textarea style="font-size: 22px; width: 90%; resize: none"  name="project_description" rows="8" >${project.getDescription()}</textarea>
                     </td>
-                    <td colspan="2" style="text-align: center; font-size:24px; width: 40%">
+                    <td style="text-align:center; font-size:24px; width: 40%; color: #2f0407" valign="top">
                         Project Tasks
-                    </td>
-
-                </tr>
-                <tr>
-                    <td style="text-align: center; width: 40%;">
-                            <span style="font-size: 24px;">Project Description:</span><br />
-                            <textarea style="font-size: 22px; width: 90%; resize: none"  name="project_description" rows="8" >${project.getDescription()}</textarea>
-                    </td>
-                    <td style="height: 100px; text-align: center; width: 60%;">
                         <ul style="text-align: left; background-color: #dcfcc4">
                             <c:forEach items="${project_tasks}" var="project_task" >
-                                 onclick="location.href='${root}/${home}/${task_detail_resource}?taskId=${project_task.getId()}&projectId=${project.getId()}&home=${home}&redirect_modify_task_to=${redirect_modify_task_to}'"
-                                    style="text-align: left; font-size:24px; background-color: #dcfcc4">
-                                    <span style="font-size:24px" >${project_task.getStory()}</span><wbr>
-                                    <span style="font-size:16px" >Assignee</span><wbr>
-                                    <span style="font-size:24px" >${project_task.getUserDTO().getName()}</span><br/>
+                                <li onclick="location.href='${root}/${home}/${task_detail_resource}/${project_task.getId()}?back=${back}'"
+                                    style="text-align: left; font-size:24px; background-color: #dcfcc4"
+                                        >${project_task.getStory()} Assignee: ${project_task.getUserDTO().getName()}</li><br/>
+
                             </c:forEach>
-                        </ul><br/>
-                        <input style="width:20%; resize: none; font-size:24px; position:relative; white-space:normal" type="button" value="Add Task"
-                               onclick="location.href='${root}/${home}/${create_task_resource}?&projectId=${project.getId()}&home=${home}&redirect_modify_task_to=${redirect_modify_task_to}'"/>
+                        </ul>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="text-align: center;">
+                    <td style="text-align: center">
                         <c:set var="error" value="${error}"/>
                         <p style="color: #c51202">${error}</p>
-                        <input style="width:20%; resize: none; font-size:24px; position:relative; white-space:normal" type="submit" value="SUBMIT" /></td>
+                        <input style="width:20%; resize: none; font-size:24px; position:relative; white-space:normal" type="submit" value="SUBMIT" />
+                    </td>
+                    <td style="text-align: center">
+                        <input style="width:20%; resize: none; font-size:24px; position:relative; white-space:normal" type="button" value="Add Task"
+                               onclick="location.href='${root}/${home}/${create_task_resource}'"/>
+                    </td>
                 </tr>
             </tbody>
         </table>

@@ -51,7 +51,8 @@
         <!--Root paths-->
         <c:set var="root" value="${pageContext.request.contextPath}"/>
         <c:set var="home" value="${home}"/>
-        <c:set var="redirect_modify_task_to" value="${redirect_modify_task_to}"/>
+        <c:set var="back" value="${back}"/>
+        <input hidden="hidden" name="back" value="${back}"/>
 
         <!--Received data-->
         <c:set var="user" value="${user}"/>
@@ -71,6 +72,7 @@
                 </tr>
                 <tr>
                     <td style="height: 100px; text-align: center; width: 60%;">
+                        <c:set var="redirect_modify_task_to" value="${redirect_modify_task_to}"/>
                         <input name="map" hidden value="${map}">
                         <c:forEach items="${map}" var="entry">
                             <ul id="tasks_list_project" style="text-align: left; background-color: #d2d6cf">
@@ -79,7 +81,7 @@
                                     &nbsp;</p>
                                 <c:forEach items="${entry.value}" var="entry_value">
                                     <li style="text-align: left; font-size:22px"
-                                        onclick="location.href='${root}/${home}/${task_detail_resource}?taskId=${entry_value.getId()}&home=${home}&redirect_modify_task_to=${redirect_modify_task_to}'">${entry_value.getStory()}</li>
+                                        onclick="location.href='${root}/${home}/${task_detail_resource}/${entry_value.getId()}?back=${back}'">${entry_value.getStory()}</li>
                                     <p>
                                         &nbsp;</p>
                                 </c:forEach>
