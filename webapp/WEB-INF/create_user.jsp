@@ -57,15 +57,15 @@
       <table align="center" style="width: 100%; background-color: rgb(235, 248, 252); height: 100%; font-size:16px;">
         <tbody>
         <tr>
-          <td colspan="3" style="text-align: center;">
+          <td colspan="3" style="table-layout: fixed; text-align: center;">
             <p>User First Name:</p>
-            <p><input name="name" style="height:40px; width:25%; resize: none" type="text" /></p>
+            <p><input maxlength="40" name="name" style="height:40px; width:25%; resize: none" type="text" /></p>
             <p>User Login:</p>
-            <p><input name="username" style="height:40px; width:25%; resize: none" type="email" /></p>
+            <p><input maxlength="40" name="username" style="height:40px; width:25%; resize: none" type="email" /></p>
             <p>Password:</p>
-            <p><input name="password" style="height:40px; width:25%; resize: none" type="password" /></p>
+            <p><input maxlength="15" name="password" style="height:40px; width:25%; resize: none" type="password" /></p>
             <p>Approve with authorization:</p>
-              <select name="role" style="height:40px; width:25%; resize: none">
+              <select maxlength="15" name="role" style="height:40px; width:25%; resize: none">
                   <option></option>
                 <c:forEach items="${roles}" var="role">
                   <option>${role.getRole()}</option>

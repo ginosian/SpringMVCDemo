@@ -285,8 +285,6 @@ public class AdminControllerTest {
                 .andExpect(model().attribute(AdminController.MODIFY, "user"));
     }
 
-
-
     @Test
     public void userDetail() throws Exception {
         UserDTO user = DTOMockUtils.generateUser();
@@ -380,18 +378,6 @@ public class AdminControllerTest {
         USER_QUANTITY = 5;
         PROJECT_QUANTITY = 3;
 
-        ResultActions fromProjectResultActions = mockMvc.perform(MockMvcRequestBuilders.get("/admin/task")
-                .param(AdminController.PROJECTID, "9"));
-        fromProjectResultActions.andExpect(model().attributeExists(AdminController.USERS))
-                .andExpect(model().attribute(AdminController.USERS, hasSize(USER_QUANTITY)))
-                .andExpect(model().attributeExists(AdminController.PROJECT))
-                .andExpect(model().attribute(AdminController.PROJECT, hasProperty("id", is(9L))))
-                .andExpect(model().attributeExists(AdminController.HOME))
-                .andExpect(model().attribute(AdminController.HOME, is("admin")))
-                .andExpect(model().attributeExists(AdminController.MODIFY))
-                .andExpect(view().name(AdminController.CREATE_TASK_FROM_PROJECT_JSP))
-                .andExpect(forwardedUrl("/WEB-INF/create_task_from_project.jsp"));
-
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/admin/task"));
         resultActions.andExpect(model().attributeExists(AdminController.USERS))
                 .andExpect(model().attribute(AdminController.USERS, hasSize(USER_QUANTITY)))
@@ -403,12 +389,4 @@ public class AdminControllerTest {
                 .andExpect(view().name(AdminController.CREATE_TASK_JSP))
                 .andExpect(forwardedUrl("/WEB-INF/create_task.jsp"));
     }
-
-
-
-
-
-
-
-
 }

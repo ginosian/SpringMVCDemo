@@ -8,6 +8,7 @@ import com.springmvc.demo.exceptions.EmptyRequiredValueException;
 import com.springmvc.demo.exceptions.NoSuchRoleException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +32,9 @@ public class UserManagerImpl implements UserManager {
 
     @Autowired
     Environment environment;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     private static boolean defaultAreSet = false;
 
@@ -69,8 +73,7 @@ public class UserManagerImpl implements UserManager {
         if(admin == null){
             HashSet<RoleDTO> roles = new HashSet<>();
             roles.add(adminRoleDTO);
-            admin = new UserDTO(admin_username, admin_pass, admin_name, true, roles);
-            userDAO.addUser(admin);
+            addUser(admin_name, admin_username, admin_pass, true, role_admin);
         }
         defaultAreSet = true;
     }
@@ -94,7 +97,7 @@ public class UserManagerImpl implements UserManager {
         if(username == null || username.isEmpty() || password == null || password.isEmpty()
                 || name == null || name.isEmpty()) throw new EmptyRequiredValueException();
         roles.add(localRole);
-        userDTO.set(username, password, name,
+        userDTO.set(username, passwordEncoder.encode(password), name,
                 true, roles);
         return userDAO.addUser(userDTO);
     }

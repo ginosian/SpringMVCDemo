@@ -1,5 +1,7 @@
 package com.springmvc.demo.dto;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 
 /**
@@ -12,16 +14,16 @@ public class TaskDTO {
     @GeneratedValue
     private Long id;
 
-    @Column(length = 10000)
+    @Type(type = "text")
     private String story;
 
-    @Column(length = 10000)
+    @Type(type = "text")
     private String description;
-    private boolean complete = true;
+
+    private boolean complete = true; // Flag to show if task is complete by assignee. This functionality is to be added later.
 
     @OneToOne (fetch = FetchType.EAGER)
     private ProjectDTO projectDTO;
-
 
     @OneToOne (fetch = FetchType.EAGER)
     private UserDTO userDTO;

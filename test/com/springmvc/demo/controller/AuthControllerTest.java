@@ -16,25 +16,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
  */
 public class AuthControllerTest {
 
-//    @Resource
-//    private WebApplicationContext context;
-//
-//    private MockMvc mockMvc;
-//
-//    @Before
-//    public void setup(){
-//        this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
-//    }
-//
-//    @Test
-//    public void testVle() throws Exception {
-//        mockMvc.perform(MockMvcRequestBuilders.get("/vle").accept(MediaType.ALL))
-//                .andExpect(MockMvcResultMatchers.view().name("admin_page"))
-//                .andExpect(MockMvcResultMatchers.forwardedUrl("/WEB-INF/admin_page.jsp"))
-//                .andExpect(MockMvcResultMatchers.model().attributeExists("aaa"));
-//    }
-
-
     @Mock
     UserManager userManager;
     @InjectMocks

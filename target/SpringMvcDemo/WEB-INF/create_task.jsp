@@ -62,39 +62,51 @@
         <table align="center" style="width: 100%; height: 95%; background-color: rgb(235, 248, 252)">
             <tbody>
                 <tr>
-                    <td colspan="2" style="text-align: center; font-size:24px">Task Story:</td>
+                    <td colspan="2" style="table-layout: fixed; text-align: center; font-size:24px">Task Story:</td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="text-align: center; font-size:24px">
+                    <td colspan="2" style="table-layout: fixed; text-align: center; font-size:24px">
                         <textarea name="task_story" rows="2" style="width: 70%; resize: none"></textarea></td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="text-align: center; font-size:24px">Task Description:</td>
+                    <td colspan="2" style="table-layout: fixed; text-align: center; font-size:24px">Task Description:</td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="text-align: center; font-size:24px">
+                    <td colspan="2" style="table-layout: fixed; text-align: center; font-size:24px">
                         <textarea name="task_description" rows="3"  style="width: 70%; resize: none"></textarea></td>
                 </tr>
                 <tr>
-                    <td style="text-align: center; font-size:24px">Choose Project</td>
-                    <td style="text-align: center; font-size:24px">Choose Assignee</td>
+                    <td style="table-layout: fixed; text-align: center; font-size:24px">Choose Project</td>
+                    <td style="table-layout: fixed; text-align: center; font-size:24px">Choose Assignee</td>
                 </tr>
                 <tr>
-                    <td style="height: 30%; text-align: center;">
-                        <select name="projectId" size="6" style="width:45%; font-size:18px">
+                    <td style=" height: 30%; width: 50%; text-align: center">
+                        <select name="projectId" size="6" style="white-space:normal; width:80%; font-size:18px">
                             <c:forEach items="${projects}" var="project">
-                                <option value="${project.getId()}">${project.getStory()}</option>
+                                <option  value="${project.getId()}">${project.getStory()}</option>
                             </c:forEach>
                         </select></td>
-                    <td style="height: 30%; text-align: center;">
-                        <select name="userId" size="6" style="width:45%; font-size:18px">
+                    <%--<td colspan="2" style="height: 30%">--%>
+                        <%--<select style="max-width: 150px; block-progression: true">--%>
+                            <%--<c:forEach items="${projects}" var="project">--%>
+                                <%--<option style="max-width: 150px" value="${project.getStory()}">${project.getStory()}</option>--%>
+                            <%--</c:forEach>--%>
+                        <%--</select></td>--%>
+                    <td style=" height: 30%; width: 50%; text-align: center">
+                        <select name="userId" size="6" style="white-space:normal; width:80%; font-size:18px">
                             <c:forEach items="${users}" var="user">
-                                <option value=${user.getId()}>${user.getName()}</option>
+                                <option  value=${user.getId()}>${user.getName()}</option>
                             </c:forEach>
                         </select></td>
+                        <%--<td colspan="2" style="height: 30%">--%>
+                            <%--<select style="width: 40%; block-progression: true">--%>
+                                <%--<c:forEach items="${users}" var="user">--%>
+                                    <%--<option style="max-width: 150px" value=${user.getName()}>${user.getName()}</option>--%>
+                                <%--</c:forEach>--%>
+                            <%--</select></td>--%>
                 </tr>
                 <tr>
-                    <td colspan="2" style="text-align: center;">
+                    <td colspan="2" style="table-layout: fixed; text-align: center;">
                         <c:set var="error" value="${error}"/>
                         <p style="color: #c51202">${error}</p>
                         <input style="width:25%;  font-size:24px; position:relative; white-space:normal" type="submit" value="SUBMIT" /></td>

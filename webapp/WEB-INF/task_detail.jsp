@@ -63,32 +63,32 @@
         <table align="center" style="width: 100%; height: 95%; background-color: rgb(235, 248, 252)">
             <tbody>
                 <tr>
-                    <td colspan="3"  style="text-align: center; font-size:24px; width: 50%">
+                    <td colspan="3"  style="table-layout: fixed; text-align: center; font-size:24px; width: 50%">
                         <span style="font-size:24px"><b>Project:</b> ${task.getProjectDTO().getStory()}</span>
                     </td>
                 </tr>
 
                 <tr>
-                    <td colspan="3" style="text-align: center; font-size:24px; width: 50%">
+                    <td colspan="3" style="table-layout: fixed; text-align: center; font-size:24px; width: 50%">
                         <input type="hidden" name="userIdForUserTD" value="${task.getUserDTO().getId()}"/>
                         <p> <b>Current Assignee:</b> ${task.getUserDTO().getName()}</p></td>
                 </tr>
                 <tr>
-                    <td style="text-align: center; font-size:24px; width: 50%">
+                    <td style="table-layout: fixed; text-align: center; font-size:24px; width: 50%">
                         <span style="color: #2f0407">Task Story:</span><br />
                         <textarea name="task_story" rows="4" style="width: 90%; resize: none;">${task.getStory()}</textarea>
                     </td>
-                    <td colspan="2" style="text-align: center; font-size:24px; width: 50%">
+                    <td colspan="2" style="table-layout: fixed; text-align: center; font-size:24px; width: 50%">
                         Choose assignee to reassign task
                     </td>
                 </tr>
                 <tr>
-                    <td style="text-align: center; width: 50%;">
+                    <td style="table-layout: fixed; text-align: center; width: 50%;">
                             <span style="font-size: 24px;">Task Description:</span><br />
                             <textarea name="task_description" rows="8" style="width: 90%; resize: none" >${task.getDescription()}</textarea>
                     </td>
-                    <td colspan="2" style="height: 100px; text-align: center; width: 50%;">
-                        <select name="userId" size="8" style="width: 75%; font-size: 18px;">
+                    <td colspan="2" style="table-layout: fixed; height: 100px; text-align: center; width: 50%;">
+                        <select name="userId" size="8" style="word-wrap:break-word; width: 75%; font-size: 18px;">
                             <c:forEach items="${users}" var="user">
                             <option value="${user.getId()}">${user.getName()}</option>
                             </c:forEach>
@@ -96,7 +96,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="text-align: center;">
+                    <td colspan="3" style="table-layout: fixed; text-align: center;">
                         <c:set var="error" value="${error}"/>
                         <p style="color: #c51202">${error}</p>
                         <input style="width:20%; font-size:24px; position:relative; white-space:normal" type="submit" value="SUBMIT" /></td>

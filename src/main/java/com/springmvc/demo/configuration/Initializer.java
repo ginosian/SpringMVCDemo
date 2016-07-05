@@ -22,7 +22,6 @@ public class Initializer implements WebApplicationInitializer { //AbstractAnnota
         servletContext.addListener(new ContextLoaderListener(ctx));
         servletContext.addListener(new SessionListener());
 
-
         ctx.setServletContext(servletContext);
 
         ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));

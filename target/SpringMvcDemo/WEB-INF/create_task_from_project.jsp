@@ -60,36 +60,36 @@
         <table align="center" border="0" cellpadding="0" cellspacing="0" style="width: 100%; height: 95%; background-color: rgb(235, 248, 252)">
             <tbody>
                 <tr>
-                    <td style="text-align: center; font-size:24px">Project: ${project.getStory()}</td>
+                    <td style="table-layout: fixed; text-align: center; font-size:24px">Project: ${project.getStory()}</td>
                         <input type="hidden" name="projectId" value="${project.getId()}">
                 </tr>
                 <tr>
-                    <td style="text-align: center; font-size:24px">Task Story:</td>
+                    <td style="table-layout: fixed; text-align: center; font-size:24px">Task Story:</td>
                 </tr>
                 <tr>
-                    <td style="text-align: center">
+                    <td style="table-layout: fixed; text-align: center">
                         <textarea name="task_story" rows="1" style="width:70%; font-size:24px; resize: none"></textarea></td>
                 </tr>
                 <tr>
-                    <td style="text-align: center; font-size:24px">Task Description:</td>
+                    <td style="table-layout: fixed; text-align: center; font-size:24px">Task Description:</td>
                 </tr>
                 <tr>
-                    <td style="text-align: center">
+                    <td style="table-layout: fixed; text-align: center">
                         <textarea name="task_description" rows="3" style="width: 70%; font-size:24px; resize: none"></textarea></td>
                 </tr>
                 <tr>
-                    <td style="text-align: center; font-size:20px">Choose Assignee</td>
+                    <td style="table-layout: fixed; text-align: center; font-size:20px">Choose Assignee</td>
                 </tr>
                 <tr>
-                    <td style="text-align: center;">
-                        <select name="userId" size="6" style="width:25%;font-size:18px">
+                    <td style="table-layout: fixed; text-align: center;">
+                        <select name="userId" size="6" style="word-wrap:break-word; width:25%;font-size:18px">
                             <c:forEach items="${users}" var="user">
                             <option value="${user.getId()}">${user.getName()}</option>
                             </c:forEach>
                         </select></td>
                 </tr>
                 <tr>
-                    <td style="text-align: center">
+                    <td style="table-layout: fixed; text-align: center">
                         <c:set var="error" value="${error}"/>
                         <p style="color: #c51202">${error}</p>
                         <input style="width:25%; font-size:24px position:relative; white-space:normal" type="submit" value="SUBMIT" /></td>

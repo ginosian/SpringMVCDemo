@@ -21,20 +21,20 @@
                 <img src="<c:url value="/image/auth_banner.png"/>" style="width: 100%; height: 100%" /></td>
         </tr>
         <tr>
-            <td colspan="3" style="text-align:center; font-size:18px">
+            <td colspan="3" style="table-layout: fixed; text-align:center; font-size:18px">
                 <br>Username:<br/>
-                <input type="email" id="username" name="username" style="font-size:18px; width:25%; resize: none; background-color: #feffbb"/><br />
+                <input maxlength="40" type="email" id="username" name="username" style="font-size:18px; width:25%; resize: none; background-color: #feffbb"/><br />
                 <br>Password:<br />
-                <input type="password" id="password" name="password" style="font-size:18px; width:25%; resize: none; background-color: #feffbb"/></p>
+                <input maxlength="15" type="password" id="password" name="password" style="font-size:18px; width:25%; resize: none; background-color: #feffbb"/></p>
                 <label><input type="checkbox" name="remember-me"> Remember Me</label>
             </td>
         </tr>
         <tr>
-            <td colspan="3" style="text-align: center">
+            <td colspan="3" style="table-layout: fixed; text-align: center">
                 <input style="width:25%; font-size:20px; position:relative; white-space:normal" type="submit" value="LOGIN"/></td>
         </tr>
         <tr>
-            <td colspan="3" style="text-align: center">
+            <td colspan="3" style="table-layout: fixed; text-align: center">
                 <c:if test="${param.error != null}">
                     <div class="alert alert-danger">
                         <p style="color: #c51202">Invalid username or password.</p>

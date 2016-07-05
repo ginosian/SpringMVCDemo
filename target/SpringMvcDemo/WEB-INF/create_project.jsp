@@ -55,7 +55,7 @@
         <table align="center" style="width: 100%; height: 100%; background-color: rgb(235, 248, 252)">
             <tbody>
                 <tr>
-                    <td style="text-align: center; font-size:24px">
+                    <td style="table-layout: fixed; text-align: center; font-size:24px">
                         <p>Project Story:<p/>
                         <p><textarea name="project_story" rows="3" style="width:70%; font-size:24px; resize: none" ></textarea><p/>
                         <p>Project Description:<p/>

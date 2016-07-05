@@ -63,20 +63,20 @@
         <table align="center" style="width: 100%; height: 95%; background-color: rgb(235, 248, 252)">
             <tbody>
                 <tr style="text-align: center; font-size:24px; height: 10%">
-                    <td style="text-align: center; font-size:24px">
+                    <td style="table-layout: fixed; text-align: center; font-size:24px">
                         <span>User:</span><br />
                         <span style="font-size: 22px; width: 100%">${user.getName()}</span></td>
                 </tr>
                 <tr>
-                    <td style="height: 100px; text-align: center; width: 60%;">
+                    <td style="table-layout: fixed; height: 100px; text-align: center; width: 60%;">
                         <input name="map" hidden value="${map}">
                         <c:forEach items="${map}" var="entry">
                             <ul id="tasks_list_project" style="text-align: left; background-color: #d2d6cf">
-                                <li style="font-size:28px">${entry.key}</li>
+                                <li style="word-wrap:break-word; font-size:28px">${entry.key}</li>
                                 <p>
                                     &nbsp;</p>
                                 <c:forEach items="${entry.value}" var="entry_value">
-                                    <li style="text-align: left; font-size:22px"
+                                    <li style="word-wrap:break-word; text-align: left; font-size:22px"
                                         onclick="location.href='${root}/${home}/${task_detail_resource}?taskId=${entry_value.getId()}&home=${home}&redirect_modify_task_to=${redirect_modify_task_to}'">${entry_value.getStory()}</li>
                                     <p>
                                         &nbsp;</p>
@@ -87,7 +87,7 @@
                         </c:forEach></td>
                 </tr>
                 <tr>
-                    <td style="text-align: center; vertical-align: middle">
+                    <td style="table-layout: fixed; text-align: center; vertical-align: middle">
                         <input name="back" onclick="location.href='${root}/${button_redirection_page}'" style="width:20%;
                                 position:relative; white-space:normal; background-color: #B0BEC5; font-size:24px" type="button" value="${button_label}"/></td>
                 </tr>

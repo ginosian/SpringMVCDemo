@@ -32,6 +32,7 @@ public class AuthController {
 
     @RequestMapping(value = "/login")
     public ModelAndView login(Authentication authentication){
+        // Check if which module to apply
         if (authentication != null) {
             if (authentication.getAuthorities().iterator().next().toString().equals("ROLE_" + environment.getProperty("role_admin")))
                 return new ModelAndView("redirect:/admin");

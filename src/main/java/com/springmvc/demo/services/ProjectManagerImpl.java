@@ -28,6 +28,8 @@ public class ProjectManagerImpl implements ProjectManager {
     @Override
     public ProjectDTO addOrUpdateProject(String id, String story, String description) {
         if(story == null || story.isEmpty()) throw new EmptyRequiredValueException();
+
+        //Check if ID exists conclude task exists and update project's fields otherwise add new task to DB.
         if(id != null && !id.isEmpty()){
             return projectDAO.modifyProject(Long.parseLong(id), story, description);
         } else {

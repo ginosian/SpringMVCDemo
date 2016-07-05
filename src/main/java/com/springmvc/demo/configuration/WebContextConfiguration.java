@@ -2,7 +2,6 @@ package com.springmvc.demo.configuration;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.mysql.jdbc.Connection;
-import com.springmvc.demo.SupportingBeans.CreateUserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -55,14 +54,6 @@ public class WebContextConfiguration extends WebMvcConfigurerAdapter {
 //        dataSource.setPassword(env.getProperty("database_password"));
 //        return dataSource;
 //
-//        GenericObjectPool connectionPool = new GenericObjectPool(null);
-//        ConnectionFactory connectionFactory = new DriverManagerConnectionFactory(env.getProperty("database_url"), env.getProperty("database_username"), env.getProperty("database_password"));
-//        PoolableConnectionFactory poolableConnectionFactory = new PoolableConnectionFactory(connectionFactory,connectionPool,null,null,false,true);
-////        connectionPool.setFactory(poolableConnectionFactory);
-//        PoolingDataSource dataSource = new PoolingDataSource(connectionPool);
-//        return dataSource;
-
-
         /** C3P0's ComboPooledDataSource connection pool bean */
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
         try {
@@ -73,8 +64,6 @@ public class WebContextConfiguration extends WebMvcConfigurerAdapter {
         dataSource.setJdbcUrl(env.getProperty("database_url"));
         dataSource.setUser(env.getProperty("database_username"));
         dataSource.setPassword(env.getProperty("database_password"));
-//        dataSource.setTestConnectionOnCheckin(true);
-//        dataSource.setTestConnectionOnCheckout(true);
         return dataSource;
     }
 
@@ -104,7 +93,8 @@ public class WebContextConfiguration extends WebMvcConfigurerAdapter {
         properties.put("hibernate.c3p0.min_size", 1);
         properties.put("hibernate.c3p0.max_size", 5);
         properties.put("hibernate.c3p0.acquire_increment", 3); // will try to acquire when the pool is exhausted
-//        //isolation level
+
+        //isolation level
         properties.setProperty("hibernate.connection.isolation", String.valueOf(Connection.TRANSACTION_SERIALIZABLE));
         return properties;
     }
@@ -123,11 +113,6 @@ public class WebContextConfiguration extends WebMvcConfigurerAdapter {
         resolver.setSuffix(".jsp");
         resolver.setViewClass(JstlView.class);
         return resolver;
-    }
-
-    @Bean
-    public CreateUserForm userFormBean() {
-        return new CreateUserForm();
     }
 
     @Override

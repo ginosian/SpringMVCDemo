@@ -41,7 +41,9 @@ public class TaskManagerImpl implements TaskManager {
     public TaskDTO addOrModifyTask(String taskId, String taskStory, String taskDescription, String projectId, String userId) {
         if(taskStory == null || taskStory.isEmpty()
                 || taskDescription == null || taskDescription.isEmpty()) throw new EmptyRequiredValueException();
+
         TaskDTO task;
+        //Check if ID exists conclude task exists and update task's fields otherwise add new task to DB.
         if (taskId != null && !taskId.isEmpty()){
                 task = modifyTask(taskId, taskStory, taskDescription, userId);
         } else {
@@ -63,6 +65,7 @@ public class TaskManagerImpl implements TaskManager {
 
     private TaskDTO modifyTask(@NotNull String taskId, @NotNull String taskStory, @NotNull String taskDescription, String newAssigneeId) {
         TaskDTO taskDTO = getTaskById(taskId);
+        // newAssignee stands for reassigned person for existing task
         if (newAssigneeId != null && !newAssigneeId.isEmpty()) {
             taskDTO.setUserDTO(userManager.getUserById(newAssigneeId));
         }
@@ -86,6 +89,8 @@ public class TaskManagerImpl implements TaskManager {
     @Override
     public HashMap<String, ArrayList<TaskDTO>> userTasksMap(String userId) {
         if(userManager.getUserById(userId)== null) throw new NoSuchUserException();
+
+        // Collect all tasks assigned to specified user
         ArrayList<TaskDTO> allTasks;
         HashMap<String, ArrayList<TaskDTO>> userTasksByProject = new HashMap<>();
         try{
@@ -95,10 +100,14 @@ public class TaskManagerImpl implements TaskManager {
             return userTasksByProject;
         }
 
+        // Collect no duplicate projects list from tasks
         Set<Long> projectsId = new HashSet<>();
         for (TaskDTO task : allTasks){
             projectsId.add(task.getProjectDTO().getId());
         }
+
+        // Create HashMap where the key is project story and value is an arrayList with tasks within
+        // defined projects and single assignee of tasks is specified user
         Iterator iterator = projectsId.iterator();
         ArrayList<TaskDTO> tempTaskList = new ArrayList<>();
         while (iterator.hasNext()){

@@ -5,12 +5,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -27,7 +30,6 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-
     @Autowired
     @Qualifier("customUsrService")
     UserDetailsService userDetailsService;
@@ -43,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN") //can only be accessed by someone who have ADMIN role
                 .antMatchers("/common/**").hasRole("USER") //can only be accessed by someone who have USER role
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER).invalidSessionUrl("/login")
-                .and().rememberMe().rememberMeParameter("remember-me").tokenRepository(persistentTokenRepository()).tokenValiditySeconds(120)
+                .and().rememberMe().rememberMeParameter("remember-me").tokenRepository(persistentTokenRepository()).tokenValiditySeconds(2000)
                 .and().formLogin().loginPage("/login").successHandler(new SecuritySuccessHandler())//  creates a custom login page with "/login" url
                 .usernameParameter("username").passwordParameter("password") // will accept username and password Http request parameters
                 .and().exceptionHandling() // will catch all 403 [http access denied] exceptions and display on user defined page
@@ -56,6 +58,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         tokenRepository.setDataSource(dataSource);
         return tokenRepository;
     }
+    // region Analog in .xml
     /* setup in XML configuration format
     <http auto-config="true" >
     <intercept-url pattern="/" access="permitAll" />
@@ -66,16 +69,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
      <form-login  login-page="/login" username-parameter="ssoId" password-parameter="password"/>
      <csrf/>
     </http> */
-
+    // endregion
 
     /** @param auth  configures AuthenticationManagerBuilder with user credentials and allowed roles.
      *               This AuthenticationManagerBuilder creates AuthenticationManager which is responsible for processing any authentication request.
      **/
      @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+         auth.userDetailsService(userDetailsService);
+         auth.authenticationProvider(daoAuthenticationProvider());
     }
-
+    // region Analog in .xml
     /*
     setup in XML configuration format
      <authentication-manager >
@@ -86,6 +90,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             </user-service>
         </authentication-provider>
     </authentication-manager>
-    * */
+    */
     // endregion
+
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider(){
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        return daoAuthenticationProvider;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
+
 }
